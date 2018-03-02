@@ -17,8 +17,8 @@
       }
 
       #canvas{
-        width: 600px;
-        height: 400px;
+        width: 500px;
+        height: 300px;
         background: white;
         display: block;
       }
@@ -68,6 +68,7 @@
         height: auto;
         background: #5352ed;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        position: relative;
       }
 
       .window_inside{
@@ -85,6 +86,7 @@
         font-size: 24px;
         color: #57606f;
       }
+
       .inbetween{
         color: white;
         text-align: center;
@@ -124,11 +126,11 @@
             <canvas id="canvas"> </canvas>
         </div> </div>
 
-        <div class="window" style="float: right;"> <div class="window_inside">
+        <div class="window"> <div class="window_inside">
           <div id="colorWheel"> </div>
         </div> </div>
 
-        <div class="window" style="float: right;"> <div class="window_inside">
+        <div class="window" style="bottom: 0;"> <div class="window_inside">
           <div id="colorWheel" style="width: 400px;"> </div>
         </div> </div>
       </div>
