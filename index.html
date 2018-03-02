@@ -65,7 +65,7 @@
       .window{
         display: inline-block;
         width: auto;
-        height: 24px;
+        height: auto;
         background: #5352ed;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         margin-top: 10px;
@@ -120,18 +120,19 @@
       <div class="menuButton"> </div> -->
     </div>
     <div id="outerside"></div>
+      <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
+        <div class="window" style="margin-left: 20px;"> <div class="window_inside">
+            <canvas id="canvas"> </canvas>
+        </div> </div>
 
-    <div class="window"> <div class="window_inside">
-        <canvas id="canvas"> </canvas>
-    </div> </div>
+        <div class="window" style="float: right;"> <div class="window_inside">
+          <div id="colorWheel"> </div>
+        </div> </div>
 
-    <div class="window" style="float: right; margin-right: 40px;"> <div class="window_inside">
-      <div id="colorWheel"> </div>
-    </div> </div>
-
-    <div class="window" style="float: right; margin-right: 40px; margin-top: 400px;"> <div class="window_inside">
-      <div id="colorWheel" style="width: 400px;"> </div>
-    </div> </div>
+        <div class="window" style="float: right;"> <div class="window_inside">
+          <div id="colorWheel" style="width: 400px;"> </div>
+        </div> </div>
+      </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
     --><div id="quote"><img src="logo3.png" style="width: 100px;"/></span></div>
@@ -144,7 +145,7 @@
       $( ".window" ).draggable({
         cancel: ".window_inside"
       });
-      $( ".window" ).draggable({ snap: '#outerside, #sidemenu', snapMode: "outer" });
+      $( ".window" ).draggable({ snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
     });
     </script>
 </html>
