@@ -136,17 +136,15 @@
       </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
-    --><div id="quote"><img src="logo3.png" style="width: 100px;"/></span></div>
+    --><div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>
     <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  </body>
     -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     $( function() {
-      $( ".window" ).draggable({
-        cancel: ".window_inside"
-      });
-      $( ".window" ).draggable({ snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
+      $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
+      //$( "#sidemenu" ).resizable();
     });
     </script>
 </html>
