@@ -1,0 +1,58 @@
+<style media="screen">
+  body{
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+  <canvas id="picker"></canvas>
+  <div id="color"> </div>
+</body>
+
+<script>
+  var canvas = document.getElementById("picker");
+  var ctx = canvas.getContext("2d");
+  canvas.height = 200;
+  canvas.width = 200;
+  var x = canvas.width / 2;
+  var y = canvas.height / 2;
+
+  var radius = 100;
+  var counterClockwise = false;
+
+  for(var angle=0; angle<=360; angle++)
+  {
+    var startAngle = (angle-2)*Math.PI/180;
+    var endAngle = angle * Math.PI/180;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+      /*
+      context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+      context.closePath();
+      var gradient = context.createRadialGradient(x, y, 0, x, y, radius);
+    	gradient.addColorStop(0,'hsl('+angle+', 10%, 100%)');
+    	gradient.addColorStop(1,'hsl('+angle+', 100%, 50%)');
+      context.fillStyle = gradient;
+      */
+    ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+    ctx.closePath();
+    ctx.fillStyle = 'hsl('+angle+', 100%, 50%)';
+    ctx.fill();
+  }
+
+  var color = document.getElementById('color');
+
+  canvas.addEventListener('mousedown', pick);
+
+  function pick(event) {
+      var x = event.layerX;
+      var y = event.layerY;
+      var pixel = ctx.getImageData(x, y, 1, 1);
+      var data = pixel.data;
+      var rgba = 'rgba(' + data[0] + ', ' + data[1] +
+                 ', ' + data[2] + ', ' + (data[3] / 255) + ')';
+      localStorage.setItem("color", JSON.stringify(data));
+      color.textContent = rgba;
+  }
+</script>
