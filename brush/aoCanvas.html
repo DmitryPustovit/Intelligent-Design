@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="aoCanvas.css">
+	<script src="aoCanvas.js"></script> 
+
+	<title></title>
+</head>
+<body>
+	<canvas id = "canvas" width="500" height="500"> </canvas>
+	<script> 
+		el = document.getElementById("canvas");
+		var bO1 = {
+  		"name": "Pencil",
+		  "textures": [
+		    "brush1.png", "brush.png"
+		  ],
+		  "mtRand": false,
+		  "iniRotation": 0,
+		  "ranRotation": true,
+		  "minRotation": 0,
+		  "maxRotation": 180,
+		  "yOffset": 16,
+		  "xOffset": 16,
+		  "scale": 1
+		}	
+		brush = new Brush(el, bO1);
+		brush.setColor("blue");
+		brush.assign();
+		//brush1 = new Brush(el, "brush1.png");
+	</script>
+
+	<div>
+		<button onclick="brush.assign();"> <img src = "brush.png"></button>
+		<button onclick="brush1.assign(); brush1.setColor('blue');"> <img src = "brush1.png"></button>
+	</div>
+	<!--<div><input type="text" name="" onmouseover="brush1"></div>
+	-->
+</body>
+</html>
+
