@@ -1,74 +1,26 @@
-<!--
-Hello! Welcome to the bare min of what a drawing app is.
-Basic draw code and image loading.
--->
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<style>
-	body{
-	padding: 0;
-	margin: 0;
-}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-canvas{
-	height: 100%;
-}
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Current Features Hit List: (PLEASE SAVE ME)</h1>
+    <ul>
+      <li>Save to Google Drive</li> 
+      <li>Fill Tool & Magic Select Wand tool (Both are sort of the same)</li>
+    </ul>
 
-</style>
-
-<div id="sketch">
-  <canvas id="paint"></canvas>
-</div>
-
-<script>
-var canvas = document.querySelector('#paint');
-var ctx = canvas.getContext('2d');
-
-var img = new Image();
-
- //drawing of the test image - img1
- img.onload = function () {
-		 //draw background image
-		 ctx.drawImage(img, 0, canvas.height - 500);
-		 //draw a box over the top
-		 //ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
-		 //ctx.fillRect(0, 0, 500, 500);
- };
-
- img.src = 'intro.jpg';
-
-var sketch = document.querySelector('#sketch');
-var sketch_style = getComputedStyle(sketch);
-canvas.width = parseInt(sketch_style.getPropertyValue('width'));
-canvas.height = parseInt(sketch_style.getPropertyValue('height'));
-
-var mouse = {x: 0, y: 0};
-
-/* Mouse Capturing Work */
-canvas.addEventListener('mousemove', function(e) {
-  mouse.x = e.pageX - this.offsetLeft;
-  mouse.y = e.pageY - this.offsetTop;
-}, false);
-
-
-/* Drawing on Paint App */
-ctx.lineWidth = 5;
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.strokeStyle = 'blue';
-
-canvas.addEventListener('mousedown', function(e) {
-    ctx.beginPath();
-    ctx.moveTo(mouse.x, mouse.y);
-
-    canvas.addEventListener('mousemove', onPaint, false);
-}, false);
-
-canvas.addEventListener('mouseup', function() {
-    canvas.removeEventListener('mousemove', onPaint, false);
-}, false);
-
-var onPaint = function() {
-    ctx.lineTo(mouse.x, mouse.y);
-    ctx.stroke();
-};
-</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
