@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css">
-	
+
 
 	<title></title>
 
@@ -10,11 +10,11 @@
 </head>
 <body>
 	<div id="layers" style="position: relative;">
-		<canvas id="layer1" width="500" height="500" 
+		<canvas id="layer1" width="500" height="500"
 	   	style="position: absolute; left: 0; top: 0; z-index: 0; border:1px solid #000000;"></canvas>
 	</div>
-	
-	
+
+
 	<script>
 	arrayLayer = ["1"];
 	function layerHander() {
@@ -30,13 +30,13 @@
 	}
 
 	function selectLayer(number) {
-		canvas.getElementById("layer" + number);
+		document.getElementById("layer" + number);
 		ctx = canvas.getContext('2d');
 	}
 
 	function createLayer(divid, number, width, height) {
 		var canvas = document.createElement('canvas');
-        	div = document.getElementById(divid); 
+        	div = document.getElementById(divid);
         	canvas.id     = ("layer"+number);
         	canvas.width  = width;
         	canvas.height = height;
@@ -48,8 +48,8 @@
 	</script>
 	<div style="position:absolute; right:0" id="layersgroup">
 		<button onclick="selectLayer(1);">Layer1</button>
-		
-	</div>		
+
+	</div>
 	<div>
 		<button style="position:absolute; bottom:0" onclick="layerHander();"> <img src ="selection-Tool-512.png"></button>
 	</div>

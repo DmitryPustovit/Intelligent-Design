@@ -1,0 +1,91 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<style media="screen">
+  body{
+    width: 260px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .layer{
+    position: relative;
+    padding: 28px;
+  }
+
+  .layer:hover{
+    background: #BBDEFB;
+  }
+
+  .canvasHolder{
+    width: 70px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    top: 11px;
+    left: 4px;
+    border: 1px solid black;
+  }
+
+  .selected{
+    background: #64B5F6 !important;
+  }
+
+  span{
+    margin-left: 70px;
+  }
+
+  input{
+    float: right;
+  }
+
+  .content{
+    height: 300px;
+    overflow-y: scroll;
+  }
+</style>
+
+<body>
+  <div id="layers" class="content">
+  <div class="layer selected">
+    <div class="canvasHolder"> </div>
+    <span> layer 1 </span>
+    <input type="checkbox" checked>
+  </div>
+
+</div>
+<i class="material-icons" onclick="addLayer();">add</i>
+<i class="material-icons">remove</i>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+var layers = 1;
+var selected = 1;
+var div = document.getElementById('layers');
+
+function addLayer()
+{
+  div.innerHTML +=
+  '<div class="layer">' +
+    '<div class="canvasHolder"> </div>' +
+    '<span> layer ' + ++layers  +  '</span>' +
+    '<input type="checkbox" checked>' +
+  '</div>';
+}
+
+function removeLayer()
+{
+  $('.selected').remove();
+}
+
+
+$(document).ready(function(){
+  $(document) .on('click', '.layer', function(e){
+    console.log("hello");
+    ///$target = $(event.target);
+    //$( ".layer" ).removeClass('.selected');
+    //$target.addClass('.selected');
+  });
+});
+
+</script>
