@@ -1,0 +1,169 @@
+<!--
+Hello! Welcome to the bare min of what a drawing app is.
+Basic draw code and image loading.
+-->
+<head>
+<style>
+  body{
+  padding: 0;
+  margin: 0;
+}
+
+canvas{
+  height: 100%;
+  width: 100%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="modebuttons">
+  <button id="brush">Brush</button>
+  <button id="eraser">Eraser</button>
+</div>
+<div id="sketch">
+  <canvas id="paint">
+  </canvas>
+
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+var canvas = document.querySelector('#paint');
+var ctx = canvas.getContext('2d');
+
+//eraser stuff
+var lastXCoordinate;
+var lastYCoordinate;
+var mouseX;
+var mouseY;
+var canvasOffset = $("#paint").offset();
+var offsetX = canvasOffset.left;
+var offsetY = canvasOffset.top;
+var isMouseDown = false;
+
+function handleMouseDown(e){
+  mouseX = parseInt(e.clientX - offsetX);
+  mouseY = parseInt(e.clientY - offsetY);
+
+  lastXCoordinate = mouseX;
+  lastYCoordinate = mouseY;
+  isMouseDown = true;
+}
+
+function handleMouseUp(e){
+  mouseX = parseInt(e.clientX - offsetX);
+  mouseY = parseInt(e.clientY - offsetY);
+
+  isMouseDown = false;
+}
+
+function handleMouseOut(e){
+  mouseX = parseInt(e.clientX - offsetX);
+  mouseY = parseInt(e.clientY - offsetY);
+
+  isMouseDown = false;
+}
+
+function handleMouseMove(e){
+  mouseX = parseInt(e.clientX - offsetX);
+  mouseY = parseInt(e.clientY - offsetY);
+
+  if(isMouseDown){
+    ctx.beginPath();
+    if(mode == "brush"){
+      ctx.globalCompositeOperation = "source-over";
+      ctx.moveTo(lastXCoordinate,lastYCoordinate);
+      ctx.lineTo(mouseX,mouseY);
+      ctx.stroke();     
+    } else {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.arc(lastXCoordinate,lastYCoordinate,8,0,Math.PI*2,false);
+      ctx.fill();
+    }
+    lastXCoordinate = mouseX;
+    lastYCoordinate = mouseY;
+  }
+}
+
+$("#paint").mousedown(function(e){handleMouseDown(e);});
+$("#paint").mousemove(function(e){handleMouseMove(e);});
+$("#paint").mouseup(function(e){handleMouseUp(e);});
+$("#paint").mouseout(function(e){handleMouseOut(e);});
+
+var mode = "brush";
+$("#brush").click(function(){ mode = "brush"; });
+$("#eraser").click(function(){ mode = "eraser"; });
+
+//eraser end
+
+canvas.width = document.documentElement.clientWidth;
+canvas.height = document.documentElement.clientHeight;
+var img = new Image();
+
+ //drawing of the test image - img1
+ img.onload = function () {
+     //draw background image
+     ctx.drawImage(img, 0, canvas.height - 500);
+     //draw a box over the top
+     //ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
+     //ctx.fillRect(0, 0, 500, 500);
+ };
+
+ img.src = 'intro.jpg';
+
+var sketch = document.querySelector('#sketch');
+var sketch_style = getComputedStyle(sketch);
+canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+
+var mouse = {x: 0, y: 0};
+
+/* Mouse Capturing Work */
+canvas.addEventListener('mousemove', function(e) {
+  mouse.x = e.pageX - this.offsetLeft;
+  mouse.y = e.pageY - this.offsetTop;
+}, false);
+
+
+/* Drawing on Paint App */
+ctx.lineWidth = 5;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.imageSmoothingEnabled = true;
+if (localStorage.getItem("color") === null) {
+  ctx.strokeStyle = 'blue';
+}
+else {
+  updateColor();
+}
+
+canvas.addEventListener('mousedown', function(e) {
+    ctx.beginPath();
+    ctx.moveTo(mouse.x, mouse.y);
+
+    canvas.addEventListener('mousemove', onPaint, false);
+}, false);
+
+canvas.addEventListener('mouseup', function() {
+    canvas.removeEventListener('mousemove', onPaint, false);
+}, false);
+
+var onPaint = function() {
+    updateColor();
+    ctx.lineTo(mouse.x, mouse.y);
+    ctx.stroke();
+};
+
+function updateColor(){
+  var storedNames = JSON.parse(localStorage.getItem("color"));
+  console.log(storedNames);
+  ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
+}
+</script>
+</body>
