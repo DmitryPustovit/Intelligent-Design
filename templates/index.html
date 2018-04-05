@@ -67,13 +67,13 @@
         width: auto;
         height: auto;
         background: #5352ed;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         position: relative;
       }
 
       .window_inside{
         margin-top: 24px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       }
 
       #quote{
@@ -92,6 +92,13 @@
         text-align: center;
         font-size: 50px;
         padding-bottom: 10px;
+      }
+
+      iframe{
+        background: white;
+        border: none;
+        padding: 10px;
+        width: 300px;
       }
     </style>
 
@@ -122,17 +129,16 @@
     </div>
     <div id="outerside"></div>
       <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
+
         <div class="window" style="margin-left: 20px;"> <div class="window_inside">
-            <canvas id="canvas"> </canvas>
+            <iframe src="canvas.html" height="300"></iframe>
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <div id="colorWheel"> </div>
+          <iframe src="colorWheel.html" height="300"></iframe>
         </div> </div>
 
-        <div class="window" style="bottom: 0;"> <div class="window_inside">
-          <div id="colorWheel" style="width: 400px;"> </div>
-        </div> </div>
+
       </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
