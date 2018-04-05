@@ -218,6 +218,12 @@ function Brush(canvas, bData){
 		return true;
 	}
 
+	/* Reassign's the brush's canvas */
+	this.setCanvas = function(canvas) {
+		this.canvas = canvas;
+		this.context = canvas.getContext('2d');
+	}
+
 	/*
 		Sets and applies the color
 	*/
