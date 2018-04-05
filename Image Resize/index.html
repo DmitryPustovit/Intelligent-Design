@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		
+
+
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+
+		
+	</head>
+	<body>
+	<!-- The container for the image -->
+		<div class="container">
+		
+			<img class="resize-image" id = "square" src="img/square.png" alt="image for resizing">
+			
+		</div> 
+		
+		<div class="container">
+		
+			<img class="resize-image" id = "circle" src="img/circle.gif" alt="image for resizing">
+			
+		</div> 
+		
+		<button id="resizeButton" style = "position: absolute; left: 0px; top: 0px">Resize</button>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+		
+			$("#resizeButton").click(function(){
+				$(".resize-image").one('click', function(){
+
+					var myid = this.id;		
+					resizeableImage($("#" + myid));		
+	
+				});
+
+			});
+			
+		});
+		</script>
+		<script src="js/component.js"></script>
+	</body>
+</html>
