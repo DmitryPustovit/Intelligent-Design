@@ -92,7 +92,6 @@ function updateColor(){
 //Paste img feature
 window.addEventListener('paste', pasteHere);
 
-
 function pasteHere(e) {
 	if(e.clipboardData == false) {
 		return false; //there is nothing to paste
@@ -111,7 +110,7 @@ function pasteHere(e) {
         pasteTheImage(source);
         }
 }
-
+//draw pasted object
 function pasteTheImage(source) {
 	var pastedImage = new Image();
 	pastedImage.onload = function() {
@@ -119,6 +118,5 @@ function pasteTheImage(source) {
 	}
 	pastedImage.src = source;
 }
-
 
 </script>
