@@ -15,30 +15,26 @@
 		  "textures": [
 		    "brush.png"
 		  ],
-		  "mtRand": false,
-		  "iniRotation": 0,
-		  "ranRotation": false,
 		  "minRotation": 0,
-		  "maxRotation": 180,
+		  "maxRotation": 0,
 		  "step": 2,
 		  "yOffset": 16,
 		  "xOffset": 16,
-		  "scale": 1.0
+		  "minScale": 1.0,
+		  "maxScale": 1.0,
 		};
 		var bO2 = {
   		"name": "Pencil",
 		  "textures": [
 		    "brush1.png"
 		  ],
-		  "mtRand": false,
-		  "iniRotation": 0,
-		  "ranRotation": false,
 		  "minRotation": 0,
-		  "maxRotation": 180,
+		  "maxRotation": 0,
 		  "step": 4,
 		  "yOffset": 16,
 		  "xOffset": 16,
-		  "scale": 1
+		  "minScale": 1.0,
+		  "maxScale": 1.0,
 		};
 		var bO3 = {
   		"name": "Pencil",
@@ -47,27 +43,24 @@
 		  ],
 		  "mtRand": true,
 		  "iniRotation": 0,
-		  "ranRotation": true,
-		  "minRotation": 0,
-		  "maxRotation": 180,
-		  "step": 10,
+		  "minRotation": 15,
+		  "maxRotation": 15,
+		  "step": 4,
 		  "yOffset": 0,
 		  "xOffset": 0,
-		  "scale": 1
+		  "minScale": 0.5,
+		  "maxScale": 1.5,
 		};	
 		brush = new Brush(el, bO1);
-		brush.setColor("blue");
 		brush1 = new Brush(el, bO2);
-		brush1.setColor("red");
 		brush2 = new Brush(el, bO3);
-		brush2.setColor("green");
 		//brush1 = new Brush(el, "brush1.png");
 	</script>
 
 	<div>
-		<button onclick="brush.assign();"> <img src = "brush.png"></button>
-		<button onclick="brush1.assign();"> <img src = "brush1.png"></button>
-		<button onclick="brush2.assign();"> <img src = "brush.png"></button>
+		<button onclick="brush.assign(); brush.setColor('blue')"> <img src = "brush.png"></button>
+		<button onclick="brush1.assign(); brush1.setColor('red');"> <img src = "brush1.png"></button>
+		<button onclick="brush2.assign(); brush2.setColor('green');"> <img src = "brush.png"></button>
 	</div>
 	<!--<div><input type="text" name="" onmouseover="brush1"></div>
 	-->

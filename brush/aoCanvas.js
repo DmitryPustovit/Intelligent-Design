@@ -3,6 +3,7 @@ function distBetween(p1, p2) { return Math.hypot(p2.x - p1.x, p2.y - p1.y); }
 function angBetween(p1, p2) { return Math.atan2(p2.x - p1.x, p2.y - p1.y); }
 function Point(x, y){ this.x = x; this.y = y; return this; }
 function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min;}
+function getRandomDouble(min, max) { return (Math.random() * (max - min)) + min;}
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return new Point(evt.clientX - rect.left, evt.clientY - rect.top);
@@ -35,16 +36,19 @@ function Brush(canvas, bData){
 	this.image = new Image();
 	this.rotation = this.bData.iniRotation;
 	this.loaded = false;
-	that = this;
-	this.image.onload = function (){
-		that.loaded = true;
-		console.log("Loaded")
-	};
+	this.lastAngle = 0;
 	this.image.src = this.bData.textures[0];
 	console.log(this.image);
 	this.canvas = canvas;
+	this.textures = {};
+	this.image.crossOrigin="anonymous"
 	this.context = canvas.getContext('2d');
 	// this.context.drawImage(this.image, 10, 10);
+
+	for (var i=0; i < this.bData.textures.length; i++) {
+		this.textures[i] = new Image();
+		this.textures[i].src = this.bData.textures[i];
+	}
 
 	this.cycleTexture = function(){
 		if (this.bData.mtRand){
@@ -52,8 +56,7 @@ function Brush(canvas, bData){
 		} else {
 			this.cT = getRandomInt(0, this.bData.textures.length - 1);
 		}
-		this.image.src = this.bData.textures[this.cT];
-		this.applyColor();
+		this.image = this.textures[this.cT];
 	}
 
 	this.mouseDown = function(e) {
@@ -73,15 +76,16 @@ function Brush(canvas, bData){
 			y = this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset;
 			this.context.save();
     		this.context.translate(x, y);
-    		this.context.scale(this.bData.scale, this.bData.scale);
-			if (this.bData.ranRotation){
-    			this.context.rotate(Math.PI * 180 / getRandomInt(this.bData.minRotation, this.bData.maxRotation));
+    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale);
+    		this.context.scale(scale, scale);
+			if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
+				this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
+    			this.context.rotate(Math.PI / 180 * this.lastAngle);
     		}
     		this.context.drawImage(this.image, 0, 0);
     		this.context.restore();
     		this.cycleTexture();
 		}
-		console.log(cP);
 
 		this.lastPoint = cP;
 	}
@@ -108,22 +112,27 @@ function Brush(canvas, bData){
 	}
 
 	this.applyColor = function(){
-		var c = document.createElement('canvas');
-    	c.width = this.image.width;
-    	c.height = this.image.height;
-    	var ctx = c.getContext('2d');
-    	ctx.drawImage(this.image, 0, 0);
-    	var imgData = ctx.getImageData(0, 0, c.width, c.height);
-		for (var i=0;i<imgData.data.length;i+=4)
-   		{
-   			if (imgData.data[i+3] > 0){
-   				imgData.data[i] = this.color[0];
-   				imgData.data[i+1] = this.color[1];
-   				imgData.data[i+2] = this.color[2];
-   			}
+		for (var u=0; u < this.bData.textures.length; u++){
+			var c = document.createElement('canvas');
+    		c.width = this.textures[u].width;
+    		c.height = this.textures[u].height;
+    		var ctx = c.getContext('2d');
+    		ctx.drawImage(this.textures[u], 0, 0);
+    		var imgData = ctx.getImageData(0, 0, c.width, c.height);
+			for (var i=0;i<imgData.data.length;i+=4) {
+   				if (imgData.data[i+3] > 0){
+   					imgData.data[i] = this.color[0];
+   					imgData.data[i+1] = this.color[1];
+   					imgData.data[i+2] = this.color[2];
+   				}
+    		}
+    	
+    		ctx.putImageData(imgData,0,0);
+    		this.textures[u].src = c.toDataURL();
+    		if (this.bData.textures.length == 1){
+    			this.image = this.textures[u];
+    		}
     	}
-    	ctx.putImageData(imgData,0,0);
-    	this.image.src = c.toDataURL();
 	}
 
 	return this;
