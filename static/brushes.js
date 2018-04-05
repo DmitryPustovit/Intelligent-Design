@@ -1,7 +1,7 @@
 pencil = {
 	"name": "Pencil",
 	"textures": [
-		"pixel.png"
+		"static/pixel.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -18,7 +18,7 @@ pencil = {
 pen = {
 	"name": "Pen",
 	"textures": [
-		"pen.png"
+		"static/pen.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -35,7 +35,7 @@ pen = {
 horizontalBar = {
 	"name": "H-Bar",
 	"textures": [
-		"horizontal_bar.png"
+		"static/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -52,7 +52,7 @@ horizontalBar = {
 verticalBar = {
 	"name": "V-Bar",
 	"textures": [
-		"vertical_bar.png"
+		"static/vertical_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -68,7 +68,7 @@ verticalBar = {
 bubbles = {
 	"name": "Bubbles",
 	"textures": [
-		"bubble.png", "bubble_small.png"
+		"static/bubble.png", "static/bubble_small.png"
 	],
 	"mtRand": true,
 	"minRotation": 25,
@@ -85,7 +85,7 @@ bubbles = {
 clouds = {
 	"name": "Clouds",
 	"textures": [
-		"cloud.png"
+		"static/cloud.png"
 	],
 	"mtRand": false,
 	"minRotation": -90,
