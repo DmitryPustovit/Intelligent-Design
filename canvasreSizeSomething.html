@@ -1,0 +1,183 @@
+<!--
+Hello! Welcome to the bare min of what a drawing app is.
+Basic draw code and image loading.
+-->
+
+<style>
+	body {
+	padding: 0;
+	margin: 0;
+	
+}
+
+
+
+</style>
+
+<div id="sketch">
+  <canvas id="paint" style = "border:1px solid"></canvas>
+ 
+</div>
+
+<script>
+var canvas = document.querySelector('#paint');
+var ctx = canvas.getContext('2d');
+
+initialize();
+//canvas.width = document.documentElement.clientWidth;
+//canvas.height = document.documentElement.clientHeight;
+ 
+var img = new Image();
+
+ //drawing of the test image - img1
+ img.onload = function () {
+		 //draw background image
+		 ctx.drawImage(img, 0, canvas.height - 500);
+		 //draw a box over the top
+		 //ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
+		 //ctx.fillRect(0, 0, 500, 500);
+ };
+
+// img.src = 'intro.jpg';
+
+var sketch = document.querySelector('#sketch');
+var sketch_style = getComputedStyle(sketch);
+//canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+//canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+
+var mouse = {x: 0, y: 0};
+
+/* Mouse Capturing Work */
+canvas.addEventListener('mousemove', function(e) {
+  mouse.x = e.pageX - this.offsetLeft;
+  mouse.y = e.pageY - this.offsetTop;
+}, false);
+
+
+/* Drawing on Paint App */
+ctx.lineWidth = 5;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.imageSmoothingEnabled = true;
+if (localStorage.getItem("color") === null) {
+	ctx.strokeStyle = 'black';
+}
+else {
+	updateColor();
+}
+
+canvas.addEventListener('mousedown', function(e) {
+    ctx.beginPath();
+    ctx.moveTo(mouse.x, mouse.y);
+
+    canvas.addEventListener('mousemove', onPaint, false);
+}, false);
+
+canvas.addEventListener('mouseup', function() {
+    canvas.removeEventListener('mousemove', onPaint, false);
+}, false);
+
+var onPaint = function() {
+	  updateColor();
+    ctx.lineTo(mouse.x, mouse.y);
+    ctx.stroke();
+};
+
+function updateColor(){
+	var storedNames = JSON.parse(localStorage.getItem("color"));
+	console.log(storedNames);
+	ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
+}
+
+
+function resizeCanvas() {
+
+			canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+			//redraw();
+
+}
+
+function initialize() {
+			// Register an event listener to call the resizeCanvas() function 
+           // each time the window is resized.
+           window.addEventListener('resize', resizeCanvas, false);
+           // Draw canvas border for the first time.
+		   //var div = document.getElementById("sketch");
+		   //sketch.style.border = "thick solid #000";
+           resizeCanvas();
+
+}
+
+// Display custom canvas.
+// In this case it's a blue, 5 pixel border that 
+// resizes along with the browser window.					
+/*function redraw() {
+		ctx.strokeStyle = 'black';
+		ctx.lineWidth = '5';
+		ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
+			}*/
+			
+function setCanvas() {
+
+		
+		canvas.height = parseInt(document.getElementById("heightSize").value);
+		canvas.width = parseInt(document.getElementById("widthSize").value);
+		//initialize();
+
+}
+
+
+function widthSize(){
+
+	 screen.width;
+
+
+}
+
+function heightSize() {
+
+	window.innerHeight;
+}
+
+
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+//shows the text boxes and current canvas size when the button is pressed
+
+$(document).ready(function(){
+    $("#canvasSize").click(function(){
+     
+		$("#inputSize").show();
+	
+		var canvasWidth = $(canvas).width();
+		$("#widthSize").val(canvasWidth);
+		var canvasHeight = $(canvas).height();
+		$("#heightSize").val(canvasHeight);
+		
+		//if ($("#inputSize").is(':visible')) 
+			//$("#inputSize").hide(); 
+    });
+//the text boxes disappear once new values have been entered
+	$("#change").click(function(){
+	
+	setCanvas();
+	$("#inputSize").hide();
+		
+	});
+	
+});
+</script>
+<p>
+<input id="canvasSize" type="button" value="Canvas Size">
+<div id="inputSize" hidden>H:
+  <input type="text" size = "3" id = "heightSize" />px
+
+W:
+  <input type="text"  size = "3" id= "widthSize"/>px
+
+<input id="change" type="button" value="Change" />
+</div>
+</p>
