@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style media="screen">
+      @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200');
+
+      body{
+        padding: 0;
+        margin: 0;
+        padding-left: 100px;
+        background: #e2e1e0;
+        position: relative;
+      }
+
+      #canvas{
+        width: 500px;
+        height: 300px;
+        background: white;
+        display: block;
+      }
+
+      #sidemenu{
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 40px;
+        background: #5352ed;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        z-index: 4;
+      }
+
+      #outerside{
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 0px;
+        z-index: 4;
+      }
+
+      .menuButton{
+        width: 60px;
+        height: 60px;
+        margin-left: 8px;
+        margin-top: 10px;
+        background: #5352ed;
+      }
+
+      #colorWheel{
+        width: 300px;
+        height: 300px;
+        background: white;
+      }
+
+      #logo{
+        background: #5352ed;
+        box-shadow: none;
+      }
+
+      .window{
+        display: inline-block;
+        width: auto;
+        height: auto;
+        background: #5352ed;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        position: relative;
+      }
+
+      .window_inside{
+        margin-top: 24px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      }
+
+      #quote{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -100;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 24px;
+        color: #57606f;
+      }
+
+      .inbetween{
+        color: white;
+        text-align: center;
+        font-size: 50px;
+        padding-bottom: 10px;
+      }
+    </style>
+
+    <title>Tomo Editor</title>
+  </head>
+  <body>
+    <div id="sidemenu">
+      <!--
+      <img src="logo3.png" class="menuButton" id="logo" style="margin-bottom: 20px; margin-top: 10px; border: none; padding: 0; height: 60px; width: 60px;"/>
+
+      <hr>
+      <img src="canvas.png" class="menuButton" />
+      <hr>
+      <img src="drive.png" class="menuButton" />
+      <hr>
+      <img src="open.png" class="menuButton" />
+      <hr>
+      <img src="discord.png" class="menuButton" />
+      <hr>
+      <img src="question.png" class="menuButton" />
+      <hr>
+      <img src="settings.png" class="menuButton" />
+      <hr> -->
+      <!-- <div class="menuButton"> </div>
+      <div class="menuButton"> </div>
+      <div class="menuButton"> </div>
+      <div class="menuButton"> </div> -->
+    </div>
+    <div id="outerside"></div>
+      <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
+        <div class="window" style="margin-left: 20px;"> <div class="window_inside">
+            <canvas id="canvas"> </canvas>
+        </div> </div>
+
+        <div class="window"> <div class="window_inside">
+          <div id="colorWheel"> </div>
+        </div> </div>
+
+        <div class="window" style="bottom: 0;"> <div class="window_inside">
+          <div id="colorWheel" style="width: 400px;"> </div>
+        </div> </div>
+      </div>
+
+    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
+    --><div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  </body>
+    -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
+      //$( "#sidemenu" ).resizable();
+    });
+    </script>
+</html>
