@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css">
+	
+
+	<title></title>
+</head>
+<body>
+	<div id="layers" style="position: relative;">
+	 <canvas id="layer1" width="500" height="500" 
+	   style="position: absolute; left: 0; top: 0; z-index: 0; border:1px solid #000000;"></canvas>
+	</div>
+	
+	<script>
+		
+		
+	var layers = ["1"];
+	function Point(x, y){ this.x = x; this.y = y; return this; }
+	
+	function getMousePos(canvas, evt) {
+		var rect = canvas.getBoundingClientRect();
+    		return new Point(evt.clientX - rect.left, evt.clientY - rect.top);
+	}
+
+
+	function selection() {
+		this.canvas = document.getElementById("layer1");
+		this.firstpoint;
+		this.lastpoint;
+		this.drawing = false;
+		
+		var that = this;
+		this.canvas.onmousedown = function(e) { that.mouseDown(e) };
+		this.canvas.onmousemove = function(e) { that.mouseMove(e) };
+		this.canvas.onmouseup = function(e) { that.mouseUp(e) };
+		
+		this.mouseDown = function(e) {
+			this.drawing = true;
+			this.firstpoint = getMousePos(this.canvas, e);
+		}
+
+		this.mouseMove = function(e) {
+			if (!this.drawing) return; 
+
+			lastpoint = getMousePos(this.canvas, e);
+		}
+
+		this.mouseUp = function(e){
+			this.drawing = false;
+			selectiontool(layers, this.firstpoint, this.lastpoint, this.canvas);
+		}
+	}
+
+	function selectiontool(layers, first, last, parentcanvas) {
+		var canvas = document.createElement('canvas');
+       		div = document.getElementById("layers"); 
+       		canvas.id     = ("layerof"+parentcanvas.id);
+        	canvas.width  = Math.abs(first.x - last.x);
+        	canvas.height = Math.abs(first.y - last.y);
+        	canvas.style.zIndex   = 8;
+        	canvas.style.position = "absolute";
+		canvas.style.left = (Math.min(first.x, last.x) + "px");
+		canvas.style.top = (Math.min(first.y, last.y)+ "px");
+		canvas.style.border = "1px solid #000000";
+		//	layers.splice(layers.findIndex(parentcavas.id)+1, canvas);
+        	div.appendChild(canvas);
+	}
+	</script>
+
+	<div>
+		<button style="position:absolute; bottom:0" onclick="selection();"> <img src ="Selection-Tool-512.png"></button>
+	</div>
+
+</body>
+</html>
