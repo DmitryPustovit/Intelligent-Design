@@ -206,13 +206,13 @@ function Brush(canvas, bData){
 
 	/* Set's the brush's reg, green and blue channels */
 	this.setRGB = function(r, g, b){
-		return this.setRGBA(r, g, b, 1)
+		return this.setRGBA(r, g, b, 1);
 	}
 
 	/* Set's the brush's red, green, blue and alpha channels */
 	this.setRGBA = function(r, g, b, a){
 		if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
-		this.color = {r, g, b, a}
+		this.color = {r, g, b, a};
 		if (!this.image.complete) return false;
 		this.applyColor();
 		return true;
