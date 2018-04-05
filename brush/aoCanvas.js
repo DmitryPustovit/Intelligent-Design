@@ -16,6 +16,7 @@ function colorToRGBA(color) {
     // colorToRGBA('red')  # [255, 0, 0, 255]
     // colorToRGBA('#f00') # [255, 0, 0, 255]
     var cvs, ctx;
+    console.log(color);
     cvs = document.createElement('canvas');
     cvs.height = 1;
     cvs.width = 1;
@@ -33,11 +34,17 @@ function Brush(canvas, bData){
 	this.bData = bData;
 	this.image = new Image();
 	this.rotation = this.bData.iniRotation;
+	this.loaded = false;
+	that = this;
+	this.image.onload = function (){
+		that.loaded = true;
+		console.log("Loaded")
+	};
 	this.image.src = this.bData.textures[0];
 	console.log(this.image);
 	this.canvas = canvas;
 	this.context = canvas.getContext('2d');
-	this.context.drawImage(this.image, 10, 10);
+	// this.context.drawImage(this.image, 10, 10);
 
 	this.cycleTexture = function(){
 		if (this.bData.mtRand){
@@ -61,21 +68,20 @@ function Brush(canvas, bData){
 		var dist = distBetween(this.lastPoint, cP);
 		var ang = angBetween(this.lastPoint, cP);
 
-		for (var i = 0; i < dist; i++){
+		for (var i = 0; i < dist; i += this.bData.step){
 			x = this.lastPoint.x + (Math.sin(ang) * i) - this.bData.xOffset;
 			y = this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset;
+			this.context.save();
+    		this.context.translate(x, y);
+    		this.context.scale(this.bData.scale, this.bData.scale);
 			if (this.bData.ranRotation){
-				this.context.save();
-    			this.context.translate(x, y);
-    			this.context.scale(0.5, 0.5);
     			this.context.rotate(Math.PI * 180 / getRandomInt(this.bData.minRotation, this.bData.maxRotation));
-    			this.context.drawImage(this.image, 0, 0);
-    			this.context.restore();
-    		} else {
-    			this.context.drawImage(this.image, x, y);
     		}
+    		this.context.drawImage(this.image, 0, 0);
+    		this.context.restore();
     		this.cycleTexture();
 		}
+		console.log(cP);
 
 		this.lastPoint = cP;
 	}
@@ -85,15 +91,20 @@ function Brush(canvas, bData){
 	}
 
 	this.assign = function(e){
+		if (!this.image.complete) return false;
 		var that = this;
+		console.log("Yum");
 		this.canvas.onmousedown = function(e) { that.mouseDown(e) };
 		this.canvas.onmousemove = function(e) { that.mouseMove(e) };
 		this.canvas.onmouseup = function(e) { that.mouseUp(e) };
+		return true;
 	}
 
 	this.setColor = function(color){
 		this.color = colorToRGBA(color);;
+		if (!this.image.complete) return false;
 		this.applyColor();
+		return true;
 	}
 
 	this.applyColor = function(){
