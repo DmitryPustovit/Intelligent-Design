@@ -98,7 +98,6 @@
         background: white;
         border: none;
         padding: 10px;
-        width: 300px;
       }
     </style>
 
@@ -131,19 +130,23 @@
       <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
 
         <div class="window" style="margin-left: 20px;"> <div class="window_inside">
-            <iframe src="canvas.html" height="300"></iframe>
+            <iframe src="{{ url_for('static', filename='canvas.html') }}" id="theCanvasIframeId" height="300"></iframe>
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <iframe src="colorWheel.html" height="300"></iframe>
+          <iframe src="{{ url_for('static', filename='colorWheel.html') }}" height="300" style="width: 300px;"></iframe>
+        </div> </div>
+
+        <div class="window"> <div class="window_inside">
+          <iframe src="{{ url_for('static', filename='tools.html') }}" width="80"></iframe>
         </div> </div>
 
 
       </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
-    --><div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  </body>
+    --> <div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  </body>
     -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -152,5 +155,43 @@
       $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
       //$( "#sidemenu" ).resizable();
     });
+
+
+
+
+    //FEATURES
+
+    //var iframe = document.getElementById("#theCanvasIframeId");
+    //var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
+    //var canvas = iframe_canvas.getElementById("paint");
+
+    function localSave(){
+      var iframe = document.getElementById("theCanvasIframeId");
+      var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
+      var canvas = iframe_canvas.getElementById("paint");
+
+      //temp download link
+      var downloadLink = document.createElement("a");
+
+
+      var dt = canvas.toDataURL('image/png');
+      dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+      dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+      downloadLink.href = dt;
+      downloadLink.download = "canvas.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      //this.href = dt;
+    	//this.download = "tomokoCanvas.jpeg";
+      //window.open = dt.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+      //var win = window.open(dt);
+      //win.download = "test.png";
+
+      //window.open(canvas.toDataURL('image/png'));
+      //this.href = dt;
+      //this.download = "dfsdf.png";
+    }
     </script>
 </html>
