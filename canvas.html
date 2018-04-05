@@ -19,11 +19,8 @@ canvas{
 <script>
 var canvas = document.querySelector('#paint');
 var ctx = canvas.getContext('2d');
-<<<<<<< HEAD
-=======
 canvas.width = document.documentElement.clientWidth;
 canvas.height = document.documentElement.clientHeight;
->>>>>>> release
 var img = new Image();
  //drawing of the test image - img1
  img.onload = function () {
@@ -48,9 +45,6 @@ canvas.addEventListener('mousemove', function(e) {
 ctx.lineWidth = 5;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-<<<<<<< HEAD
-ctx.strokeStyle = 'blue';
-=======
 ctx.imageSmoothingEnabled = true;
 if (localStorage.getItem("color") === null) {
 	ctx.strokeStyle = 'blue';
@@ -59,7 +53,6 @@ else {
 	updateColor();
 }
 
->>>>>>> release
 canvas.addEventListener('mousedown', function(e) {
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
@@ -74,21 +67,9 @@ var onPaint = function() {
     ctx.stroke();
 };
 
-<<<<<<< HEAD
-//the below function converts canvas to jpg
-function download() {
-
-	var dt = canvas.toDataURL('image/jpeg');
-	this.href = dt;
-};
-
-downloadLnk.addEventListener('click', download, false); //allows the user to save their work
-=======
 function updateColor(){
 	var storedNames = JSON.parse(localStorage.getItem("color"));
 	console.log(storedNames);
 	ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
 }
->>>>>>> release
 </script>
-
