@@ -3,72 +3,29 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="aoCanvas.css">
 	<script src="aoCanvas.js"></script> 
-
+	<script src="brushes.js"></script> 
 	<title></title>
 </head>
 <body>
 	<canvas id = "canvas" width="500" height="500"> </canvas>
 	<script> 
 		el = document.getElementById("canvas");
-		var bO1 = {
-  		"name": "Pencil",
-		  "textures": [
-		    "brush.png"
-		  ],
-		  "mtRand": false,
-		  "minRotation": 0,
-		  "maxRotation": 0,
-		  "step": 2,
-		  "yOffset": 16,
-		  "xOffset": 16,
-		  "minScale": 1.0,
-		  "maxScale": 1.0,
-		  "minOpacity": 0.01,
-		  "maxOpacity": 0.5,
-		};
-		var bO2 = {
-  		"name": "Pencil",
-		  "textures": [
-		    "brush1.png"
-		  ],
-		  "mtRand": false,
-		  "minRotation": 0,
-		  "maxRotation": 0,
-		  "step": 4,
-		  "yOffset": 16,
-		  "xOffset": 16,
-		  "minScale": 1.0,
-		  "maxScale": 1.0,
-		  "minOpacity": 1.0,
-		  "maxOpacity": 1.0,
-		};
-		var bO3 = {
-  		"name": "Pencil",
-		  "textures": [
-		   "brush.png", "brush1.png"
-		  ],
-		  "mtRand": true,
-		  "iniRotation": 0,
-		  "minRotation": 15,
-		  "maxRotation": 15,
-		  "step": 4,
-		  "yOffset": 0,
-		  "xOffset": 0,
-		  "minScale": 0.5,
-		  "maxScale": 1.5,
-		  "minOpacity": 1.0,
-		  "maxOpacity": 1.0,
-		};	
-		brush = new Brush(el, bO1);
-		brush1 = new Brush(el, bO2);
-		brush2 = new Brush(el, bO3);
+		bPencil = new Brush(el, pencil);
+		bPen = new Brush(el, pen);
+		bHorizontalBar = new Brush(el, horizontalBar);
+		bVerticalBar = new Brush(el, verticalBar);
+		bBubbles = new Brush(el, bubbles);
+		bClouds = new Brush(el, clouds);
 		//brush1 = new Brush(el, "brush1.png");
 	</script>
 
 	<div>
-		<button onclick="brush.assign(); brush.setColor('blue')"> <img src = "brush.png"></button>
-		<button onclick="brush1.assign(); brush1.setColor('red');"> <img src = "brush1.png"></button>
-		<button onclick="brush2.assign(); brush2.setColor('green');"> <img src = "brush.png"></button>
+		<button onclick="bPencil.assign();"> <img src = "pixel.png"></button>
+		<button onclick="bPen.assign();"> <img src = "pen.png"></button>
+		<button onclick="bHorizontalBar.assign();"> <img src = "horizontal_bar.png"></button>
+		<button onclick="bVerticalBar.assign();"> <img src = "vertical_bar.png"></button>
+		<button onclick="bBubbles.assign(); bBubbles.setColor('blue');"> <img src = "bubble.png"></button>
+		<button onclick="bClouds.assign();"> <img src = "cloud.png"></button>
 	</div>
 	<!--<div><input type="text" name="" onmouseover="brush1"></div>
 	-->
