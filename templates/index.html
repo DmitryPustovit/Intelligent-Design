@@ -18,6 +18,8 @@
 		bVerticalBar = new Brush(el, verticalBar);
 		bBubbles = new Brush(el, bubbles);
 		bClouds = new Brush(el, clouds);
+		bTwirl = new Brush(el, twirl);
+		bSpaz = new Brush(el, spaz);
 		cBrush = bPencil;
 
 
@@ -31,6 +33,8 @@
 		<button onclick="cBrush = bVerticalBar; bVerticalBar.assign();"> <img src = "static/vertical_bar.png"></button>
 		<button onclick="cBrush = bBubbles; bBubbles.assign(); bBubbles.setColor('blue');"> <img src = "static/bubble.png"></button>
 		<button onclick="cBrush = bClouds; bClouds.assign();"> <img src = "static/cloud.png"></button>
+		<button onclick="cBrush = bTwirl; bTwirl.assign();"> <img src = "static/horizontal_bar.png"></button>
+		<button onclick="cBrush = bSpaz; bSpaz.assign();"> <img src = "static/vertical_bar.png"></button>
 	</div>
 	<div class="color">
 		<button onclick="cBrush.setColor('red'); "> Red </button>
