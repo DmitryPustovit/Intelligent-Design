@@ -20,8 +20,9 @@ function getRandomDouble(min, max) { return (Math.random() * (max - min)) + min;
 /* Finds the mouse's current true position */
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
+    //return new Point(mouse.x, mouse.y);
     return new Point(evt.clientX - rect.left, evt.clientY - rect.top);
-}
+  }
 
 /* Used to check if a value is between two values (Inclusive) */
 function between(x, min, max) { return x >= min && x <= max; }
@@ -116,6 +117,11 @@ function Brush(canvas, bData){
 		this.lastPoint = getMousePos(this.canvas, e);
 	}
 
+   var mouse = {x: 0, y: 0, oX: 0, oY: 0};
+  $(document).mousemove(function(e) {
+    mouse.x = e.pageX;
+    mouse.y = e.pageY;
+  });
 	/*
 		Updates the canvas when the mouse moves
 	*/
@@ -186,9 +192,9 @@ function Brush(canvas, bData){
 		if (!this.image.complete) return false;
 		var that = this;
 		console.log("Assigning brush:" + this.bData.name);
-		this.canvas.onmousedown = function(e) { that.mouseDown(e) };
-		this.canvas.onmousemove = function(e) { that.mouseMove(e) };
-		this.canvas.onmouseup = function(e) { that.mouseUp(e) };
+		document.onmousedown = function(e) { that.mouseDown(e) };
+		document.onmousemove = function(e) { that.mouseMove(e) };
+		document.onmouseup = function(e) { that.mouseUp(e) };
 		return true;
 	}
 

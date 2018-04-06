@@ -1,7 +1,7 @@
 pencil = {
 	"name": "Pencil",
 	"textures": [
-		"static/pixel.png"
+		"pixel.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -18,7 +18,7 @@ pencil = {
 pen = {
 	"name": "Pen",
 	"textures": [
-		"static/pen.png"
+		"pen.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -35,7 +35,7 @@ pen = {
 horizontalBar = {
 	"name": "H-Bar",
 	"textures": [
-		"static/horizontal_bar.png"
+		"horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -52,7 +52,7 @@ horizontalBar = {
 verticalBar = {
 	"name": "V-Bar",
 	"textures": [
-		"static/vertical_bar.png"
+		"vertical_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -68,7 +68,7 @@ verticalBar = {
 bubbles = {
 	"name": "Bubbles",
 	"textures": [
-		"static/bubble.png", "static/bubble_small.png"
+		"bubble.png", "bubble_small.png"
 	],
 	"mtRand": true,
 	"minRotation": 25,
@@ -85,7 +85,24 @@ bubbles = {
 clouds = {
 	"name": "Clouds",
 	"textures": [
-		"static/cloud.png"
+		"cloud.png"
+	],
+	"mtRand": false,
+	"minRotation": -90,
+	"maxRotation": 90,
+	"step": 3,
+	"yOffset": 8,
+	"xOffset": 8,
+	"minScale": 0.5,
+	"maxScale": 1.0,
+	"minOpacity": 0.1,
+	"maxOpacity": 0.5,
+};
+
+blank = {
+	"name": "blank",
+	"textures": [
+		""
 	],
 	"mtRand": false,
 	"minRotation": -90,

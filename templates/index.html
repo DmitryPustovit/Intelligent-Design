@@ -240,5 +240,11 @@
       document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
     }
 
+    function assignBrush(data)
+    {
+      console.log( data);
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
+    }
+
     </script>
 </html>

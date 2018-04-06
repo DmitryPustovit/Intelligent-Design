@@ -23,16 +23,26 @@ canvas{
 
 </style>
 
-<div id="sketch"></div>
+<div id="sketch"><canvas id="1" width="800" height="600" style="z-index: 1;"></canvas></div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="aoCanvas.js"></script>
 <script src="brushes.js"></script>
 <script>
+
 //Onload Code
 var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
 createLayer(1);
 selectLayer(1);
+
+el = document.getElementById("1");
+bPencil = new Brush(el, pencil);
+bPen = new Brush(el, pen);
+bHorizontalBar = new Brush(el, horizontalBar);
+bVerticalBar = new Brush(el, verticalBar);
+bBubbles = new Brush(el, bubbles);
+bClouds = new Brush(el, clouds);
+blank = new Brush(el, blank);
 
 if (localStorage.getItem("color") === null) {
 	ctx.strokeStyle = 'blue';
@@ -56,13 +66,10 @@ $(document).mousemove(function(e) {
 var brush;
 
 $(document).mousedown(function(e) {
-		if (localStorage.getItem("tool") == "brush")
+		if (localStorage.getItem("tool") != "none")
 		{
-			brush = new Brush(canvas, localStorage.getItem("cat"));
-			console.log("test" + localStorage.getItem("cat"));
-			setTimeout(brush.assign(), 2000);
+				blank.assign();
 		}
-		else {
 		console.log("nouse down");
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
@@ -71,7 +78,6 @@ $(document).mousedown(function(e) {
 		mouse.oY = mouse.y;``
 		//$(document).mousemove(function(e) { onPaint();});
 		document.addEventListener('mousemove', onPaint, false);
-	}
 });
 
 $(document).mouseup(function(e) {
@@ -200,7 +206,25 @@ $(document).mouseup(function(e) {
 		{
 				$(document.getElementById(num)).toggle();
 		}
-
+		var brushWorking = false;
+		function assignBrush(brush)
+ 	 {
+		 brushWorking = true;
+		 console.log(brush);
+		 if(brush == "pencil")
+ 		 	bPencil.assign();
+		if(brush == "pen")
+			 bPen.assign();
+		if(brush == "h")
+	 		bHorizontalBar.assign();
+		if(brush == "v")
+		 		bVerticalBar.assign();
+				if(brush == "b")
+			 		bBubbles.assign();
+				if(brush == "c")
+				 		bClouds.assign();
+ 		 //brush = new Brush(canvas, localStorage.getItem("cat"));
+ 	 }
 
 
 //Universal Listerer
@@ -228,6 +252,9 @@ function receiver(e) {
 
 		if(data[0] == 'hideLayer')
 				hideLayer(data[1], data[1]);
+
+		if(data[0] == 'assign')
+			assignBrush(data[1]);
 
 		 console.log(data);
    }
