@@ -1,7 +1,7 @@
 pencil = {
 	"name": "Pencil",
 	"textures": [
-		"static/pixel.png"
+		"pixel.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,

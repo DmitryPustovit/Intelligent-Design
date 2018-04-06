@@ -25,7 +25,10 @@ canvas{
 
 <div id="sketch"></div>
 
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="aoCanvas.js"></script>
+<script src="brushes.js"></script>
 <script>
 //Onload Code
 var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
@@ -51,7 +54,16 @@ $(document).mousemove(function(e) {
 	mouse.y = e.pageY;
 });
 
+var brush;
+
 $(document).mousedown(function(e) {
+		if (localStorage.getItem("tool") == "brush")
+		{
+			brush = new Brush(canvas, localStorage.getItem("cat"));
+			console.log("test" + localStorage.getItem("cat"));
+			brush.assign();
+		}
+		else {
 		console.log("nouse down");
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
@@ -60,6 +72,7 @@ $(document).mousedown(function(e) {
 		mouse.oY = mouse.y;``
 		//$(document).mousemove(function(e) { onPaint();});
 		document.addEventListener('mousemove', onPaint, false);
+	}
 });
 
 $(document).mouseup(function(e) {

@@ -1,4 +1,4 @@
-/*	
+/*
 	By: aowolfie (Brandon Beckwith)
 	References:
 		For general brush information:
@@ -80,10 +80,10 @@ function Brush(canvas, bData){
 	/* Canvas information */
 	this.canvas = canvas;
 	this.context = canvas.getContext('2d');
-	
+
 	/* Texture array */
 	this.textures = {};
-	
+
 	/* Load all associated brush textures */
 	for (var i=0; i < this.bData.textures.length; i++) {
 		this.textures[i] = new Image();
@@ -106,7 +106,7 @@ function Brush(canvas, bData){
 			this.cT = getRandomInt(0, this.bData.textures.length - 1);
 		}
 
-		/* Update the current texture */ 
+		/* Update the current texture */
 		this.image = this.textures[this.cT];
 	}
 
@@ -120,7 +120,7 @@ function Brush(canvas, bData){
 		Updates the canvas when the mouse moves
 	*/
 	this.mouseMove = function(e) {
-		
+
 		/* If we aren't drawing ignore mouse movements*/
 		if (!this.drawing) return;
 
@@ -151,7 +151,7 @@ function Brush(canvas, bData){
 				this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
     			this.context.rotate(Math.PI / 180 * this.lastAngle);
     		}
-    		
+
     		/* If opacity changes are needed, apply them */
     		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
     			var op = this.context.globalAlpha;
@@ -262,18 +262,18 @@ function Brush(canvas, bData){
     				r, g, b, a, r, g, b, a
     		*/
 			for (var i=0;i<imgData.data.length;i+=4) {
-				/* If the pixel is not transparent, apply the color */ 
+				/* If the pixel is not transparent, apply the color */
    				if (imgData.data[i+3] > 0){
    					imgData.data[i] = this.color[0];
    					imgData.data[i+1] = this.color[1];
    					imgData.data[i+2] = this.color[2];
    				}
     		}
-    	
+
     		/* Add the updated image data back to the ghost canvas */
     		ctx.putImageData(imgData,0,0);
 
-    		/* Update the texture array */ 
+    		/* Update the texture array */
 
     		this.textures[u].src = c.toDataURL();
 
