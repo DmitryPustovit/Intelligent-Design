@@ -140,6 +140,11 @@ $(document).mouseup(function(e) {
 			$(document.getElementById(top)).remove();
 		}
 
+		function removeLayer(num)
+		{
+			$(document.getElementById(num)).remove();
+		}
+
 		function flattenLayers()
 		{
 			var layers = [];
@@ -175,6 +180,9 @@ function receiver(e) {
 
 		if(data[0] == 'flattenLayers')
 			flattenLayers();
+
+		if(data[0] == 'removeLayer')
+				removeLayer(data[1]);
 		 console.log(data);
    }
 }

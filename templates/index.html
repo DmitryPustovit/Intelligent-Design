@@ -205,10 +205,10 @@
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
     }
 
-    function selectLayer(param)
+    function removeLayer(param)
     {
-      console.log("select layer");
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
+      console.log("remove layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("removeLayer,"+ param, '*');
     }
 
     function mergeLayer(top, bottom)

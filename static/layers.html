@@ -92,14 +92,12 @@ $( "#add" ).click(function() {
 });
 
 
-//TODO
 $( "#remove" ).click(function() {
   $('.selected').remove();
-  var location = layers.indexOf(selected);
-  console.log(location);
-  if(layers.length > 1)
-    selected = location - 1;
-    //TODO
+  var cur = global.selected;
+  var indexOfCur = layers.indexOf(parseInt(cur));
+  layers.splice(indexOfCur, 1);
+  parent.removeLayer(cur);
 });
 
 $( "#merge" ).click(function() {
