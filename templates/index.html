@@ -7,25 +7,37 @@
 	<title></title>
 </head>
 <body>
-	<canvas id = "canvas" width="500" height="500"> </canvas>
+	<canvas id = "canvas"> </canvas>
 	<script>
 		el = document.getElementById("canvas");
+		el.width = document.body.clientWidth;
+		el.height = document.body.clientHeight * .8;
 		bPencil = new Brush(el, pencil);
 		bPen = new Brush(el, pen);
 		bHorizontalBar = new Brush(el, horizontalBar);
 		bVerticalBar = new Brush(el, verticalBar);
 		bBubbles = new Brush(el, bubbles);
 		bClouds = new Brush(el, clouds);
+		cBrush = bPencil;
+
+
 		//brush1 = new Brush(el, "brush1.png");
 	</script>
 
 	<div>
-		<button onclick="bPencil.assign();"> <img src = "static/pixel.png"></button>
-		<button onclick="bPen.assign();"> <img src = "static/pen.png"></button>
-		<button onclick="bHorizontalBar.assign();"> <img src = "static/horizontal_bar.png"></button>
-		<button onclick="bVerticalBar.assign();"> <img src = "static/vertical_bar.png"></button>
-		<button onclick="bBubbles.assign(); bBubbles.setColor('blue');"> <img src = "static/bubble.png"></button>
-		<button onclick="bClouds.assign();"> <img src = "static/cloud.png"></button>
+		<button onclick="cBrush = bPencil; bPencil.assign();"> <img src = "static/pixel.png"></button>
+		<button onclick="cBrush = bPen; bPen.assign();"> <img src = "static/pen.png"></button>
+		<button onclick="cBrush = bHorizontalBar; bHorizontalBar.assign();"> <img src = "static/horizontal_bar.png"></button>
+		<button onclick="cBrush = bVerticalBar; bVerticalBar.assign();"> <img src = "static/vertical_bar.png"></button>
+		<button onclick="cBrush = bBubbles; bBubbles.assign(); bBubbles.setColor('blue');"> <img src = "static/bubble.png"></button>
+		<button onclick="cBrush = bClouds; bClouds.assign();"> <img src = "static/cloud.png"></button>
+	</div>
+	<div class="color">
+		<button onclick="cBrush.setColor('red'); "> Red </button>
+		<button onclick="cBrush.setColor('green'); "> Green </button>
+		<button onclick="cBrush.setColor('blue'); "> Blue </button>
+		<button onclick="cBrush.setColor('black'); "> Black </button>
+		<button onclick="cBrush.setColor('white'); "> White </button>
 	</div>
 	<!--<div><input type="text" name="" onmouseover="brush1"></div>
 	-->
