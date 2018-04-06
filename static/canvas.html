@@ -45,9 +45,13 @@ else {
 	updateColor();
 }
 
+if (localStorage.getItem("tool") === null) {
+	ctx.strokeStyle = 'pencil';
+}
+
 
 //Univeral Mouse Movement Tracker
-var mouse = {x: 0, y: 0};
+var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 $(document).mousemove(function(e) {
   mouse.x = e.pageX;
 	mouse.y = e.pageY;
@@ -58,7 +62,8 @@ $(document).mousedown(function(e) {
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
 		updateColor();
-
+		mouse.oX = mouse.x;
+		mouse.oY = mouse.y;``
 		//$(document).mousemove(function(e) { onPaint();});
 		document.addEventListener('mousemove', onPaint, false);
 });
@@ -71,8 +76,25 @@ $(document).mouseup(function(e) {
 
 //Paint feature
 		var onPaint = function() {
-		    ctx.lineTo(mouse.x, mouse.y);
-		    ctx.stroke();
+			ctx.beginPath();
+			console.log(localStorage.getItem("tool"));
+			if(localStorage.getItem("tool") == "pencil"){
+				ctx.globalCompositeOperation = "source-over";
+				ctx.moveTo(mouse.oX,mouse.oY);
+				ctx.lineTo(mouse.x,mouse.y);
+				ctx.stroke();
+			}
+			if (localStorage.getItem("tool") == "er")
+			{
+	      ctx.globalCompositeOperation = "destination-out";
+	      ctx.arc(mouse.oX,mouse.oY,8,0,Math.PI*2,false);
+	      ctx.fill();
+	    }
+			mouse.oX = mouse.x;
+			mouse.oY = mouse.y;
+
+		    //ctx.lineTo(mouse.x, mouse.y);
+		    //ctx.stroke();
 		};
 
 //Change Color Feature
@@ -126,8 +148,6 @@ $(document).mouseup(function(e) {
 		{
 			canvas = document.getElementById(number);
 			ctx = canvas.getContext('2d');
-			console.log("selected " + number);
-			console.log(canvas + "waffles");
 		}
 
 		function mergeLayers(top, bottom){
