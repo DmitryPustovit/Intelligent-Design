@@ -210,5 +210,17 @@
       console.log("select layer");
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
     }
+
+    function selectLayer(param)
+    {
+      console.log("select layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
+    }
+
+    function mergeLayer(top, bottom)
+    {
+      console.log("merge layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("mergeLayer,"+ top + "," + bottom, '*');
+    }
     </script>
 </html>

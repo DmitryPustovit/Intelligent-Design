@@ -130,6 +130,18 @@ $(document).mouseup(function(e) {
 			console.log(canvas + "waffles");
 		}
 
+		function mergeLayers(top, bottom){
+			console.log(top + " " + bottom);
+			var ctx = document.getElementById(bottom).getContext('2d');
+			//ctx.setOpacity(top.getOpacity, bottom);
+			ctx.drawImage(document.getElementById(top), 0, 0);
+			//ctx.setOpacity(1, bottom);
+			//TODO layer opactiy HERE
+			$(document.getElementById(top)).remove();
+		}
+
+
+
 //Universal Listerer
 window.addEventListener('message', receiver, false);
 
@@ -143,6 +155,9 @@ function receiver(e) {
 
 		if(data[0] == 'selectLayer')
 	 		 selectLayer(data[1]);
+
+		if(data[0] == 'mergeLayer')
+			mergeLayers(data[1], data[2]);
 		 console.log(data);
    }
 }

@@ -42,6 +42,17 @@
     height: 300px;
     overflow-y: scroll;
   }
+
+  .rotate180 {
+  -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+  -moz-transform: rotate(180deg);        /* FF */
+  -o-transform: rotate(180deg);          /* Opera */
+  -ms-transform: rotate(180deg);         /* IE9 */
+  transform: rotate(180deg);             /* W3C compliant browsers */
+
+  /* IE8 and below */
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
+}
 </style>
 
 <body>
@@ -55,6 +66,7 @@
 </div>
 <i class="material-icons" id="add">add</i>
 <i class="material-icons" id="remove">remove</i>
+<i class="material-icons rotate180" id="merge">merge_type</i>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -63,6 +75,7 @@ var layers = [1];
 var selected = 1;
 var counter = 1;
 var div = document.getElementById('layers');
+var global = this; // WHY WHY WHY
 
 $( "#add" ).click(function() {
   div.innerHTML =
@@ -74,22 +87,33 @@ $( "#add" ).click(function() {
 
   layers.push(counter);
   console.log(layers);
-  if(layers.length == 1)
-  {
-    //TODO
-  }
 
   parent.createLayer(counter);
 });
 
+
+//TODO
 $( "#remove" ).click(function() {
   $('.selected').remove();
   var location = layers.indexOf(selected);
   console.log(location);
   if(layers.length > 1)
     selected = location - 1;
+    //TODO
+});
 
-  //console.log(selected);
+$( "#merge" ).click(function() {
+  if(selected != layers[0] && layers.length > 1)
+  {
+    var top = global.selected;
+    var indexOfTop = layers.indexOf(parseInt(top));
+    var indexOfBottom = layers.indexOf(parseInt(top)) - 1;
+    var bottom = layers[indexOfBottom]; //IDs
+    parent.mergeLayer(top, bottom);
+    $('.selected').remove();
+    layers.splice(indexOfTop, 1);
+    console.log(layers);
+  }
 });
 
 
