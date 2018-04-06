@@ -25,7 +25,6 @@ canvas{
 
 <div id="sketch"></div>
 
-
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="aoCanvas.js"></script>
 <script src="brushes.js"></script>
@@ -61,7 +60,7 @@ $(document).mousedown(function(e) {
 		{
 			brush = new Brush(canvas, localStorage.getItem("cat"));
 			console.log("test" + localStorage.getItem("cat"));
-			brush.assign();
+			setTimeout(brush.assign(), 2000);
 		}
 		else {
 		console.log("nouse down");
