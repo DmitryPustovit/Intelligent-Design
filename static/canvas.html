@@ -8,6 +8,7 @@ Basic draw code and image loading.
 	padding: 0;
 	margin: 0;
 }
+
 #sketch{
 	position: relative;
 	height: 100%;
@@ -30,13 +31,6 @@ canvas{
 var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
 createLayer(1);
 selectLayer(1);
-
-//DEFAULT PEN
-ctx.lineWidth = 5;
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.imageSmoothingEnabled = true;
-//END DEFAULT PEN
 
 if (localStorage.getItem("color") === null) {
 	ctx.strokeStyle = 'blue';
@@ -76,6 +70,10 @@ $(document).mouseup(function(e) {
 
 //Paint feature
 		var onPaint = function() {
+			ctx.lineWidth = 1;
+			ctx.lineJoin = 'round';
+			ctx.lineCap = 'round';
+			ctx.imageSmoothingEnabled = true;
 			ctx.beginPath();
 			console.log(localStorage.getItem("tool"));
 			if(localStorage.getItem("tool") == "pencil"){

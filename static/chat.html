@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  html, body {
+  	height: 100%;
+  	position: relative;
+  	margin: 0;
+    padding: 0;
+  }
+
+  div.chatMain {
+  	background: #383A3D;
+  	min-width: 10%;
+  	right: 0;
+  	height: 100%;
+  	padding-top: 0;
+    width: 400px;
+    height: 300px;
+    position: relative;
+  }
+
+  div.chatMessages {
+  	color:white;
+  }
+
+  div.chatUsers {
+    padding: 10px;
+  }
+
+  div.chatUsers ul {
+  	list-style-type: none;
+  	padding-left: 0;
+  	padding-right: 0;
+  	min-height: 5ex;
+    margin: 0;
+  }
+
+  div.chatUsers li {
+  	float: left;
+  	margin-left: 0;
+  	padding-right:10px;
+    margin-top: 0;
+  }
+
+  div.chatUsers img {
+  	max-width: 5ex;
+  	max-height: 5ex;
+    border-radius: 100px;
+  }
+
+  div.chatSend {
+  	background: #484B51;
+    position: absolute;
+    width: 380px;
+  	right: 0;
+  	left: 0;
+    bottom: 0;
+    height: 20px;
+    padding: 10px;
+    color: white;
+  }
+
+  .chatMessages img{
+    width: 50px;
+    border-radius: 100px;
+  }
+  .chatMessages div{
+    display: inline-block;
+    width: 340px;
+    min-height: 56px;
+    position: absolute;
+    left: 60px;
+  }
+
+  div.chatMessages ul {
+  	list-style-type: none;
+  }
+
+.chatMessages il{
+  position: relative;
+
+}
+
+  div.chatSend {
+    position: absolute;
+
+  }
+
+  div.chatSend input[type=submit] {
+  }
+
+  #chatList{
+    padding: 0;
+  }
+
+li{
+  margin-top: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <div class = "chatMain">
+    <div class = "chatUsers">
+      <ul>
+        <li>
+          <img src="aowolfie.gif">
+        </li>
+        <li>
+          <img src="profile.png">
+        </li>
+        <li>
+          <img src="prof3.png">
+        </li>
+      </ul>
+    </div>
+    <div class="chatMessages">
+      <ul id = "chatList">
+        <li>
+          <img src="prof3.png">
+          <div>
+          Well team<br/>
+Everything is merged together branch wise, code wise it shall be a while
+</div>
+        </li>
+        <li>
+          <img src="aowolfie.gif">
+          <div>
+        yay! :cheer:
+</div>
+        </li>
+      </ul>
+  </div>
+  <div class="chatSend" contenteditable="true">
+  </div>
+  </div>
+</body>
+</html>
