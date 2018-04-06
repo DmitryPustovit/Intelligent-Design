@@ -115,3 +115,37 @@ blank = {
 	"minOpacity": 0.1,
 	"maxOpacity": 0.5,
 };
+
+twirl = {
+	"name": "bTwirl",
+	"textures": [
+		"static/horizontal_bar.png"
+	],
+	"mtRand": false,
+	"minRotation": 5,
+	"maxRotation": 30,
+	"step": 3,
+	"yOffset": 0,
+	"xOffset": 0,
+	"minScale": 0.5,
+	"maxScale": 1.0,
+	"minOpacity": 0.1,
+	"maxOpacity": 0.5,
+};
+
+spaz = {
+	"name": "spaz",
+	"textures": [
+		"static/horizontal_bar.png"
+	],
+	"mtRand": false,
+	"minRotation": 1,
+	"maxRotation": 180,
+	"step": 1,
+	"yOffset": 0,
+	"xOffset": 0,
+	"minScale": 0.2,
+	"maxScale": 0.5,
+	"minOpacity": 0.4,
+	"maxOpacity": 0.8,
+};
