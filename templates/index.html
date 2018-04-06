@@ -170,13 +170,17 @@
     //var canvas = iframe_canvas.getElementById("paint");
 
     function localSave(){
+      flattenLayers();
+       setTimeout(save, 2000)
+    }
+
+    function save(){
       var iframe = document.getElementById("theCanvasIframeId");
       var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-      var canvas = iframe_canvas.getElementById("paint");
+      var canvas = iframe_canvas.getElementById("1");
 
       //temp download link
       var downloadLink = document.createElement("a");
-
 
       var dt = canvas.toDataURL('image/png');
       dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
@@ -186,16 +190,6 @@
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-
-      //this.href = dt;
-    	//this.download = "tomokoCanvas.jpeg";
-      //window.open = dt.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-      //var win = window.open(dt);
-      //win.download = "test.png";
-
-      //window.open(canvas.toDataURL('image/png'));
-      //this.href = dt;
-      //this.download = "dfsdf.png";
     }
 
 
@@ -222,5 +216,12 @@
       console.log("merge layer");
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("mergeLayer,"+ top + "," + bottom, '*');
     }
+
+    function flattenLayers()
+    {
+      console.log("faltten layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
+    }
+
     </script>
 </html>
