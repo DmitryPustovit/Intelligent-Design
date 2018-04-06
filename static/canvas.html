@@ -220,9 +220,14 @@ $(document).mouseup(function(e) {
 		if(brush == "v")
 		 		bVerticalBar.assign();
 				if(brush == "b")
+				{
 			 		bBubbles.assign();
+					bBubbles.setColor('blue');
+				}
 				if(brush == "c")
+				{
 				 		bClouds.assign();
+					}
  		 //brush = new Brush(canvas, localStorage.getItem("cat"));
  	 }
 
