@@ -138,7 +138,7 @@
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='layers.html') }}" height="330" style="width: 260px;"></iframe>
+          <iframe src="{{ url_for('static', filename='layers.html') }}" id="theLayerIframeId" height="330" style="width: 260px;"></iframe>
         </div> </div>
 
         <div class="window"> <div class="window_inside">
@@ -221,6 +221,7 @@
     {
       console.log("faltten layer");
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
+      document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
     }
 
     </script>

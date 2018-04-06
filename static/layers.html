@@ -114,6 +114,17 @@ $( "#merge" ).click(function() {
   }
 });
 
+function flatten(){
+  console.log(layers);
+  layers = [layers[0]];
+  console.log(layers);
+  div.innerHTML =
+  '<div class="layer" id="' + layers[0] + '">' +
+    '<div class="canvasHolder"> </div>' +
+    '<span> layer ' + layers[0]   +  '</span>' +
+    '<input type="checkbox" checked>' +
+  '</div>'
+}
 
 
 $(document).ready(function(){
@@ -124,7 +135,22 @@ $(document).ready(function(){
     console.log(selected);
     parent.selectLayer($(this).attr('id'));
 });
-
 });
+
+window.addEventListener('message', receiver, false);
+
+function receiver(e) {
+   if (e.origin == '*') {
+     console.log("baka");
+     return;
+   } else {
+		 var data = e.data.split(',');
+
+		if(data[0] == 'flattenLayers')
+			flatten();
+console.log("layer falaten command ");
+		 console.log(data);
+   }
+}
 
 </script>
