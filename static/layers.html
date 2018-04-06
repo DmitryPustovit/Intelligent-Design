@@ -46,46 +46,63 @@
 
 <body>
   <div id="layers" class="content">
-  <div class="layer selected">
+  <div class="layer selected" id="1">
     <div class="canvasHolder"> </div>
     <span> layer 1 </span>
     <input type="checkbox" checked>
   </div>
 
 </div>
-<i class="material-icons" onclick="addLayer();">add</i>
-<i class="material-icons">remove</i>
+<i class="material-icons" id="add">add</i>
+<i class="material-icons" id="remove">remove</i>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>
-var layers = 1;
+var layers = [1];
 var selected = 1;
+var counter = 1;
 var div = document.getElementById('layers');
 
-function addLayer()
-{
-  div.innerHTML +=
-  '<div class="layer">' +
+$( "#add" ).click(function() {
+  div.innerHTML =
+  '<div class="layer" id="' + ++counter + '">' +
     '<div class="canvasHolder"> </div>' +
-    '<span> layer ' + ++layers  +  '</span>' +
+    '<span> layer ' + counter   +  '</span>' +
     '<input type="checkbox" checked>' +
-  '</div>';
-}
+  '</div>' + div.innerHTML;
 
-function removeLayer()
-{
+  layers.push(counter);
+  console.log(layers);
+  if(layers.length == 1)
+  {
+    //TODO
+  }
+
+  parent.createLayer(counter);
+});
+
+$( "#remove" ).click(function() {
   $('.selected').remove();
-}
+  var location = layers.indexOf(selected);
+  console.log(location);
+  if(layers.length > 1)
+    selected = location - 1;
+
+  //console.log(selected);
+});
+
 
 
 $(document).ready(function(){
-  $(document) .on('click', '.layer', function(e){
-    console.log("hello");
-    ///$target = $(event.target);
-    //$( ".layer" ).removeClass('.selected');
-    //$target.addClass('.selected');
-  });
+  $(document).delegate( ".layer", "click", function() {
+    $(".layer").removeClass('selected');
+    $(this).addClass('selected');
+    selected = $(this).attr('id');
+    console.log(selected);
+    parent.selectLayer($(this).attr('id'));
+});
+
 });
 
 </script>

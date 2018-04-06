@@ -138,7 +138,11 @@
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='tools.html') }}" width="80"></iframe>
+          <iframe src="{{ url_for('static', filename='layers.html') }}" height="330" style="width: 260px;"></iframe>
+        </div> </div>
+
+        <div class="window"> <div class="window_inside">
+          <iframe src="{{ url_for('static', filename='tools.html') }}" width="80" height="400"></iframe>
         </div> </div>
 
 
@@ -192,6 +196,19 @@
       //window.open(canvas.toDataURL('image/png'));
       //this.href = dt;
       //this.download = "dfsdf.png";
+    }
+
+
+    function createLayer(param)
+    {
+      console.log("created layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("createLayer,"+ param, '*');
+    }
+
+    function selectLayer(param)
+    {
+      console.log("select layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
     }
     </script>
 </html>
