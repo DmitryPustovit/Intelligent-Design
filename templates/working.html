@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -139,7 +138,11 @@
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='tools.html') }}" width="80"></iframe>
+          <iframe src="{{ url_for('static', filename='layers.html') }}" height="330" style="width: 260px;"></iframe>
+        </div> </div>
+
+        <div class="window"> <div class="window_inside">
+          <iframe src="{{ url_for('static', filename='tools.html') }}" width="80" height="400"></iframe>
         </div> </div>
 
 
@@ -167,13 +170,17 @@
     //var canvas = iframe_canvas.getElementById("paint");
 
     function localSave(){
+      flattenLayers();
+       setTimeout(save, 2000)
+    }
+
+    function save(){
       var iframe = document.getElementById("theCanvasIframeId");
       var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-      var canvas = iframe_canvas.getElementById("paint");
+      var canvas = iframe_canvas.getElementById("1");
 
       //temp download link
       var downloadLink = document.createElement("a");
-
 
       var dt = canvas.toDataURL('image/png');
       dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
@@ -183,50 +190,38 @@
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-
-      //this.href = dt;
-    	//this.download = "tomokoCanvas.jpeg";
-      //window.open = dt.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-      //var win = window.open(dt);
-      //win.download = "test.png";
-
-      //window.open(canvas.toDataURL('image/png'));
-      //this.href = dt;
-      //this.download = "dfsdf.png";
     }
-    </script>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="static/aoCanvas.css">
-	<script src="static/aoCanvas.js"></script>
-	<script src="static/brushes.js"></script>
-	<title></title>
-</head>
-<body>
-	<canvas id = "canvas" width="500" height="500"> </canvas>
-	<script>
-		el = document.getElementById("canvas");
-		bPencil = new Brush(el, pencil);
-		bPen = new Brush(el, pen);
-		bHorizontalBar = new Brush(el, horizontalBar);
-		bVerticalBar = new Brush(el, verticalBar);
-		bBubbles = new Brush(el, bubbles);
-		bClouds = new Brush(el, clouds);
-		//brush1 = new Brush(el, "brush1.png");
-	</script>
 
-	<div>
-		<button onclick="bPencil.assign();"> <img src = "static/pixel.png"></button>
-		<button onclick="bPen.assign();"> <img src = "static/pen.png"></button>
-		<button onclick="bHorizontalBar.assign();"> <img src = "static/horizontal_bar.png"></button>
-		<button onclick="bVerticalBar.assign();"> <img src = "static/vertical_bar.png"></button>
-		<button onclick="bBubbles.assign(); bBubbles.setColor('blue');"> <img src = "static/bubble.png"></button>
-		<button onclick="bClouds.assign();"> <img src = "static/cloud.png"></button>
-	</div>
-	<!--<div><input type="text" name="" onmouseover="brush1"></div>
-	-->
-</body>
->>>>>>> brushes
+
+    function createLayer(param)
+    {
+      console.log("created layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("createLayer,"+ param, '*');
+    }
+
+    function selectLayer(param)
+    {
+      console.log("select layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
+    }
+
+    function selectLayer(param)
+    {
+      console.log("select layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("selectLayer,"+ param, '*');
+    }
+
+    function mergeLayer(top, bottom)
+    {
+      console.log("merge layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("mergeLayer,"+ top + "," + bottom, '*');
+    }
+
+    function flattenLayers()
+    {
+      console.log("faltten layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
+    }
+
+    </script>
 </html>
