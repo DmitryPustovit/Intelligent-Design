@@ -132,9 +132,9 @@ function Brush(canvas, bData){
 		/*	For iterate through all spaces between where the mouse
 			last was and where it is currently*/
 		for (var i = 0; i < dist; i += this.bData.step){
-			/* Calculate the x and y point where the drawing should take palce*/
-			x = this.lastPoint.x + (Math.sin(ang) * i) - this.bData.xOffset;
-			y = this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset;
+			/* Calculate the x and y point where the drawing should take place*/
+			x = (this.lastPoint.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
+			y = (this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
 
 			/* Save the state of the context */
 			this.context.save();
@@ -142,6 +142,7 @@ function Brush(canvas, bData){
 			/* It's easier to transform the canvas than it is the image */
     		this.context.translate(x, y);
 
+    		/* Apply the random scaling */
     		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
     		this.context.scale(scale, scale);
 
