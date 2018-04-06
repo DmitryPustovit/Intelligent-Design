@@ -134,7 +134,7 @@
         </div> </div>
 
         <div class="window"> <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='colorWheel.html') }}" height="300" style="width: 300px;"></iframe>
+          <iframe src="{{ url_for('static', filename='colorWheel.html') }}" id="theColorIframeId" height="300" style="width: 300px;"></iframe>
         </div> </div>
 
         <div class="window"> <div class="window_inside">
@@ -232,6 +232,11 @@
     {
       console.log("hide layer");
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("hideLayer,"+ id + "," + val, '*');
+    }
+
+    function eyedropper(data)
+    {
+      document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
     }
 
     </script>

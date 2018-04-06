@@ -84,13 +84,32 @@ input[type=number]::-webkit-outer-spin-button {
       var rgba = 'rgba(' + data[0] + ', ' + data[1] +
                  ', ' + data[2] + ', ' + (data[3] / 255) + ')';
       localStorage.setItem("color", JSON.stringify(data));
-      red.value = data[0];
-      green.value = data[1];
-      blue.value = data[2];
-      ctx.beginPath();
-      ctx.lineWidth = 1;
-      ctx.fillStyle = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
-      ctx.rect(220,20,60,60);
-      ctx.fill();
+      setColor(data);
+  }
+
+  function setColor(data){
+    red.value = data[0];
+    green.value = data[1];
+    blue.value = data[2];
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
+    ctx.rect(220,20,60,60);
+    ctx.fill();
+  }
+
+  window.addEventListener('message', receiver, false);
+
+  function receiver(e) {
+     if (e.origin == '*') {
+       console.log("baka");
+       return;
+     } else {
+  		 var data = e.data.split(',');
+
+  		if(data[0] == 'eyedropper')
+  			setColor([data[1], data[2], data[3], data[4]]);
+     }
+     console.log([data[1], data[2], data[3], data[4]]);
   }
 </script>

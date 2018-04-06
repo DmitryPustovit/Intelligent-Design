@@ -88,6 +88,13 @@ $(document).mouseup(function(e) {
 	      ctx.arc(mouse.oX,mouse.oY,8,0,Math.PI*2,false);
 	      ctx.fill();
 	    }
+			if (localStorage.getItem("tool") == "eyedropper")
+			{
+				var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+	      var data = pixel.data;
+				parent.eyedropper(data);
+				console.log("eyedropper drag");
+			}
 			mouse.oX = mouse.x;
 			mouse.oY = mouse.y;
 
