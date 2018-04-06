@@ -228,5 +228,11 @@
       document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
     }
 
+    function hideLayer(id, val)
+    {
+      console.log("hide layer");
+      document.getElementById('theCanvasIframeId').contentWindow.postMessage("hideLayer,"+ id + "," + val, '*');
+    }
+
     </script>
 </html>

@@ -60,7 +60,7 @@
   <div class="layer selected" id="1">
     <div class="canvasHolder"> </div>
     <span> layer 1 </span>
-    <input type="checkbox" checked>
+    <input class="check" type="checkbox" checked>
   </div>
 
 </div>
@@ -82,7 +82,7 @@ $( "#add" ).click(function() {
   '<div class="layer" id="' + ++counter + '">' +
     '<div class="canvasHolder"> </div>' +
     '<span> layer ' + counter   +  '</span>' +
-    '<input type="checkbox" checked>' +
+    '<input class="check" type="checkbox" checked>' +
   '</div>' + div.innerHTML;
 
   layers.push(counter);
@@ -135,6 +135,21 @@ $(document).ready(function(){
     console.log(selected);
     parent.selectLayer($(this).attr('id'));
 });
+
+$(document).delegate( ".check", "change", function() {
+  var hide;
+  console.log("layer: hide");
+  if($(this).is(":checked")) {
+    hide = 0;
+  }
+  else {
+    hide = 1;
+  }
+
+  parent.hideLayer($(this).parent().attr('id'), hide);
+});
+
+
 });
 
 window.addEventListener('message', receiver, false);
