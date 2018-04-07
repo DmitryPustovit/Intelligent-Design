@@ -1,34 +1,3 @@
-<!--
-Hello! Welcome to the bare min of what a drawing app is.
-Basic draw code and image loading.
--->
-
-<style>
-	body{
-	padding: 0;
-	margin: 0;
-}
-
-#sketch{
-	position: relative;
-	height: 100%;
-	width: 100%;
-}
-
-canvas{
-	height: 100%;
-	width: 100%;
-  position: absolute;
-}
-
-</style>
-
-<div id="sketch"><canvas id="1" width="800" height="600" style="z-index: 1;"></canvas></div>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="aoCanvas.js"></script>
-<script src="brushes.js"></script>
-<script>
 
 //Onload Code
 var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
@@ -283,4 +252,3 @@ function receiver(e) {
  //};
 
  //img.src = 'intro.jpg';
-</script>
