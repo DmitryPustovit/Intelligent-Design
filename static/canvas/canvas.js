@@ -13,12 +13,7 @@ bBubbles = new Brush(el, bubbles);
 bClouds = new Brush(el, clouds);
 blank = new Brush(el, blank);
 
-if (localStorage.getItem("color") === null) {
-	ctx.strokeStyle = 'blue';
-}
-else {
-	updateColor();
-}
+updateColor();
 
 if (localStorage.getItem("tool") === null) {
 	ctx.strokeStyle = 'pencil';
