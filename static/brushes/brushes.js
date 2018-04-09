@@ -1,7 +1,7 @@
 pencil = {
 	"name": "Pencil",
 	"textures": [
-		"pixel.png"
+		"../brushes/BrushTextures/pixel.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -18,7 +18,7 @@ pencil = {
 pen = {
 	"name": "Pen",
 	"textures": [
-		"pen.png"
+		"../brushes/BrushTextures/pen.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -35,7 +35,7 @@ pen = {
 horizontalBar = {
 	"name": "H-Bar",
 	"textures": [
-		"horizontal_bar.png"
+		"../brushes/BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -52,7 +52,7 @@ horizontalBar = {
 verticalBar = {
 	"name": "V-Bar",
 	"textures": [
-		"vertical_bar.png"
+		"../brushes/BrushTextures/vertical_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -68,7 +68,7 @@ verticalBar = {
 bubbles = {
 	"name": "Bubbles",
 	"textures": [
-		"bubble.png", "bubble_small.png"
+		"../brushes/BrushTextures/bubble.png", "../brushes/BrushTextures/bubble_small.png"
 	],
 	"mtRand": true,
 	"minRotation": 25,
@@ -85,7 +85,7 @@ bubbles = {
 clouds = {
 	"name": "Clouds",
 	"textures": [
-		"cloud.png"
+		"../brushes/BrushTextures/cloud.png"
 	],
 	"mtRand": false,
 	"minRotation": -90,
@@ -119,7 +119,7 @@ blank = {
 twirl = {
 	"name": "bTwirl",
 	"textures": [
-		"static/horizontal_bar.png"
+		"../brushes/BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 5,
@@ -136,7 +136,7 @@ twirl = {
 spaz = {
 	"name": "spaz",
 	"textures": [
-		"static/horizontal_bar.png"
+		"../brushes/BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 1,

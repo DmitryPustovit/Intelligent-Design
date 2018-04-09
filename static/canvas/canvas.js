@@ -4,14 +4,14 @@ var canvas, ctx, width = document.documentElement.clientWidth, height = document
 createLayer(1);
 selectLayer(1);
 
-el = document.getElementById("1");
-bPencil = new Brush(el, pencil);
-bPen = new Brush(el, pen);
-bHorizontalBar = new Brush(el, horizontalBar);
-bVerticalBar = new Brush(el, verticalBar);
-bBubbles = new Brush(el, bubbles);
-bClouds = new Brush(el, clouds);
-blank = new Brush(el, blank);
+canvas = document.getElementById("1");
+bPencil = new Brush(canvas, pencil);
+bPen = new Brush(canvas, pen);
+bHorizontalBar = new Brush(canvas, horizontalBar);
+bVerticalBar = new Brush(canvas, verticalBar);
+bBubbles = new Brush(canvas, bubbles);
+bClouds = new Brush(canvas, clouds);
+blank = new Brush(canvas, blank);
 
 updateColor();
 
@@ -31,23 +31,18 @@ var brush;
 
 $(document).mousedown(function(e) {
 		if (localStorage.getItem("tool") != "none")
-		{
 				blank.assign();
-		}
-		console.log("nouse down");
+
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
 		updateColor();
 		mouse.oX = mouse.x;
 		mouse.oY = mouse.y;``
-		//$(document).mousemove(function(e) { onPaint();});
 		document.addEventListener('mousemove', onPaint, false);
 });
 
 $(document).mouseup(function(e) {
-	console.log("nouse up");
-    //$(document).off('mousemove');
-		document.removeEventListener('mousemove', onPaint, false);
+	 document.removeEventListener('mousemove', onPaint, false);
 });
 
 //Paint feature
@@ -120,79 +115,23 @@ $(document).mouseup(function(e) {
 			pastedImage.src = source;
 		}
 
-//Layers!
-		function createLayer(number) {
-			console.log("layer created!");
-			var canvas = document.createElement('canvas');
-			canvas.id = number;
-			canvas.width = width;
-			canvas.height = height;
-			canvas.style.zIndex = number ;
-			$('#sketch').append(canvas);
-		}
-
-		function selectLayer(number)
-		{
-			canvas = document.getElementById(number);
-			ctx = canvas.getContext('2d');
-		}
-
-		function mergeLayers(top, bottom){
-			console.log(top + " " + bottom);
-			var ctx = document.getElementById(bottom).getContext('2d');
-			//ctx.setOpacity(top.getOpacity, bottom);
-			ctx.drawImage(document.getElementById(top), 0, 0);
-			//ctx.setOpacity(1, bottom);
-			//TODO layer opactiy HERE
-			$(document.getElementById(top)).remove();
-		}
-
-		function removeLayer(num)
-		{
-			$(document.getElementById(num)).remove();
-		}
-
-		function flattenLayers()
-		{
-			var layers = [];
-			$('#sketch').children('canvas').each(function () {
-    		layers.push($(this).attr('id'));
-			});
-
-			if(layers.length > 1)
-			{
-				for(var i = layers.length - 1; i > 0; i--)
-					mergeLayers(layers[i], layers[i-1]);
-			}
-		}
-
-		function hideLayer(num, val)
-		{
-				$(document.getElementById(num)).toggle();
-		}
 		var brushWorking = false;
-		function assignBrush(brush)
+	function assignBrush(brush)
  	 {
 		 brushWorking = true;
-		 console.log(brush);
+
 		 if(brush == "pencil")
- 		 	bPencil.assign();
-		if(brush == "pen")
-			 bPen.assign();
-		if(brush == "h")
-	 		bHorizontalBar.assign();
-		if(brush == "v")
-		 		bVerticalBar.assign();
-				if(brush == "b")
-				{
-			 		bBubbles.assign();
-					bBubbles.setColor('blue');
-				}
-				if(brush == "c")
-				{
-				 		bClouds.assign();
-					}
- 		 //brush = new Brush(canvas, localStorage.getItem("cat"));
+ 		     bPencil.assign();
+		 if(brush == "pen")
+			   bPen.assign();
+		 if(brush == "h")
+	 		   bHorizontalBar.assign();
+		 if(brush == "v")
+		 		 bVerticalBar.assign();
+	 	 if(brush == "b")
+			 	 bBubbles.assign();
+		 if(brush == "c")
+				 bClouds.assign();
  	 }
 
 

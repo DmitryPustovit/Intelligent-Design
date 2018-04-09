@@ -36,7 +36,7 @@
         <!-- Canvas -->
         <div class="window" style="margin-left: 20px; left: 300px; top: 80px;">
           <div class="window_inside">
-            <iframe src="{{ url_for('static', filename='canvas/canvas.html') }}" id="theCanvasIframeId" height="600" width="800"></iframe>
+            <iframe style="padding: 0;" src="{{ url_for('static', filename='canvas/canvas.html') }}" id="theCanvasIframeId" height="600" width="800"></iframe>
           </div>
         </div>
 
@@ -75,6 +75,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="static/main.js"></script>
+    <script src="static/crossWindow.js"></script>
     <script>
     //FEATURES
 

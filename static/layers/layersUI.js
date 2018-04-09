@@ -21,7 +21,7 @@ var global = this; // WHY WHY WHY Sometimes JS needs to be remined that global v
 
       layers.push(counter);   //Adds to layer counter
       //Adds an actual canvas as a layer
-      sendToSibling("theCanvasIframeId", "createLayer", null);
+      sendToSibling("theCanvasIframeId", "createLayer", [counter]);
     });
 
     //Remove Layer
@@ -40,7 +40,7 @@ var global = this; // WHY WHY WHY Sometimes JS needs to be remined that global v
         var indexOfTop = layers.indexOf(parseInt(top)); //get the index of the top(selected) layer
         var indexOfBottom = layers.indexOf(parseInt(top)) - 1; //get the index of the layer to the bottom
         var bottom = layers[indexOfBottom]; //Gets the ID of the bottom layer
-        sendToSibling("theCanvasIframeId", "mergeLayer", [top,bottom]]); //Merges the two canvases together
+        sendToSibling("theCanvasIframeId", "mergeLayer", [top,bottom]); //Merges the two canvases together
         $('.selected').remove(); //Removes the selected layer from the UI (top layer)
         layers.splice(indexOfTop, 1); //Removes selected layer from the array (top layer)
       }
