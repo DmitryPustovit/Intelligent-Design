@@ -69,7 +69,7 @@ var global = this; // WHY WHY WHY Sometimes JS needs to be remined that global v
       '<div class="layer" id="' + layers[0] + '">' +
         '<div class="canvasHolder"> </div>' +
         '<span> layer ' + layers[0]   +  '</span>' +
-        '<input type="checkbox" checked>' +
+        '<input class="check" type="checkbox" checked>' +
       '</div>';
     }
 
