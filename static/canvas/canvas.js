@@ -4,6 +4,10 @@ var canvas, ctx, width = document.documentElement.clientWidth, height = document
 createLayer(1);
 selectLayer(1);
 
+//Fills first layer with white
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 bPencil = new Brush(pencil);
 bPen = new Brush(pen);
 bHorizontalBar = new Brush(horizontalBar);
