@@ -94,7 +94,7 @@ $(document).mouseup(function(e) {
 			var storedNames = JSON.parse(localStorage.getItem("color"));
 			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
 
-      /*
+			/*
       bPencil.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
       bPen.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
       bHorizontalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
@@ -103,7 +103,7 @@ $(document).mouseup(function(e) {
       bClouds.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
       blank.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
       bTwirl.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      spaz.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1); */
+      spaz.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);  */
 		}
 
 //Paste img feature
@@ -153,7 +153,7 @@ $(document).mouseup(function(e) {
 			 	 bBubbles.assign();
 		 if(brush == "c")
 				 bClouds.assign();
-    if(brush == "b")
+    if(brush == "t")
      		 bTwirl.assign();
     if(brush == "s")
          spaz.assign();

@@ -21,8 +21,8 @@ body{
   top: 0;
   height: 100%;
   width: 40px;
-  background: #5352ed;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background: #A9A3CF; /*Side Menu Color */
+  //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   z-index: 4;
 }
 
@@ -58,7 +58,7 @@ body{
   display: inline-block;
   width: auto;
   height: auto;
-  background: #5352ed;
+  background: #A9A3CF; /*Windows bar color */
   //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   position: absolute;
 }
