@@ -4,14 +4,15 @@ var canvas, ctx, width = document.documentElement.clientWidth, height = document
 createLayer(1);
 selectLayer(1);
 
-canvas = document.getElementById("1");
-bPencil = new Brush(canvas, pencil);
-bPen = new Brush(canvas, pen);
-bHorizontalBar = new Brush(canvas, horizontalBar);
-bVerticalBar = new Brush(canvas, verticalBar);
-bBubbles = new Brush(canvas, bubbles);
-bClouds = new Brush(canvas, clouds);
-blank = new Brush(canvas, blank);
+bPencil = new Brush(pencil);
+bPen = new Brush(pen);
+bHorizontalBar = new Brush(horizontalBar);
+bVerticalBar = new Brush(verticalBar);
+bBubbles = new Brush(bubbles);
+bClouds = new Brush(clouds);
+blank = new Brush(blank);
+bTwirl = new Brush(twirl);
+spaz = new Brush(spaz);
 
 updateColor();
 
@@ -33,6 +34,16 @@ $(document).mousedown(function(e) {
 		if (localStorage.getItem("tool") != "none")
 				blank.assign();
 
+    bPencil.setCanvas(canvas);
+    bPen.setCanvas(canvas);
+    bHorizontalBar.setCanvas(canvas);
+    bVerticalBar.setCanvas(canvas);
+    bBubbles.setCanvas(canvas);
+    bClouds.setCanvas(canvas);
+    blank.setCanvas(canvas);
+    bTwirl.setCanvas(canvas);
+    spaz.setCanvas(canvas);
+
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
 		updateColor();
@@ -52,7 +63,6 @@ $(document).mouseup(function(e) {
 			ctx.lineCap = 'round';
 			ctx.imageSmoothingEnabled = true;
 			ctx.beginPath();
-			console.log(localStorage.getItem("tool"));
 			if(localStorage.getItem("tool") == "pencil"){
 				ctx.globalCompositeOperation = "source-over";
 				ctx.moveTo(mouse.oX,mouse.oY);
@@ -83,6 +93,17 @@ $(document).mouseup(function(e) {
 		function updateColor(){
 			var storedNames = JSON.parse(localStorage.getItem("color"));
 			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
+
+      /*
+      bPencil.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bPen.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bHorizontalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bVerticalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bBubbles.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bClouds.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      blank.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      bTwirl.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
+      spaz.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1); */
 		}
 
 //Paste img feature
@@ -132,6 +153,10 @@ $(document).mouseup(function(e) {
 			 	 bBubbles.assign();
 		 if(brush == "c")
 				 bClouds.assign();
+    if(brush == "b")
+     		 bTwirl.assign();
+    if(brush == "s")
+         spaz.assign();
  	 }
 
 

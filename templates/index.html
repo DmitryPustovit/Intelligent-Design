@@ -108,7 +108,6 @@
 
     function flattenLayers()
     {
-      console.log("faltten layer");
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
       document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
     }
@@ -120,7 +119,6 @@
 
     function assignBrush(data)
     {
-      console.log( data);
       document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
     }
 

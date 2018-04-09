@@ -56,7 +56,7 @@ var global = this; // WHY WHY WHY Sometimes JS needs to be remined that global v
 
     //Hide Layer
     $(document).delegate( ".check", "change", function() { //delegate will eventually be phased out of JQuery
-      sendToSibling("theCanvasIframeId", "hideLayer", $(this).attr('id')); //Triggers a toggle
+      sendToSibling("theCanvasIframeId", "hideLayer", [$(this).parent().attr('id')]); //Triggers a toggle
     });
 
 
