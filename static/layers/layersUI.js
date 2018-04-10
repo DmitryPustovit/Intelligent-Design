@@ -30,7 +30,7 @@ var global = this; // WHY WHY WHY Sometimes JS needs to be remined that global v
       var cur = global.selected; //Gets the current selected layer ID
       var indexOfCur = layers.indexOf(parseInt(cur)); //Gets the index of the current Layer ID
       layers.splice(indexOfCur, 1); //Removes the layer from the Layer array
-      sendToSibling("theCanvasIframeId", "removeLayer", cur);
+      sendToSibling("theCanvasIframeId", "removeLayer", [cur]);
     });
 
     //Merge Layer

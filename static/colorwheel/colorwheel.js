@@ -38,14 +38,6 @@ var red = document.getElementById('red');
 var green = document.getElementById('green');
 var blue = document.getElementById('blue');
 
-if (localStorage.getItem("color") === null) {
-  localStorage.setItem("color", JSON.stringify([255,255,255,1]));
-}
-else{
-  var storedColor = JSON.parse(localStorage.getItem("color"));
-  setColor(storedColor);
-}
-
 canvas.addEventListener('mousedown', pick);
 
 function pick(event) {
@@ -68,6 +60,14 @@ function setColor(data){
   ctx.fillStyle = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
   ctx.rect(220,20,60,60);
   ctx.fill();
+}
+
+if (localStorage.getItem("color") === null) {
+  localStorage.setItem("color", JSON.stringify([255,255,255,1]));
+}
+else{
+  var storedColor = JSON.parse(localStorage.getItem("color"));
+  setColor(storedColor);
 }
 
 window.addEventListener('message', receiver, false);
