@@ -64,7 +64,7 @@ function colorToRGBA(color) {
 		"maxOpacity": 1.0,	//The maximum opacity the brush can have randomly applied
 	}
 */
-function Brush(canvas, bData){
+function Brush(bData){
 	/* The brush's properties */
 	this.bData = bData;
 
@@ -198,6 +198,7 @@ function Brush(canvas, bData){
 		return true;
 	}
 
+
 	/* Set the brush's opacity */
 	this.setOpacity = function(opacity) { this.opacity = opacity; }
 
@@ -218,7 +219,7 @@ function Brush(canvas, bData){
 
 	/* Set's the brush's red, green, blue and alpha channels */
 	this.setRGBA = function(r, g, b, a){
-		if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
+		//if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
 		this.color = {r, g, b, a};
 		if (!this.image.complete) return false;
 		this.applyColor();
@@ -235,7 +236,7 @@ function Brush(canvas, bData){
 		Sets and applies the color
 	*/
 	this.setColor = function(color){
-		this.color = colorToRGBA(color);;
+		this.color = colorToRGBA(color);
 		if (!this.image.complete) return false;
 		this.applyColor();
 		return true;

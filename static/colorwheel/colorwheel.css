@@ -1,0 +1,23 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 300px;
+}
+
+.color{
+  width: 200px;
+  margin-top: 10px;
+}
+
+
+input{
+  display: inline-block;
+  width: 40px;
+  float: right;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
