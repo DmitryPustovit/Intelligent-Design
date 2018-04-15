@@ -96,13 +96,17 @@
       //temp download link
       var downloadLink = document.createElement("a");
       var fileName = prompt("Enter a filename: ", "canvas");
-      var downloadFormat = prompt("Enter a download format(jpeg, png): ", "png");
+      var downloadFormat = prompt("Enter a download format (jpeg, png): ", "png");
       var dt = canvas.toDataURL('image/' + downloadFormat);
       dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
       dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
       downloadLink.href = dt;
-
-      downloadLink.download = fileName;
+      var downloadExtension;
+      if (downloadFormat == 'jpeg')
+        downloadExtension = '.jpg';
+      else if (downloadFormat == 'png')
+        downloadExtension = '.png';
+      downloadLink.download = fileName + downloadExtension;
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
