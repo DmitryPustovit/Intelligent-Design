@@ -6,6 +6,7 @@ body{
   padding-left: 100px;
   background: #e2e1e0;
   position: relative;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 
 #canvas{
