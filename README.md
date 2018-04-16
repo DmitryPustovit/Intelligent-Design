@@ -32,3 +32,12 @@ https://polar-falls-71423.herokuapp.com/
 
 Development To Do List aka Hit List:   
 http://dmitrypustovit.com/Intelligent-Design/  
+
+Application Links
+==================
+Build 2.1.0 
+- Merged in advanced save functions and save UI 
+- Bug Fixes
+
+Build 1.0.0 
+- First release
