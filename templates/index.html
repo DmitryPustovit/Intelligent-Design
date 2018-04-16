@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="static/main.css" rel="stylesheet">
+    <link href="static/UI/PerfectUI.css" rel="stylesheet">
 
     <title>Tomo Editor</title>
   </head>
@@ -76,40 +77,13 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="static/main.js"></script>
     <script src="static/crossWindow.js"></script>
+    <script src="static/UI/PerfectUI.js"></script>
+    <script src="static/save/save.js"></script>
     <script>
-    //FEATURES
 
-    //var iframe = document.getElementById("#theCanvasIframeId");
-    //var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-    //var canvas = iframe_canvas.getElementById("paint");
-
-    function localSave(){
-      flattenLayers();
-      setTimeout(save, 2000);
-    }
-
-    function save(){
-      var iframe = document.getElementById("theCanvasIframeId");
-      var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-      var canvas = iframe_canvas.getElementsByTagName("canvas")[0]; //Possibly a better, cleaner way of fixing things
-
-      //temp download link
-      var downloadLink = document.createElement("a");
-      var fileName = prompt("Enter a filename: ", "canvas");
-      var downloadFormat = prompt("Enter a download format (jpeg, png): ", "png");
-      var dt = canvas.toDataURL('image/' + downloadFormat);
-      dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-      dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
-      downloadLink.href = dt;
-      var downloadExtension;
-      if (downloadFormat == 'jpeg')
-        downloadExtension = '.jpg';
-      else if (downloadFormat == 'png')
-        downloadExtension = '.png';
-      downloadLink.download = fileName + downloadExtension;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
+    function test123(va)
+    {
+      console.log(va);
     }
 
     function flattenLayers()
