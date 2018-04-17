@@ -1,0 +1,32 @@
+<body>
+	<div id="sizeinput" class="Resize Canvas">
+		<p> Enter the size for the canvas.</p>
+
+		<form name="resizeinput" method>
+			<fieldset>
+				<label for="width">Width</label>
+				<input type ="number" name="width">
+				<label for="height">Height</label>
+				<input type="number" name="height">
+				<label for="scale">Scale</label>
+				<input type="radio" name="scales" value=1>Yes</input>
+				<input type="radio" name="scales" value=0>No</input>
+				<input type="submit" tabindex="-1">
+			</fieldset>
+		</form>
+	</div>
+</body>
+
+<button id="resizebutton">Resizebutton</button>
+
+	<script>
+		function size() {
+			var input = document.getElementById("resizeinput").elements;
+			var radio = document.getElementById("scales");
+			if(radio[0].checked) {
+				resize(canvas, input[0].value, input[1].value, 1);
+			} else {
+				resize(canvas, input[0].value, input[1].value, 0);
+			}
+		}
+	</script>
