@@ -1,25 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.modal {
+    				display: none; 
+   				position: fixed; 
+   				z-index: 1;
+   				padding-top: 25px; 
+    				left: 0;
+    				top: 0;
+				width: 100%; 
+				height: 100%; 
+				overflow: auto; 
+				background-color: rgb(0,0,0); 
+				background-color: rgba(0,0,0,0.5);
+			}
+			.modalinput {
+   				background-color: #fefefe;
+    				margin: auto;
+    				padding: 20px;
+    				border: 1px solid #888;
+    				width: 75%;
+			}
+		</style>
+	</head>
 <body>
-	<div id="sizeinput" class="Resize Canvas">
-		<p> Enter the size for the canvas.</p>
+	<button id="resizebutton">Resizebutton</button>
+	<div id="sizeinput" class="modal">
+		<div class="modalinput">
+			<p> Enter the size for the canvas.</p>
 
-		<form name="resizeinput" method>
-			<fieldset>
-				<label for="width">Width</label>
-				<input type ="number" name="width">
-				<label for="height">Height</label>
-				<input type="number" name="height">
-				<label for="scale">Scale</label>
-				<input type="radio" name="scales" value=1>Yes</input>
-				<input type="radio" name="scales" value=0>No</input>
-				<input type="submit" tabindex="-1">
-			</fieldset>
-		</form>
+			<form name="resizeinput" method>
+				<fieldset>
+					<label for="width">Width</label>
+					<input type ="number" name="width"><br>
+					<label for="height">Height</label>
+					<input type="number" name="height"><br>
+					<label for="scale">Scale</label>
+					<input type="radio" name="scales" value=1>Yes</input>
+					<input type="radio" name="scales" value=0>No</input><br>
+					<input type="submit" tabindex="-1">
+				</fieldset>
+			</form>
+		</div>
 	</div>
-</body>
-
-<button id="resizebutton">Resizebutton</button>
-
 	<script>
+		var modal = document.getElementById("sizeinput");
+		var resizebutton = document.getElementById("resizebutton");
+
+		resizebutton.onclick = function() {
+    			modal.style.display = "block";
+		}
+
+		window.onclick = function(e) {
+		    if (e.target == modal) {
+		        modal.style.display = "none";
+		    }
+		}
+
 		function size() {
 			var input = document.getElementById("resizeinput").elements;
 			var radio = document.getElementById("scales");
@@ -30,3 +68,5 @@
 			}
 		}
 	</script>
+</body>
+</html>
