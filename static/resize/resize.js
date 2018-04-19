@@ -1,5 +1,5 @@
 function resizeButton(data){
-	resize(data[0], data[1], data[2]);
+	$.when(resize(data[0], data[1], data[2]));
 }
 //canvas is the canvas that will be resized
 //newwidth is the width the canvas will be
@@ -25,7 +25,7 @@ function scale(canvas, width, height) {
 	var width = canvas.width;
 	var height = canvas.height;
 	var temp = document.createElement("canvas");
-	var tempctx = tempCanvas.getContext("2d");
+	var tempctx = temp.getContext("2d");
 	tempctx.drawImage(canvas,0,0);
 	var ctx = canvas.getContext('2d');
 	ctx.drawImage(temp, 0, 0, width, height);	
