@@ -1,5 +1,7 @@
 Intelligent-Design (WIP name :P)
 ================================
+Current Build - Build 2.1.0 
+
 Branch Statuses:  
 Master - Safe, Up to Date, BRANCH FROM THIS ONE!  
 Release - Safe, Behind, CURRENTLY INACTIVE  
@@ -41,7 +43,7 @@ Build 2.2.0
 - More dependable canvas
 - Save work protection
 - aobrush 2.0
-- More to com 
+- More to come
 
 Build 2.1.0 
 - Merged in advanced save functions and save UI 
