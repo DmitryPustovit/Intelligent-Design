@@ -34,29 +34,28 @@
       <div class="menuButton"> </div>
       <div class="menuButton"> </div> -->
     </div>
+    <!-- Canvas -->
+    <div id="canvasHolder">
+      <div id="sketchScroll">
+        <div id="sketch"></div>
+      </div>
+    </div>
+
     <div id="outerside"></div>
-      <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
-
-        <!-- Canvas -->
-        <div class="window" style="margin-left: 20px; left: 300px; top: 80px;">
-          <div class="window_inside">
-            <div id="sketch"></div>
-          </div>
-        </div>
-
+      <!-- div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px; z-index:-1;">
         <!-- Tools -->
-        <!-- <div class="window" style="top:90px;">
+      <!--<div class="window" style="position: fixed; top: 0;">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='tools/tools.html') }}" width="80" height="400"></iframe>
           </div>
-        </div> -->
+        </div>    -->
 
         <!-- Color Wheel -->
-        <!-- <div class="window" style="left: calc(100% - 325px);">
+        <!--<div class="" style="left: calc(100% - 325px); z-index: 4;">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='colorwheel/colorwheel.html') }}" id="theColorIframeId" height="300" style="width: 300px;"></iframe>
           </div>
-        </div> -->
+        </div>  -->
 
         <!-- Layers -->
         <!-- <div class="window" style="left: calc(100% - 280px); top:440px; ">
@@ -70,11 +69,12 @@
           <iframe src="{{ url_for('static', filename='chat.html') }}" width="400" height="300" style="padding: 0;"></iframe>
         </div> </div> -->
 
-        <div id="dev-build" style="position: fixed; bottom: 0; left: 100px;"> Build - 2.1.0 </div>
-      </div>
+      <!-- </div> -->
 
-    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
-    <div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>-->
+    <div id="dev-build"> Developer Build - 2.1.2 </div>
+
+    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>-->
+    <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

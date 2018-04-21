@@ -1,10 +1,33 @@
+#canvasHolder{
+  width: calc(100% - 40px);
+  height: 100%;
+  overflow: scroll;
+  position: fixed;
+  top: 0;
+  left: 40px;
+}
+
+#sketchScroll{
+    width: 140%;
+    height: 140%;
+    position: relative;
+    margin: auto;
+}
+
 #sketch{
-background: url("transparent.png");
-position: relative;
-width: 700px;
+  background: url("transparent.png");
+  width: 700px;
+  height: 400px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  cursor: crosshair;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 canvas{
-width: 100%;
-background: none;
+  width: 100%;
+  height: 100%;
+  background: none;
 }
