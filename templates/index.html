@@ -7,6 +7,7 @@
 
     <link href="static/main.css" rel="stylesheet">
     <link href="static/UI/PerfectUI.css" rel="stylesheet">
+    <link href="static/canvas/canvas.css" rel="stylesheet">
 
     <title>Tomo Editor</title>
   </head>
@@ -39,30 +40,30 @@
         <!-- Canvas -->
         <div class="window" style="margin-left: 20px; left: 300px; top: 80px;">
           <div class="window_inside">
-            <iframe style="padding: 0;" src="{{ url_for('static', filename='canvas/canvas.html') }}" id="theCanvasIframeId" height="600" width="800"></iframe>
+            <div id="sketch"></div>
           </div>
         </div>
 
         <!-- Tools -->
-        <div class="window" style="top:90px;">
+        <!-- <div class="window" style="top:90px;">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='tools/tools.html') }}" width="80" height="400"></iframe>
           </div>
-        </div>
+        </div> -->
 
         <!-- Color Wheel -->
-        <div class="window" style="left: calc(100% - 325px);">
+        <!-- <div class="window" style="left: calc(100% - 325px);">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='colorwheel/colorwheel.html') }}" id="theColorIframeId" height="300" style="width: 300px;"></iframe>
           </div>
-        </div>
+        </div> -->
 
         <!-- Layers -->
-        <div class="window" style="left: calc(100% - 280px); top:440px; ">
+        <!-- <div class="window" style="left: calc(100% - 280px); top:440px; ">
           <div class="window_inside">
           <iframe src="{{ url_for('static', filename='layers/layers.html') }}" id="theLayerIframeId" height="330" style="width: 260px;"></iframe>
           </div>
-        </div>
+        </div> -->
 
         <!--
         <div class="window"> <div class="window_inside">
@@ -82,11 +83,15 @@
     <script src="static/UI/PerfectUI.js"></script>
     <script src="static/save/save.js"></script>
     <script src="static/resize/resize.js"></script>
+    <script src="static/brushes/aoCanvas.js"></script>
+    <script src="static/brushes/brushes.js"></script>
+    <script src="static/layers/layers.js"></script>
+    <script src="static/canvas/canvas.js"></script>
     <script>
 
     function test123(va)
     {
-      console.log(va);
+      console.log(va + "this is a temp function that i need to see if thi is still an active funtion");
     }
 
     function flattenLayers()
