@@ -35,6 +35,14 @@ http://dmitrypustovit.com/Intelligent-Design/
 
 Application Links
 ==================
+Build 2.2.0
+- Layer Manger, revap of layer system
+- UI rework
+- More dependable canvas
+- Save work protection
+- aobrush 2.0
+- More to com 
+
 Build 2.1.0 
 - Merged in advanced save functions and save UI 
 - Bug Fixes
