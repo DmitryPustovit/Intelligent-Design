@@ -3,9 +3,9 @@ import json
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
-print "Generating Amazingness. Please Hold."
+print ("Generating Amazingness. Please Hold.")
 
-moduleRoot ='static' 
+moduleRoot ='static'
 moduleLocation = os.listdir(moduleRoot)
 modules = []
 
@@ -18,12 +18,12 @@ for module in moduleLocation:
                        data["defaultX"], data["defaultY"]])
 
 modules = sorted(modules,key=lambda l:l[0], reverse=False)
- 
+
 #for subdir, dirs, files in os.walk(moduleRoot):
 #    for file in files:
 #       print os.path.join(subdir, file)
 
-#@app.errorhandler(404)
+#@app.errorhandler(500)
 #def page_not_found(e):
 #    return render_template('500.html'), 500
 
@@ -33,5 +33,3 @@ def main():
 
 if __name__ == "__main__":
     app.run()
-
-
