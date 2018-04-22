@@ -2,78 +2,77 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
     <meta http-equiv="Pragma" content="no-cache">
 
     <link href="static/main.css" rel="stylesheet">
     <link href="static/UI/PerfectUI.css" rel="stylesheet">
+    <link href="static/canvas/canvas.css" rel="stylesheet">
 
     <title>Tomo Editor</title>
   </head>
   <body>
+    <!-- Main Menu Buttons -->
     <div id="sidemenu">
-      <!--
-      <img src="logo3.png" class="menuButton" id="logo" style="margin-bottom: 20px; margin-top: 10px; border: none; padding: 0; height: 60px; width: 60px;"/>
-
-      <hr>
-      <img src="canvas.png" class="menuButton" />
-      <hr>
-      <img src="drive.png" class="menuButton" />
-      <hr>
-      <img src="open.png" class="menuButton" />
-      <hr>
-      <img src="discord.png" class="menuButton" />
-      <hr>
-      <img src="question.png" class="menuButton" />
-      <hr>
-      <img src="settings.png" class="menuButton" />
-      <hr> -->
-      <!-- <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div> -->
+      <div style="position: absolute; top: 50%; transform: translateY(-50%);">
+        {% for module in modules %}
+          <div class="menuButton"> <img src="{{ module[2] }}"/> </div>
+        {% endfor %}
+      </div>
     </div>
+
+    <!-- Canvas -->
+    <div id="canvasHolder">
+      <div id="sketchScroll">
+        <div id="sketch"></div>
+      </div>
+    </div>
+
     <div id="outerside"></div>
-      <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
 
-        <!-- Canvas -->
-        <div class="window" style="margin-left: 20px; left: 300px; top: 80px;">
-          <div class="window_inside">
-            <iframe style="padding: 0;" src="{{ url_for('static', filename='canvas/canvas.html') }}" id="theCanvasIframeId" height="600" width="800"></iframe>
+    {% for module in modules %}
+        {% if module[4] %}
+          <div class="window" style="{{ module[5] }} {{ module[6] }}">
+            <div class="window_inside">
+              <iframe src="{{ module[3] }}"></iframe>
+            </div>
           </div>
-        </div>
+        {% endif %}
+    {% endfor %}
 
+      <!-- div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px; z-index:-1;"> -->
         <!-- Tools -->
-        <div class="window" style="top:90px;">
+      <!--<div class="window" style="position: fixed; top: 0;">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='tools/tools.html') }}" width="80" height="400"></iframe>
           </div>
-        </div>
+        </div>    -->
 
         <!-- Color Wheel -->
-        <div class="window" style="left: calc(100% - 325px);">
+        <!--<div class="" style="left: calc(100% - 325px); z-index: 4;">
           <div class="window_inside">
             <iframe src="{{ url_for('static', filename='colorwheel/colorwheel.html') }}" id="theColorIframeId" height="300" style="width: 300px;"></iframe>
           </div>
-        </div>
+        </div>  -->
 
         <!-- Layers -->
-        <div class="window" style="left: calc(100% - 280px); top:440px; ">
+        <!-- <div class="window" style="left: calc(100% - 280px); top:440px; ">
           <div class="window_inside">
           <iframe src="{{ url_for('static', filename='layers/layers.html') }}" id="theLayerIframeId" height="330" style="width: 260px;"></iframe>
           </div>
-        </div>
+        </div> -->
 
         <!--
         <div class="window"> <div class="window_inside">
           <iframe src="{{ url_for('static', filename='chat.html') }}" width="400" height="300" style="padding: 0;"></iframe>
         </div> </div> -->
 
-        <div id="dev-build" style="position: fixed; bottom: 0; left: 100px;"> Build - 2.1.0 </div>
-      </div>
+      <!-- </div> -->
+
+    <div id="dev-build"> Developer Build - 2.1.2 </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
-    <div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>-->
+    <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>-->
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -82,28 +81,27 @@
     <script src="static/UI/PerfectUI.js"></script>
     <script src="static/save/save.js"></script>
     <script src="static/resize/resize.js"></script>
+    <script src="static/brushes/aoCanvas.js"></script>
+    <script src="static/brushes/brushes.js"></script>
+    <script src="static/layers/layers.js"></script>
+    <script src="static/canvas/canvas.js"></script>
     <script>
 
-    function test123(va)
-    {
-      console.log(va);
-    }
+      function flattenLayers()
+      {
+        document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
+        document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
+      }
 
-    function flattenLayers()
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
-      document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
-    }
+      function eyedropper(data)
+      {
+        document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
+      }
 
-    function eyedropper(data)
-    {
-      document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
-    }
-
-    function assignBrush(data)
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
-    }
+      function assignBrush(data)
+      {
+        document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
+      }
 
     </script>
 </html>

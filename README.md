@@ -1,6 +1,6 @@
 Intelligent-Design (WIP name :P)
 ================================
-Current Build - Build 2.1.0 
+Current Build - Build 2.1.0
 
 Branch Statuses:  
 Master - Safe, OUTDATE , AVOID!  
@@ -18,8 +18,8 @@ Install
 	Run the python-2.7.14.amd64.msi  
 2) Install Flask - Windows Users  
 	Run this command in command prompt C:/Python27/Scripts/pip.exe install Flask  
-  
-  
+
+
 To Do
 =========
 Add Documentation  
@@ -42,12 +42,13 @@ Build 2.2.0
 - UI rework
 - More dependable canvas
 - Save work protection
+- Color Wheel 2.0
 - aobrush 2.0
 - More to come
 
-Build 2.1.0 
-- Merged in advanced save functions and save UI 
+Build 2.1.0
+- Merged in advanced save functions and save UI
 - Bug Fixes
 
-Build 1.0.0 
+Build 1.0.0
 - First release
