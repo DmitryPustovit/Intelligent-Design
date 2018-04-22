@@ -4,6 +4,8 @@
   "page_src" : "save.html",
   "order" : 10,
   "popout" : false,
+  "defaultX" : null,
+  "defaultY" : null,
   "action" : true,
   "disable" : false
 }

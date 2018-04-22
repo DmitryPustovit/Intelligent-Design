@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
 $('iframe').load(function () {
     $(this).height($(this).contents().height());
-    $(this).width($(this).contents().width());
+    $(this).width($(this).contents().find("body").width());
 });
 
 $(document).delegate( ".menuButton", "click", function() {

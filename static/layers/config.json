@@ -4,6 +4,8 @@
   "page_src" : "layers.html",
   "order" : 5,
   "popout" : false,
+  "defaultX" : null,
+  "defaultY" : null,
   "action" : false,
   "disable" : false
 }

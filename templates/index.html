@@ -32,9 +32,9 @@
 
     {% for module in modules %}
         {% if module[4] %}
-          <div class="window">
+          <div class="window" style="{{ module[5] }} {{ module[6] }}">
             <div class="window_inside">
-              <iframe src="{{ module[3] }}" ></iframe>
+              <iframe src="{{ module[3] }}"></iframe>
             </div>
           </div>
         {% endif %}
