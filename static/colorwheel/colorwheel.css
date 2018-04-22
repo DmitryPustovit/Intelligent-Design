@@ -5,6 +5,7 @@ body{
   font-family: Tahoma, Verdana, Segoe, sans-serif;
   font-size: 12px;
   font-weight: 300;
+  height: 300px;
 }
 
 #picker{
@@ -27,7 +28,7 @@ body{
     -webkit-appearance: none;
     width: 60px;
     height: 10px;
-    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    //background: linear-gradient(to right, rgba(0,0,0,1), rgba(255,0,0,1));
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
@@ -43,7 +44,7 @@ body{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
+    width: 1px;
     height: 8px;
     border: 0;
     background: url('needle.png');

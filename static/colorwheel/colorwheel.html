@@ -14,37 +14,37 @@
       <div class="colorHeader">RGB</div>
       <div class="color">
         <div class="letters">R:</div>
-        <input type="range" min="1" max="255" value="50" class="slider">
+        <input type="range" min="0" max="255" class="slider" id="redSlider">
         <input type="number" value="255" class="textbox" id="red"/>
       </div>
       <div class="color">
         <div class="letters">G:</div>
-        <input type="range" min="1" max="255" value="50" class="slider">
+        <input type="range" min="0" max="255" class="slider" id="greenSlider">
         <input type="number" value="255" class="textbox"  id="green"/>
       </div>
       <div class="color">
         <div class="letters">B:</div>
-        <input type="range" min="1" max="255" value="50" class="slider">
+        <input type="range" min="0" max="255" class="slider" id="blueSlider">
         <input type="number" value="255" class="textbox"  id="blue"/>
       </div>
-
+      
       <br/><br/>
 
       <div class="colorHeader">HSV</div>
       <div class="color">
         <div class="letters">H:</div>
-        <input type="range" min="1" max="360" value="50" class="slider">
-        <input type="number" value="360" class="textbox" id="red"/>
+        <input type="range" min="0" max="360" value="50" class="slider" id="hueSlider" style="background: linear-gradient(to right,red, yellow, lime, aqua, blue, magenta, red);">
+        <input type="number" value="360" class="textbox" id="hue"/>
       </div>
       <div class="color">
         <div class="letters">S:</div>
-        <input type="range" min="1" max="100" value="50" class="slider">
-        <input type="number" value="100" class="textbox"  id="green"/>
+        <input type="range" min="0" max="100" value="50" class="slider" id="satSlider">
+        <input type="number" value="100" class="textbox"  id="sat"/>
       </div>
       <div class="color">
         <div class="letters">V:</div>
-        <input type="range" min="1" max="100" value="50" class="slider">
-        <input type="number" value="100" class="textbox"  id="blue"/>
+        <input type="range" min="0" max="100" value="50" class="slider" id="valueSlider">
+        <input type="number" value="100" class="textbox"  id="val"/>
       </div>
 
       <br/><br/>
@@ -64,6 +64,7 @@
       <div class="colorBoxBack" id="color2Back"></div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="colorwheel.js"></script>
   </body>
 </html>

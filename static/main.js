@@ -5,6 +5,11 @@ $( document ).ready(function() {
     - $("#canvasHolder").width()/2 + $("#sketchScroll").width()/2);
 });
 
+$('iframe').load(function () {
+    $(this).height($(this).contents().height());
+    $(this).width($(this).contents().width());
+});
+
 $(document).delegate( ".menuButton", "click", function() {
   $(this).toggleClass('menuButtonSelected');
 });
