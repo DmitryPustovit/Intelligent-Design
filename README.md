@@ -3,9 +3,9 @@ Intelligent-Design (WIP name :P)
 Current Build - Build 2.1.0 
 
 Branch Statuses:  
-Master - Safe, Up to Date, BRANCH FROM THIS ONE!  
-Release - Safe, Behind, CURRENTLY INACTIVE  
-Production - Safe, Outdated, Build 1.0  
+Master - Safe, OUTDATE , AVOID! 
+Release - Safe, up to date, Branch from this one!
+Production - Safe, OUTDATE , AVOID! 
 
 Notice
 ========
