@@ -1,0 +1,9 @@
+{
+  "name": "Tools",
+  "icon_src" : "tools.png",
+  "page_src" : "tools.html",
+  "order" : 1,
+  "popout" : false,
+  "action" : false,
+  "disable" : false
+}

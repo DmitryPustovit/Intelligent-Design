@@ -12,28 +12,15 @@
     <title>Tomo Editor</title>
   </head>
   <body>
+    <!-- Main Menu Buttons -->
     <div id="sidemenu">
-      <!--
-      <img src="logo3.png" class="menuButton" id="logo" style="margin-bottom: 20px; margin-top: 10px; border: none; padding: 0; height: 60px; width: 60px;"/>
-
-      <hr>
-      <img src="canvas.png" class="menuButton" />
-      <hr>
-      <img src="drive.png" class="menuButton" />
-      <hr>
-      <img src="open.png" class="menuButton" />
-      <hr>
-      <img src="discord.png" class="menuButton" />
-      <hr>
-      <img src="question.png" class="menuButton" />
-      <hr>
-      <img src="settings.png" class="menuButton" />
-      <hr> -->
-      <!-- <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div> -->
+      <div style="position: absolute; top: 50%; transform: translateY(-50%);">
+        {% for module in modules %}
+          <div class="menuButton"> <img src="{{ module[2] }}"/> </div>
+        {% endfor %}
+      </div>
     </div>
+
     <!-- Canvas -->
     <div id="canvasHolder">
       <div id="sketchScroll">
@@ -42,7 +29,18 @@
     </div>
 
     <div id="outerside"></div>
-      <!-- div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px; z-index:-1;">
+
+    {% for module in modules %}
+        {% if module[4] %}
+          <div class="window">
+            <div class="window_inside">
+              <iframe src="{{ module[3] }}" height="330" style="width: 260px;"></iframe>
+            </div>
+          </div>
+        {% endif %}
+    {% endfor %}
+
+      <!-- div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px; z-index:-1;"> -->
         <!-- Tools -->
       <!--<div class="window" style="position: fixed; top: 0;">
           <div class="window_inside">
@@ -73,8 +71,8 @@
 
     <div id="dev-build"> Developer Build - 2.1.2 </div>
 
-    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>-->
-    <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>
+    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
+    <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>-->
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -89,26 +87,21 @@
     <script src="static/canvas/canvas.js"></script>
     <script>
 
-    function test123(va)
-    {
-      console.log(va + "this is a temp function that i need to see if thi is still an active funtion");
-    }
+      function flattenLayers()
+      {
+        document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
+        document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
+      }
 
-    function flattenLayers()
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
-      document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
-    }
+      function eyedropper(data)
+      {
+        document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
+      }
 
-    function eyedropper(data)
-    {
-      document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
-    }
-
-    function assignBrush(data)
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
-    }
+      function assignBrush(data)
+      {
+        document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
+      }
 
     </script>
 </html>

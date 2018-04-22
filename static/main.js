@@ -5,7 +5,11 @@ $( document ).ready(function() {
     - $("#canvasHolder").width()/2 + $("#sketchScroll").width()/2);
 });
 
+$(document).delegate( ".menuButton", "click", function() {
+  $(this).toggleClass('menuButtonSelected');
+});
+
 $( function() {
-  $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "parent"});
+  $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "window"});
   //$( "#sidemenu" ).resizable();
 });

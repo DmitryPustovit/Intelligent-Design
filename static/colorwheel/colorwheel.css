@@ -3,18 +3,128 @@ body{
   padding: 0;
   width: 300px;
   font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+#picker{
+  border-radius: 100px;
+}
+
+#stats{
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  margin-left: 20px;
+}
+
+.colorHeader{
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 4px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 60px;
+    height: 10px;
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    position: absolute;
+    margin-top: 3px;
+}
+
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 8px;
+    border: 0;
+    background: url('needle.png');
+    cursor: pointer;
+    margin-top: 18px;
+}
+
+.slider::-moz-range-thumb {
+    width: 10px;
+    height: 8px;
+    border: 0;
+    background: url('needle.png');
+    cursor: pointer;
+}
+
+.textbox{
+  position: absolute;
+  right: 0;
+  margin-top: -3px;
 }
 
 .color{
-  width: 200px;
   margin-top: 10px;
+  width: 140px;
 }
 
+.letters{
+  width: 24px;
+  display: inline-block;
+}
+
+.colorBox{
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 1px solid black;
+}
+
+.colorBoxBack{
+    background: white;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+#color1{
+  z-index: 4;
+  position: absolute;
+}
+
+#color1Back{
+  top: 0;
+  border: 1px;
+  z-index: 0;
+  position: absolute;
+}
+
+#color1Back{
+  z-index: -20;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+}
+
+#color2{
+  z-index: -10;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+}
+
+#colorBoxes{
+  position: absolute;
+  top: 150px;
+  left: 20px;
+}
 
 input{
   display: inline-block;
   width: 40px;
-  float: right;
+  font-size: 12px;
 }
 
 input[type=number]::-webkit-inner-spin-button,

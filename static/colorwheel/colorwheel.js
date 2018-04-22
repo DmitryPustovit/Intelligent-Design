@@ -1,11 +1,11 @@
 var canvas = document.getElementById("picker");
 var ctx = canvas.getContext("2d");
-canvas.height = 200;
-canvas.width = 300;
-var x = 100;
-var y = 100;
+canvas.height = 140;
+canvas.width = 140;
+var x = canvas.height / 2;
+var y = canvas.width / 2;
 
-var radius = 100;
+var radius = canvas.height / 2;
 var counterClockwise = false;
 
 for(var angle=0; angle<=360; angle++)
@@ -30,8 +30,8 @@ for(var angle=0; angle<=360; angle++)
   ctx.fillStyle = gradient;
   ctx.fill();
 
-  ctx.lineWidth = 1;
-  ctx.strokeRect(220,20,60,60);
+  //ctx.lineWidth = 1;
+  //ctx.strokeRect(220,20,60,60);
 }
 
 var red = document.getElementById('red');
@@ -52,14 +52,15 @@ function pick(event) {
 }
 
 function setColor(data){
+  document.getElementById('color1').style.backgroundColor = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
   red.value = data[0];
   green.value = data[1];
   blue.value = data[2];
   ctx.beginPath();
-  ctx.lineWidth = 1;
-  ctx.fillStyle = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
-  ctx.rect(220,20,60,60);
-  ctx.fill();
+  //ctx.lineWidth = 1;
+  //ctx.fillStyle = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
+  //ctx.rect(220,20,60,60);
+  //ctx.fill();
 }
 
 if (localStorage.getItem("color") === null) {
@@ -79,8 +80,8 @@ function receiver(e) {
    } else {
      var data = e.data.split(',');
 
-    if(data[0] == 'eyedropper')
-      setColor([data[1], data[2], data[3], data[4]]);
+    //if(data[0] == 'eyedropper')
+      //setColor([data[1], data[2], data[3], data[4]]);
    }
    console.log([data[1], data[2], data[3], data[4]]);
 }
