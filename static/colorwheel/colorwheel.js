@@ -40,6 +40,7 @@ var blue = document.getElementById('blue');
 var hue = document.getElementById('hue');
 var sat = document.getElementById('sat');
 var value = document.getElementById('val');
+var alpha = document.getElementById('alpha');
 
 $(document).mousedown(function(e) {
   pick(e);
@@ -58,6 +59,7 @@ function pick(event) {
     else{
     var pixel = ctx.getImageData(mouseX, mouseY, 1, 1);
     var data = pixel.data;
+    data[3] = document.getElementById("alphaSlider").value;
     setColor(data);
   }
 }
@@ -67,30 +69,45 @@ function setColor(data){
   var hsv = RGBToHSV(data[0], data[1], data[2]);
   document.getElementById('color1').style.backgroundColor = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
   document.getElementById('redSlider').style.background = 'linear-gradient(to right, ' +
-  'rgba( 0,' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')' + ',' +
-  'rgba( 255' + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + '))';
+  'rgba( 0,' + data[1] +',' + data[2] + ', 255 )' + ',' +
+  'rgba( 255' + ',' + data[1] +',' + data[2] + ', 255 ))';
   document.getElementById("redSlider").value = data[0] ;
 
   document.getElementById('greenSlider').style.background = 'linear-gradient(to right, ' +
-  'rgba(' +  data[0] + ', 0 ,' + data[2] + ',' + (data[3] / 255) + ')' + ',' +
-  'rgba(' +  data[0] + ', 255 ,' + data[2] + ',' + (data[3] / 255) +'))';
+  'rgba(' +  data[0] + ', 0 ,' + data[2] + ', 255 )' + ',' +
+  'rgba(' +  data[0] + ', 255 ,' + data[2] + ', 255 ))';
   document.getElementById("greenSlider").value = data[1] ;
 
   document.getElementById('blueSlider').style.background = 'linear-gradient(to right, ' +
-  'rgba(' +  data[0] + ', ' + data[1] + ' , 0 ,' + (data[3] / 255) + ')' + ',' +
-  'rgba(' +  data[0] + ', ' + data[1] + ' , 255 ,' + (data[3] / 255) +'))';
+  'rgba(' +  data[0] + ', ' + data[1] + ' , 0 , 255 )' + ',' +
+  'rgba(' +  data[0] + ', ' + data[1] + ' , 255 , 255 ))';
   document.getElementById("blueSlider").value = data[2] ;
+
+  var tempHSV1 = HSVToRGB(hsv[0] / 360, 0 ,hsv[2] / 100);
+  var tempHSV2 = HSVToRGB(hsv[0] / 360, 1, hsv[2] / 100);
+
+  document.getElementById('satSlider').style.background = 'linear-gradient(to right, ' +
+  'rgba(' +  tempHSV1[0] + ', ' + tempHSV1[1] + ' , ' + tempHSV1[2] + ' , 255 )' + ',' +
+  'rgba(' +  tempHSV2[0] + ', ' + tempHSV2[1] + ' , '+ tempHSV2[2] + ' , 255 ))';
+  document.getElementById("satSlider").value = hsv[1]; ;
+
+  document.getElementById('alphaSlider').style.background = 'linear-gradient(to right, ' +
+  'rgba(' +  data[0] + ', ' + data[1] + ' , ' + data[2] + ' , 0 )' + ',' +
+  'rgba(' +  data[0] + ', ' + data[1] + ' , '+ data[2] + ' , 255 ))';
+  document.getElementById("alphaSlider").value = data[3] ;
+
 
   red.value = data[0];
   green.value = data[1];
   blue.value = data[2];
+  hue.value = hsv[0];
+  sat.value = hsv[1];
+  value.value = hsv[2];
+  alpha.value = data[3];
 
   document.getElementById("hueSlider").value = hsv[0] ;
   document.getElementById("satSlider").value = hsv[1] ;
   document.getElementById("valueSlider").value = hsv[2] ;
-  hue.value = hsv[0];
-  sat.value = hsv[1];
-  value.value = hsv[2];
 }
 
 if (localStorage.getItem("color") === null) {
@@ -102,16 +119,90 @@ else{
 }
 
 document.getElementById('redSlider').addEventListener("input", function() {
-    setColor([this.value, document.getElementById('green').value, document.getElementById('blue').value, 255])
+    setColor([this.value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
 }, false);
 
 document.getElementById('greenSlider').addEventListener("input", function() {
-    setColor([document.getElementById('red').value, this.value, document.getElementById('blue').value, 255])
+    setColor([document.getElementById('red').value, this.value, document.getElementById('blue').value, document.getElementById('alpha').value])
 }, false);
 
 document.getElementById('blueSlider').addEventListener("input", function() {
-    setColor([document.getElementById('red').value, document.getElementById('green').value, this.value, 255])
+    setColor([document.getElementById('red').value, document.getElementById('green').value, this.value, document.getElementById('alpha').value])
 }, false);
+
+document.getElementById('alphaSlider').addEventListener("input", function() {
+    setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, this.value])
+}, false);
+
+document.getElementById('red').addEventListener("input", function() {
+  setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
+});
+
+document.getElementById('green').addEventListener("input", function() {
+  setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
+});
+
+document.getElementById('blue').addEventListener("input", function() {
+  setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
+});
+
+document.getElementById('alpha').addEventListener("input", function() {
+  setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
+});
+
+function HSVToRGB(h, s, v)
+{
+  var r,g,b;
+  console.log([h,s,v]);
+  if((Math.floor(h * 6) % 6) == 0)
+  {
+    r = v;
+    g = v * (1 - (1 - (h * 6 - (Math.floor(h * 6)))) * s);
+    b = v * (1 - s);
+  }
+
+  else if((Math.floor(h * 6) % 6) == 1)
+  {
+    r = v * (1 - (h * 6 - (Math.floor(h * 6))) * s);
+    g = v;
+    b = v * (1 - s);
+  }
+
+  else if((Math.floor(h * 6) % 6) == 2)
+  {
+    r = v * (1 - s);
+    g = v;
+    b = v * (1 - (1 - (h * 6 - (Math.floor(h * 6)))) * s);
+  }
+
+  else if((Math.floor(h * 6) % 6) == 3)
+  {
+    r = v * (1 - s);
+    g = v * (1 - (h * 6 - (Math.floor(h * 6))) * s);
+    b = v;
+  }
+
+  else if((Math.floor(h * 6) % 6) == 4)
+  {
+    r = v * (1 - (1 - (h * 6 - (Math.floor(h * 6)))) * s);
+    g = v * (1 - s);
+    b = v;
+  }
+
+  else if((Math.floor(h * 6) % 6) == 5)
+  {
+    r = v;
+    g = v * (1 - s);
+    b = v * (1 - (h * 6 - (Math.floor(h * 6))) * s);
+  }
+
+  r *= 255;
+  g *= 255;
+  b *= 255;
+
+  return [ r, g, b ];
+}
+
 
 function RGBToHSV(r, g, b)
 {
@@ -150,7 +241,7 @@ function RGBToHSV(r, g, b)
       h = ((r - g) / diff) + 4;
   }
 
-  return [Math.round((h / 6) * 360), Math.round(s * 100), Math.round(v * 100)];
+  return [Math.round((h / 6) * 360), Math.round(s * 100), Math.round(v * 100), h, s, v];
 }
 
 window.addEventListener('message', receiver, false);
@@ -174,4 +265,3 @@ function receiver(e) {
 //TODO
 //Get Color indicator circle working
 //Get HSV fully working
-//Get transparacy working

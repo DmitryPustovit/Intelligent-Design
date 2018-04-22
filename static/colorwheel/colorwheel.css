@@ -91,7 +91,7 @@ body{
 }
 
 .colorBoxBack{
-    background: white;
+    background: url("transparent.png");
     position: absolute;
     width: 50px;
     height: 50px;
@@ -127,6 +127,16 @@ body{
   position: absolute;
   top: 150px;
   left: 20px;
+}
+
+#alphaSliderBackground{
+  background: url("transparent.png");
+  width: 60px;
+  height: 10px;
+  position: absolute;
+  margin-top: -11.5px;
+  margin-left: 26px;
+  z-index: -2;
 }
 
 input{
