@@ -85,7 +85,7 @@ function setColor(data){
 
   var tempHSV1 = HSVToRGB(hsv[0] / 360, 0 ,hsv[2] / 100);
   var tempHSV2 = HSVToRGB(hsv[0] / 360, 1, hsv[2] / 100);
-
+    console.log(tempHSV1);
   document.getElementById('satSlider').style.background = 'linear-gradient(to right, ' +
   'rgba(' +  tempHSV1[0] + ', ' + tempHSV1[1] + ' , ' + tempHSV1[2] + ' , 255 )' + ',' +
   'rgba(' +  tempHSV2[0] + ', ' + tempHSV2[1] + ' , '+ tempHSV2[2] + ' , 255 ))';
@@ -150,10 +150,13 @@ document.getElementById('alpha').addEventListener("input", function() {
   setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
 });
 
+document.getElementById('color1').addEventListener("click", function() {
+  $('#color1').css("z-index", 4);
+});
+
 function HSVToRGB(h, s, v)
 {
   var r,g,b;
-  console.log([h,s,v]);
   if((Math.floor(h * 6) % 6) == 0)
   {
     r = v;
