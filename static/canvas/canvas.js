@@ -1,6 +1,6 @@
 
 //Onload Code
-var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
+var canvas, ctx, width = $('#sketch').width(), height = $('#sketch').height();
 createLayer(1);
 selectLayer(1);
 
@@ -31,9 +31,10 @@ if (localStorage.getItem("tool") === null) {
 
 //Univeral Mouse Movement Tracker
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
-$(document).mousemove(function(e) {
-  mouse.x = e.pageX;
-	mouse.y = e.pageY;
+$('#sketch').mousemove(function(e) {
+  mouse.x = e.pageX - $('#sketch').offset().left;
+	mouse.y = e.pageY - $('#sketch').offset().top;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
 });
 
 var brush;

@@ -1,0 +1,11 @@
+{
+  "name": "Color Wheel",
+  "icon_src" : "colorwheel.png",
+  "page_src" : "colorwheel.html",
+  "order" : 2,
+  "popout" : true,
+  "defaultX" : "right:0;",
+  "defaultY" : "top:0px;",
+  "action" : false,
+  "disable" : false
+}
