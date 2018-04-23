@@ -12,12 +12,18 @@
     <title>Tomo Editor</title>
   </head>
   <body>
-    <!-- Main Menu Buttons -->
+
+
+     <!-- Main Menu Buttons -->
     <div id="sidemenu">
       <div style="position: absolute; top: 50%; transform: translateY(-50%);">
         {% for module in modules %}
           <div class="menuButton"> <img src="{{ module[2] }}"/> </div>
         {% endfor %}
+
+          <label>Image File:</label><br/>
+          <input type="file" id="imageLoader" name="imageLoader"/>
+          <canvas id="theCanvasIframeId"></canvas>
       </div>
     </div>
 
@@ -39,6 +45,7 @@
           </div>
         {% endif %}
     {% endfor %}
+
 
       <!-- div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px; z-index:-1;"> -->
         <!-- Tools -->
@@ -103,5 +110,33 @@
         document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
       }
 
+    </script>
+
+
+   <!--  Works, it just opens up a window under the file selection tool, you still draw on the normal canvas, but
+    the changes are reflected in the bottom window -->
+    <script>
+      var imageLoader = document.getElementById('imageLoader');
+          imageLoader.addEventListener('change', handleImage, false);
+      var canvas = document.getElementById('theCanvasIframeId');
+      var ctx = canvas.getContext('2d');
+
+
+      function handleImage(e){
+          var reader = new FileReader();
+          reader.onload = function(event){
+              var img = new Image();
+              img.onload = function(){
+
+                  //canvas.width = openImg.width;
+                  //canvas.height = openImg.height;
+                  ctx.drawImage(img,0,0);
+              }
+              img.src = event.target.result;
+          }
+          reader.readAsDataURL(e.target.files[0]);
+
+          ctx.putImageData(img, 0, 0);     
+      }
     </script>
 </html>
