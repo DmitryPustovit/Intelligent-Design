@@ -23,7 +23,7 @@
 
           <label>Image File:</label><br/>
           <input type="file" id="imageLoader" name="imageLoader"/>
-          <canvas id="theCanvasIframeId"></canvas>
+          <!-- <canvas id="Canvas"></canvas> -->
       </div>
     </div>
 
@@ -118,7 +118,7 @@
     <script>
       var imageLoader = document.getElementById('imageLoader');
           imageLoader.addEventListener('change', handleImage, false);
-      var canvas = document.getElementById('theCanvasIframeId');
+      // var canvas = document.getElementById('Canvas');
       var ctx = canvas.getContext('2d');
 
 
