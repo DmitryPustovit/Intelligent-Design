@@ -25,7 +25,7 @@
           <input type="file" id="imageLoader" name="imageLoader"/>
           <!-- <canvas id="Canvas"></canvas> -->
       </div>
-    </div>
+    </div> pu
 
     <!-- Canvas -->
     <div id="canvasHolder">
@@ -128,8 +128,8 @@
               var img = new Image();
               img.onload = function(){
 
-                  //canvas.width = openImg.width;
-                  //canvas.height = openImg.height;
+                  canvas.width = img.width;
+                  canvas.height = img.height;
                   ctx.drawImage(img,0,0);
               }
               img.src = event.target.result;
