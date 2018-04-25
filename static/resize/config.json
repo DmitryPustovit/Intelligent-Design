@@ -1,0 +1,11 @@
+{
+  "name": "Resize",
+  "icon_src" : "ic_photo_size_select_small_black_48dp_2x.png",
+  "page_src" : "Resize.html",
+  "order" : 9,
+  "popout" : false,
+  "defaultX" : null,
+  "defaultY" : null,
+  "action" : true,
+  "disable" : false
+}

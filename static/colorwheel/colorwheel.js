@@ -14,14 +14,7 @@ for(var angle=0; angle<=360; angle++)
   var endAngle = angle * Math.PI/180;
   ctx.beginPath();
   ctx.moveTo(x, y);
-    /*
-    context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
-    context.closePath();
-    var gradient = context.createRadialGradient(x, y, 0, x, y, radius);
-    gradient.addColorStop(0,'hsl('+angle+', 10%, 100%)');
-    gradient.addColorStop(1,'hsl('+angle+', 100%, 50%)');
-    context.fillStyle = gradient;
-    */
+
   ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
   ctx.closePath();
   var gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
@@ -29,9 +22,6 @@ for(var angle=0; angle<=360; angle++)
   gradient.addColorStop(1,'hsl('+angle+', 100%, 50%)');
   ctx.fillStyle = gradient;
   ctx.fill();
-
-  //ctx.lineWidth = 1;
-  //ctx.strokeRect(220,20,60,60);
 }
 
 var red = document.getElementById('red');
@@ -41,6 +31,8 @@ var hue = document.getElementById('hue');
 var sat = document.getElementById('sat');
 var value = document.getElementById('val');
 var alpha = document.getElementById('alpha');
+
+var currentColor = document.getElementById('color1');
 
 $(document).mousedown(function(e) {
   pick(e);
@@ -65,9 +57,9 @@ function pick(event) {
 }
 
 function setColor(data){
-  localStorage.setItem("color", JSON.stringify(data));
+  localStorage.setItem($('.top').attr('id'), JSON.stringify(data));
   var hsv = RGBToHSV(data[0], data[1], data[2]);
-  document.getElementById('color1').style.backgroundColor = 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')';
+  $('.top').css('background-color', 'rgba(' + data[0] + ',' + data[1] +',' + data[2] + ',' + (data[3] / 255) + ')');
   document.getElementById('redSlider').style.background = 'linear-gradient(to right, ' +
   'rgba( 0,' + data[1] +',' + data[2] + ', 255 )' + ',' +
   'rgba( 255' + ',' + data[1] +',' + data[2] + ', 255 ))';
@@ -85,11 +77,18 @@ function setColor(data){
 
   var tempHSV1 = HSVToRGB(hsv[0] / 360, 0 ,hsv[2] / 100);
   var tempHSV2 = HSVToRGB(hsv[0] / 360, 1, hsv[2] / 100);
-    console.log(tempHSV1);
+
   document.getElementById('satSlider').style.background = 'linear-gradient(to right, ' +
   'rgba(' +  tempHSV1[0] + ', ' + tempHSV1[1] + ' , ' + tempHSV1[2] + ' , 255 )' + ',' +
   'rgba(' +  tempHSV2[0] + ', ' + tempHSV2[1] + ' , '+ tempHSV2[2] + ' , 255 ))';
   document.getElementById("satSlider").value = hsv[1]; ;
+
+  tempHSV1 = HSVToRGB(hsv[0] / 360, hsv[1] / 100 , 0);
+  tempHSV2 = HSVToRGB(hsv[0] / 360, hsv[1] / 100, 1);
+  document.getElementById('valueSlider').style.background = 'linear-gradient(to right, ' +
+  'rgba(' +  tempHSV1[0] + ', ' + tempHSV1[1] + ' , ' + tempHSV1[2] + ' , 255 )' + ',' +
+  'rgba(' +  tempHSV2[0] + ', ' + tempHSV2[1] + ' , '+ tempHSV2[2] + ' , 255 ))';
+  document.getElementById("valueSlider").value = hsv[2] ;
 
   document.getElementById('alphaSlider').style.background = 'linear-gradient(to right, ' +
   'rgba(' +  data[0] + ', ' + data[1] + ' , ' + data[2] + ' , 0 )' + ',' +
@@ -97,25 +96,40 @@ function setColor(data){
   document.getElementById("alphaSlider").value = data[3] ;
 
 
-  red.value = data[0];
-  green.value = data[1];
-  blue.value = data[2];
+  red.value = Math.floor(data[0]);
+  green.value = Math.floor(data[1]);
+  blue.value = Math.floor(data[2]);
   hue.value = hsv[0];
   sat.value = hsv[1];
   value.value = hsv[2];
   alpha.value = data[3];
 
   document.getElementById("hueSlider").value = hsv[0] ;
-  document.getElementById("satSlider").value = hsv[1] ;
-  document.getElementById("valueSlider").value = hsv[2] ;
 }
 
-if (localStorage.getItem("color") === null) {
-  localStorage.setItem("color", JSON.stringify([255,255,255,1]));
+if (localStorage.getItem("color1") === null) {
+  localStorage.setItem("color1", JSON.stringify([0,0,0,1]));
+  localStorage.setItem("color2", JSON.stringify([255,255,255,1]));
 }
 else{
-  var storedColor = JSON.parse(localStorage.getItem("color"));
-  setColor(storedColor);
+  var storedColor1 = JSON.parse(localStorage.getItem("color1"));
+  var storedColor2 = JSON.parse(localStorage.getItem("color2"));
+  currentColor = document.getElementById('color1');
+  $.when($.when( setColor(storedColor1) ).then(function() {
+    $(".colorBox").removeClass('top');
+    $(".colorBoxBack").removeClass('topback');
+    $('#color2').addClass('top');
+    $('#color2Back').addClass('topback');
+    currentColor = document.getElementById('color2');
+    setColor(storedColor2);
+  })).then(function() {
+    $(".colorBox").removeClass('top');
+    $(".colorBoxBack").removeClass('topback');
+    $('#color1').addClass('top');
+    $('#color1Back').addClass('topback');
+    currentColor = document.getElementById('color1');
+    setColor(JSON.parse(localStorage.getItem("color1")));
+  });
 }
 
 document.getElementById('redSlider').addEventListener("input", function() {
@@ -128,6 +142,21 @@ document.getElementById('greenSlider').addEventListener("input", function() {
 
 document.getElementById('blueSlider').addEventListener("input", function() {
     setColor([document.getElementById('red').value, document.getElementById('green').value, this.value, document.getElementById('alpha').value])
+}, false);
+
+document.getElementById('hueSlider').addEventListener("input", function() {
+  var temp = HSVToRGB(this.value /360, document.getElementById('sat').value / 100, document.getElementById('val').value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
+}, false);
+
+document.getElementById('satSlider').addEventListener("input", function() {
+  var temp = HSVToRGB(document.getElementById('hue').value /360, this.value / 100, document.getElementById('val').value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
+}, false);
+
+document.getElementById('valueSlider').addEventListener("input", function() {
+  var temp = HSVToRGB(document.getElementById('hue').value /360, document.getElementById('sat').value / 100, this.value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
 }, false);
 
 document.getElementById('alphaSlider').addEventListener("input", function() {
@@ -146,12 +175,65 @@ document.getElementById('blue').addEventListener("input", function() {
   setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
 });
 
+document.getElementById('hue').addEventListener("input", function() {
+  var temp = HSVToRGB(document.getElementById('hue').value /360, document.getElementById('sat').value / 100, document.getElementById('val').value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
+});
+
+document.getElementById('sat').addEventListener("input", function() {
+  var temp = HSVToRGB(document.getElementById('hue').value /360, document.getElementById('sat').value / 100, document.getElementById('val').value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
+});
+
+document.getElementById('val').addEventListener("input", function() {
+  var temp = HSVToRGB(document.getElementById('hue').value /360, document.getElementById('sat').value / 100, document.getElementById('val').value / 100);
+  setColor([temp[0], temp[1], temp[2], document.getElementById('alpha').value]);
+});
+
+
 document.getElementById('alpha').addEventListener("input", function() {
   setColor([document.getElementById('red').value, document.getElementById('green').value, document.getElementById('blue').value, document.getElementById('alpha').value])
 });
 
 document.getElementById('color1').addEventListener("click", function() {
-  $('#color1').css("z-index", 4);
+  $(".colorBox").removeClass('top');
+  $(".colorBoxBack").removeClass('topback');
+  $('#color1').addClass('top');
+  $('#color1Back').addClass('topback');
+  currentColor = document.getElementById('color1');
+  setColor(JSON.parse(localStorage.getItem("color1")));
+});
+
+document.getElementById('color2').addEventListener("click", function() {
+  $(".colorBox").removeClass('top');
+  $(".colorBoxBack").removeClass('topback');
+  $('#color2').addClass('top');
+  $('#color2Back').addClass('topback');
+  currentColor = document.getElementById('color2');
+  setColor(JSON.parse(localStorage.getItem("color2")));
+});
+
+document.getElementById('swap').addEventListener("click", function() {
+  var color1 = JSON.parse(localStorage.getItem("color1"));
+  var color2 = JSON.parse(localStorage.getItem("color2"));
+
+  localStorage.setItem("color1", JSON.stringify(color2));
+  localStorage.setItem("color2", JSON.stringify(color1));
+
+  $('#color1').css('background-color', 'rgba(' + color2[0] + ',' + color2[1] +',' + color2[2] + ',' + (color2[3] / 255) + ')');
+  $('#color2').css('background-color', 'rgba(' + color1[0] + ',' + color1[1] +',' + color1[2] + ',' + (color1[3] / 255) + ')');
+
+  setColor(JSON.parse(localStorage.getItem($('.top').attr('id'))));
+});
+
+$('.restBox').click(function() {
+  localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
+  localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
+
+  $('#color1').css('background-color', 'rgba(' + 0 + ',' + 0 +',' + 0 + ',' + (255 / 255) + ')');
+  $('#color2').css('background-color', 'rgba(' + 255 + ',' + 255 +',' + 255 + ',' + (255 / 255) + ')');
+
+  setColor(JSON.parse(localStorage.getItem($('.top').attr('id'))));
 });
 
 function HSVToRGB(h, s, v)
@@ -199,9 +281,9 @@ function HSVToRGB(h, s, v)
     b = v * (1 - (h * 6 - (Math.floor(h * 6))) * s);
   }
 
-  r *= 255;
-  g *= 255;
-  b *= 255;
+  Math.floor(r *= 255);
+  Math.floor(g *= 255);
+  Math.floor(b *= 255);
 
   return [ r, g, b ];
 }

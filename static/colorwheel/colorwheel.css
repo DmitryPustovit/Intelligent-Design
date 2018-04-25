@@ -88,6 +88,7 @@ body{
   height: 50px;
   background: white;
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .colorBoxBack{
@@ -103,21 +104,21 @@ body{
 }
 
 #color1Back{
-  top: 0;
+  top: 2;
   border: 1px;
   z-index: 0;
   position: absolute;
 }
 
-#color1Back{
-  z-index: -20;
+#color2Back{
+  z-index: 0;
   position: absolute;
   top: 35px;
   left: 35px;
 }
 
 #color2{
-  z-index: -10;
+  z-index: 1;
   position: absolute;
   top: 35px;
   left: 35px;
@@ -137,6 +138,45 @@ body{
   margin-top: -11.5px;
   margin-left: 26px;
   z-index: -2;
+}
+
+#swap{
+  width: 20px;
+  position: absolute;
+  top: 158px;
+  left: 80px;
+  cursor: pointer;
+}
+
+.top{
+  z-index: 100 !important;
+}
+
+.topback{
+  z-index: 99 !important;
+}
+
+#resetColorBoxes{
+  position: absolute;
+  top: 208px;
+  left: 28px;
+}
+
+.restBox{
+  height: 10px;
+  width: 10px;
+  background: red;
+  border: 0.5px solid black;
+  cursor: pointer;
+}
+
+#colorReset1{
+  background: black;
+}
+
+#colorReset2{
+  background: white;
+  margin-left: 10px;
 }
 
 input{
