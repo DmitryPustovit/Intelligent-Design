@@ -5,8 +5,8 @@
   "page_src" : "layers.html",
   "order" : 5,
   "popout" : true,
-  "defaultX" : "right: 0;",
-  "defaultY" : "bottom: 0;",
+  "defaultX" : "left: calc(100% - 300px);",
+  "defaultY" : "top: calc(100vh - 400px);",
   "action" : false,
   "disable" : false
 }
