@@ -19,7 +19,8 @@ bTwirl = new Brush(twirl);
 spaz = new Brush(spaz);
 
 if (localStorage.getItem("color") === null) {
-  localStorage.setItem("color", JSON.stringify([255,255,255,1]));
+  localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
+  localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
 }
 
 updateColor();
@@ -100,7 +101,7 @@ $(document).mouseup(function(e) {
 
 //Change Color Feature
 		function updateColor(){
-			var storedNames = JSON.parse(localStorage.getItem("color"));
+			var storedNames = JSON.parse(localStorage.getItem("color1"));
 			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
 
 			/*

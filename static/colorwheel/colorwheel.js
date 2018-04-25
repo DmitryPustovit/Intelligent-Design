@@ -108,8 +108,8 @@ function setColor(data){
 }
 
 if (localStorage.getItem("color1") === null) {
-  localStorage.setItem("color1", JSON.stringify([0,0,0,1]));
-  localStorage.setItem("color2", JSON.stringify([255,255,255,1]));
+  localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
+  localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
 }
 else{
   var storedColor1 = JSON.parse(localStorage.getItem("color1"));
