@@ -18,8 +18,11 @@ blank = new Brush(blank);
 bTwirl = new Brush(twirl);
 spaz = new Brush(spaz);
 
-if (localStorage.getItem("color") === null) {
+if (localStorage.getItem("color1") == null ) {
   localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
+}
+
+if (localStorage.getItem("color2") == null ) {
   localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
 }
 

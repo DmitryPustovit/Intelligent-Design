@@ -1,5 +1,6 @@
 {
   "name": "Color Wheel",
+  "id": "colorwheel",
   "icon_src" : "colorwheel.png",
   "page_src" : "colorwheel.html",
   "order" : 2,
