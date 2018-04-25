@@ -11,11 +11,11 @@ modules = []
 
 for module in moduleLocation:
     if os.path.isfile(moduleRoot + '/' + module +'/config.json'):
-        #Order, Name, icon location, page location, popout, x, y
+        #Order, Name, icon location, page location, popout, x, y, id
         data = json.load(open(moduleRoot + "/" + module +'/config.json'))
         modules.append([data["order"],data["name"], moduleRoot + "/" + module + "/" +
                         data["icon_src"], moduleRoot + "/" + module + "/" + data["page_src"], data["popout"],
-                       data["defaultX"], data["defaultY"]])
+                       data["defaultX"], data["defaultY"], data["id"]])
 
 modules = sorted(modules,key=lambda l:l[0], reverse=False)
 

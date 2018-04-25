@@ -5,13 +5,12 @@ $( document ).ready(function() {
     - $("#canvasHolder").width()/2 + $("#sketchScroll").width()/2);
 });
 
-$('iframe').load(function () {
-    $(this).height($(this).contents().height());
-    $(this).width($(this).contents().find("body").width());
-});
-
 $(document).delegate( ".menuButton", "click", function() {
   $(this).toggleClass('menuButtonSelected');
+  $('#' + $(this).data("id")).toggle();
+  $('#' + $(this).data("id") + " iframe").height($('#' + $(this).data("id") + " iframe").contents().find("body").height());
+  $('#' + $(this).data("id") + " iframe").width($('#' + $(this).data("id") + " iframe").contents().find("body").width());
+  console.log("width: " + $('#' + $(this).data("id") + " iframe").contents().find("body").height() + " height: " + $('#' + $(this).data("id") + " iframe").contents().find("body").width());
 });
 
 $( function() {

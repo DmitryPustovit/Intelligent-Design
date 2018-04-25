@@ -16,7 +16,7 @@
     <div id="sidemenu">
       <div style="position: absolute; top: 50%; transform: translateY(-50%);">
         {% for module in modules %}
-          <div class="menuButton"> <img src="{{ module[2] }}"/> </div>
+          <div class="menuButton" data-id="{{ module[7] }}"> <img src="{{ module[2] }}"/> </div>
         {% endfor %}
       </div>
     </div>
@@ -32,7 +32,7 @@
 
     {% for module in modules %}
         {% if module[4] %}
-          <div class="window" style="{{ module[5] }} {{ module[6] }}">
+          <div id="{{ module[7] }}" class="window" style="{{ module[5] }} {{ module[6] }}">
             <div class="window_inside">
               <iframe src="{{ module[3] }}"></iframe>
             </div>

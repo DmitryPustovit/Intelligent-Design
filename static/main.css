@@ -88,8 +88,7 @@ body{
 }
 
 .window{
-  display: inline-block;
-  width: auto;
+  display: none;
   height: auto;
   background: #A9A3CF; /*Windows bar color */
   //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
