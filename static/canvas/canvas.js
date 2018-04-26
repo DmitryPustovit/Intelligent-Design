@@ -77,7 +77,7 @@ $(document).mouseup(function(e) {
 	 document.removeEventListener('mousemove', onPaint, false);
    image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
    document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
-     image.layers[image.selected].data, image.width, image.height);
+     image.layers[image.selected], image.width, image.height);
 });
 
 //Paint feature

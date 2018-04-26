@@ -51,27 +51,32 @@ $(document).delegate( ".check", "change", function() { //delegate will eventuall
 
 //Redraws layers
 function drawLayers(){
-  var layers = parent.getLayers();
+  var image = parent.getImage();
   div.innerHTML = "";
 
-  for(var i = 0; i < layers[1].length; i++)
+  for(var i = 0; i < image.layers.length; i++)
   {
-    div.innerHTML =
-      '<div class="layer" id="' + layers[1][i].id + '">' +
+    $('#layers').prepend(
+      '<div class="layer" id="' + image.layers[i].id + '">' +
       '<div class="canvasHolder"><canvas></canvas></div>' +
-      '<span> ' +  layers[1][i].name  +  '</span>' +
+      '<span> ' +  image.layers[i].name  +  '</span>' +
       '<input class="check" type="checkbox" checked>' +
-      '</div>' + div.innerHTML;
+      '</div>' );
   }
 
-  $('#' + layers[0]).addClass('selected');
+  for(var i = 0; i < image.layers.length; i++)
+  {
+    updateLayerPreview(image.layers[i], image.width, image.height);
+  }
+
+  //$('#' + layers[0]).addClass('selected');
 }
 
 //Update Layer Preview
-function updateLayerPreview(data, width, height){
-  var canvas = document.getElementsByClassName('selected')[0].getElementsByTagName('canvas')[0];
+function updateLayerPreview(layer, width, height){
+  var canvas = document.getElementById(layer.id).getElementsByTagName('canvas')[0];
   var ctx = canvas.getContext('2d');
   canvas.width = width;
   canvas.height = height;
-  ctx.putImageData(data,0,0);
+  ctx.putImageData(layer.data,0,0);
 }

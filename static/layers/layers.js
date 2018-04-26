@@ -143,7 +143,7 @@ function setLayerOpacity(id, opacity) {
 }
 
 //Returns the layers array
-function getLayers()
+function getImage()
 {
-  return [image.selected, image.layers];
+  return image;
 }
