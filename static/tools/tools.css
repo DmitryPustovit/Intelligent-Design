@@ -1,5 +1,6 @@
 body{
-  width: 34px;
+  width: 42px;
+  height: 252px;
   padding: 0;
   margin: 0;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -21,9 +22,13 @@ img{
   cursor: pointer;
 }
 
+i{
+  padding: 4px;
+}
+
 .selected{
   background: #dfe4ea;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .clicky{

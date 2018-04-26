@@ -26,8 +26,10 @@ $( "#merge" ).click(function() {
 
 //Move Layer Up
 $( "#up" ).click(function() {
-  if(parent.moveLayerUp($('.selected').attr('id')))
+  var id = $('.selected').attr('id');
+  if(parent.moveLayerUp(id))
     drawLayers();
+  $(id).addClass('selected');
 });
 
 //Merge Layer Down
@@ -52,6 +54,7 @@ $(document).delegate( ".check", "change", function() { //delegate will eventuall
 //Redraws layers
 function drawLayers(){
   var image = parent.getImage();
+  var id = $('.selected').attr('id');
   div.innerHTML = "";
 
   for(var i = 0; i < image.layers.length; i++)
@@ -69,14 +72,18 @@ function drawLayers(){
     updateLayerPreview(image.layers[i], image.width, image.height);
   }
 
-  //$('#' + layers[0]).addClass('selected');
+  //$('#' + id).addClass('selected');
 }
 
 //Update Layer Preview
 function updateLayerPreview(layer, width, height){
+  console.log(layer);
   var canvas = document.getElementById(layer.id).getElementsByTagName('canvas')[0];
   var ctx = canvas.getContext('2d');
   canvas.width = width;
   canvas.height = height;
-  ctx.putImageData(layer.data,0,0);
+  if(layer.data != null)
+    ctx.putImageData(layer.data,0,0);
+  else
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

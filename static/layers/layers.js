@@ -87,7 +87,7 @@ function moveLayerUp(id){
       var tempLayer = image.layers[position]
       image.layers[position] = image.layers[position+1];
       image.layers[position+1] = tempLayer;
-
+      selectLayer(image.layers[position+1].id);
       performed = true;
   }
 
@@ -112,7 +112,7 @@ function moveLayerDown(id){
       var tempLayer = image.layers[position]
       image.layers[position] = image.layers[position-1];
       image.layers[position-1] = tempLayer;
-
+      selectLayer(image.layers[position-1].id);
       performed = true;
   }
 
