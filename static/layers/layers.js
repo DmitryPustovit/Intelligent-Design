@@ -8,6 +8,7 @@ function createLayer() {
 
   image.layers.push({
     id : newCanvas.id,
+    zindex : newCanvas.id,
     name : "layer " + newCanvas.id,
     opacity : 1,
     visable : true,
@@ -19,8 +20,7 @@ function createLayer() {
 }
 
 //Removes a Layer
-function removeLayer(id)
-{
+function removeLayer(id){
   $(document.getElementById(id)).remove();
   var position = image.layers.findIndex(function(e) {
     return e.id == id
@@ -29,15 +29,17 @@ function removeLayer(id)
 }
 
 //Selects the active canvas layer
-function selectLayer(id)
-{
+function selectLayer(id){
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+  image.selected = position;
   canvas = document.getElementById(id);
   ctx = canvas.getContext('2d');
 }
 
 //Hides a layer
-function changeLayerVisability(id)
-{
+function changeLayerVisability(id){
     $(document.getElementById(id)).toggle();
     var position = image.layers.findIndex(function(e) {
       return e.id == id
@@ -47,50 +49,101 @@ function changeLayerVisability(id)
 
 //Merges two layer canvases together
 function mergeLayers(id){
+  var performed = false;
   var position = image.layers.findIndex(function(e) {
     return e.id == id
   });
 
   if(image.layers[position].id != image.layers[0].id
     && image.layers.length > 1) {
-    var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
-    ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
-    //ctx.setOpacity(top.getOpacity, bottom);
-    //ctx.setOpacity(1, bottom);
+      if(image.layers[position].visable)
+      {
+        var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
+        ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
+      }
     $(document.getElementById(image.layers[position].id)).remove();
     image.layers.splice(position, 1);
+    performed = true;
   }
+
+  return performed;
 }
 
-/*
-var cur = global.selected; //Gets the current selected layer ID
-var indexOfCur = layers.indexOf(parseInt(cur)); //Gets the index of the current Layer ID
-layers.splice(indexOfCur, 1); //Removes the layer from the Layer array
-sendToSibling("theCanvasIframeId", "removeLayer", [cur]);
-
-if(selected != layers[0] && layers.length > 1) {
-  var top = global.selected; //Get the ID of current selected layer as the top layer
-  var indexOfTop = layers.indexOf(parseInt(top)); //get the index of the top(selected) layer
-  var indexOfBottom = layers.indexOf(parseInt(top)) - 1; //get the index of the layer to the bottom
-  var bottom = layers[indexOfBottom]; //Gets the ID of the bottom layer
-  sendToSibling("theCanvasIframeId", "mergeLayer", [top,bottom]); //Merges the two canvases together
-  $('.selected').remove(); //Removes the selected layer from the UI (top layer)
-  layers.splice(indexOfTop, 1); //Removes selected layer from the array (top layer)
-}
-*/
-
-
-//Flattens all of the layer canvases into one for saving
-function flattenLayers()
-{
-  var layers = [];
-  $('#sketch').children('canvas').each(function () {
-    layers.push($(this).attr('id'));
+//Moves layer up
+function moveLayerUp(id){
+  var performed = false;
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
   });
 
-  if(layers.length > 1)
-  {
-    for(var i = layers.length - 1; i > 0; i--)
-      mergeLayers(layers[i], layers[i-1]);
+  if(image.layers[position].id != image.layers[image.layers.length-1].id
+    && image.layers.length > 1) {
+      var z = $('#' + image.layers[position].id).css('z-index');
+      $('#' + image.layers[position].id).css('z-index', $('#' + image.layers[position+1].id).css('z-index'));
+      image.layers[position].zIndex = image.layers[position+1].zIndex;
+      $('#' + image.layers[position+1].id).css('z-index', z);
+      image.layers[position+1].zIndex = z;
+
+      var tempLayer = image.layers[position]
+      image.layers[position] = image.layers[position+1];
+      image.layers[position+1] = tempLayer;
+
+      performed = true;
   }
+
+  return performed;
+}
+
+//Move Layer down
+function moveLayerDown(id){
+  var performed = false;
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+
+  if(image.layers[position].id != image.layers[0].id
+    && image.layers.length > 1) {
+      var z = $('#' + image.layers[position].id).css('z-index');
+      $('#' + image.layers[position].id).css('z-index', $('#' + image.layers[position-1].id).css('z-index'));
+      image.layers[position].zIndex = image.layers[position-1].zIndex;
+      $('#' + image.layers[position-1].id).css('z-index', z);
+      image.layers[position-1].zIndex = z;
+
+      var tempLayer = image.layers[position]
+      image.layers[position] = image.layers[position-1];
+      image.layers[position-1] = tempLayer;
+
+      performed = true;
+  }
+
+  return performed;
+}
+
+//Flattens all of the layer canvases into one for saving
+function flattenLayers(){
+  if(image.layers.length > 1)
+  {
+    for(var i = image.layers.length - 1; i > 0; i--)
+      mergeLayers(image.layers[i].id);
+  }
+
+  document.getElementById('layers_iframe').contentWindow.drawLayers();
+}
+
+function setLayerOpacity(id, opacity) {
+  var modifyCanvas = document.getElementById(id);
+  var ctx = canvas.getContext("2d");
+
+	hidden_context.drawImage(canvas, 0, 0);
+
+
+	var ctx = canvas.getContext("2d");
+	ctx.globalAlpha=opacity;
+	ctx.drawImage(hidden_canvas, 0, 0);
+}
+
+//Returns the layers array
+function getLayers()
+{
+  return [image.selected, image.layers];
 }

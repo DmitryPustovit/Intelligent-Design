@@ -6,9 +6,10 @@ function saveButton(data){
 
 function save(name, type){
 
-  var iframe = document.getElementById("theCanvasIframeId");
-  var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-  var canvas = iframe_canvas.getElementsByTagName("canvas")[0]; //Possibly a better, cleaner way of fixing things
+  //var iframe = document.getElementById("theCanvasIframeId");
+  //var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
+  //var canvas = iframe_canvas.getElementsByTagName("canvas")[0]; //Possibly a better, cleaner way of fixing things
+  var canvas = document.getElementsByTagName("canvas")[0];
 
   var downloadLink = document.createElement("a");
   var dt = canvas.toDataURL('image/' + type);

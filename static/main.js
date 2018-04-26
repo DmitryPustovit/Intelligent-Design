@@ -5,7 +5,7 @@ $( document ).ready(function() {
     - $("#canvasHolder").width()/2 + $("#sketchScroll").width()/2);
 });
 
-$(document).delegate( ".menuButton", "click", function() {
+$(document).delegate( ".noneAction", "click", function() {
   $(this).toggleClass('menuButtonSelected');
   $('#' + $(this).data("id")).toggle();
   $('#' + $(this).data("id") + " iframe").height($('#' + $(this).data("id") + " iframe").contents().find("body").height());

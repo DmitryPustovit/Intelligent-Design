@@ -4,12 +4,12 @@ var div = document.getElementById('layers'); //UI element to display layers
 //Add Layer
 $("#add").click(function() {
   var layer = parent.createLayer();
-  div.innerHTML =
+  $('#layers').prepend(
     '<div class="layer" id="' + layer.id + '">' +
-    '<div class="canvasHolder"> </div>' +
+    '<div class="canvasHolder"><canvas></canvas></div>' +
     '<span> ' +  layer.name  +  '</span>' +
     '<input class="check" type="checkbox" checked>' +
-    '</div>' + div.innerHTML;
+    '</div>');
 });
 
 //Remove Layer
@@ -20,8 +20,20 @@ $("#remove").click(function() {
 
 //Merge Layer
 $( "#merge" ).click(function() {
-  parent.mergeLayers($('.selected').attr('id'));
-  $('.selected').remove();
+  if(parent.mergeLayers($('.selected').attr('id')))
+    $('.selected').remove();
+});
+
+//Move Layer Up
+$( "#up" ).click(function() {
+  if(parent.moveLayerUp($('.selected').attr('id')))
+    drawLayers();
+});
+
+//Merge Layer Down
+$( "#down" ).click(function() {
+  if(parent.moveLayerDown($('.selected').attr('id')))
+    drawLayers();
 });
 
 //Select Layer
@@ -37,18 +49,28 @@ $(document).delegate( ".check", "change", function() { //delegate will eventuall
   parent.changeLayerVisability($(this).parent().attr('id')); //Triggers a toggle
 });
 
+//Redraws layers
+function drawLayers(){
+  var layers = parent.getLayers();
+  div.innerHTML = "";
 
-/* Reaction Functions */
-    //Flatten Layers
-  /*  function flatten(){
-      layers = [layers[0]]; //Removes all layers execpt bottom most layer
-      //Sets the UI to display only one layer
-      div.innerHTML =
-      '<div class="layer" id="' + layers[0] + '">' +
-        '<div class="canvasHolder"> </div>' +
-        '<span> layer ' + layers[0]   +  '</span>' +
-        '<input class="check" type="checkbox" checked>' +
-      '</div>';
-    }
+  for(var i = 0; i < layers[1].length; i++)
+  {
+    div.innerHTML =
+      '<div class="layer" id="' + layers[1][i].id + '">' +
+      '<div class="canvasHolder"><canvas></canvas></div>' +
+      '<span> ' +  layers[1][i].name  +  '</span>' +
+      '<input class="check" type="checkbox" checked>' +
+      '</div>' + div.innerHTML;
+  }
 
-*/
+  $('#' + layers[0]).addClass('selected');
+}
+
+//Update Layer Preview
+function updateLayerPreview(data, width, height){
+  var ctx = document.getElementsByClassName('selected')[0].getElementsByTagName('canvas')[0].getContext('2d');
+  ctx.width = width;
+  ctx.height = height;
+  ctx.putImageData(data,0,0);
+}

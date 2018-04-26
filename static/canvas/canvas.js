@@ -1,6 +1,7 @@
 var image = {
   name : "",
   layers : [],
+  selected : null,
   counter : 0,
   width: $('#sketch').width(),
   height: $('#sketch').height()
@@ -74,6 +75,9 @@ $(document).mousedown(function(e) {
 
 $(document).mouseup(function(e) {
 	 document.removeEventListener('mousemove', onPaint, false);
+   image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
+   document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
+     image.layers[image.selected].data, image.width, image.height);
 });
 
 //Paint feature

@@ -8,5 +8,6 @@
   "defaultX" : "left: calc(100% - 300px);",
   "defaultY" : "top: calc(100vh - 400px);",
   "action" : false,
+  "action_function" : null,
   "disable" : false
 }

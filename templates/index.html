@@ -16,7 +16,9 @@
     <div id="sidemenu">
       <div style="position: absolute; top: 50%; transform: translateY(-50%);">
         {% for module in modules %}
-          <div class="menuButton" data-id="{{ module[7] }}"> <img src="{{ module[2] }}"/> </div>
+          <div class="menuButton {% if module[8] == false %} noneAction {% endif %}" data-id="{{ module[7] }}" {% if module[8] %} onclick="{{ module[9] }}" {% endif %}>
+            <img src="{{ module[2] }}"/>
+          </div>
         {% endfor %}
       </div>
     </div>
@@ -34,7 +36,7 @@
         {% if module[4] %}
           <div id="{{ module[7] }}" class="window" style="{{ module[5] }} {{ module[6] }}">
             <div class="window_inside">
-              <iframe src="{{ module[3] }}"></iframe>
+              <iframe id="{{ module[7] }}_iframe" src="{{ module[3] }}"></iframe>
             </div>
           </div>
         {% endif %}
@@ -57,22 +59,9 @@
     <script src="static/layers/layers.js"></script>
     <script src="static/canvas/canvas.js"></script>
     <script>
-
-      function flattenLayers()
-      {
-        document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
-        document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
-      }
-
       function eyedropper(data)
       {
         document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
       }
-
-      function assignBrush(data)
-      {
-        document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
-      }
-
     </script>
 </html>

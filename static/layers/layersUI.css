@@ -22,7 +22,12 @@ body{
   top: 11px;
   left: 4px;
   border: 1px solid black;
-  display: none;
+  background: url("transparent.png");
+}
+
+canvas{
+  width: 70px;
+  height: 50px;
 }
 
 .selected{
@@ -44,6 +49,21 @@ input{
 
 .material-icons{
   cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+#add{
+  color: #2ed573;
+}
+
+#remove{
+  color: #ff4757;
 }
 
 .rotate180 {

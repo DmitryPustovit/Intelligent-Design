@@ -8,5 +8,6 @@
   "defaultX" : "left:50px;",
   "defaultY" : "top: 100px;",
   "action" : false,
+  "action_function" : null,
   "disable" : false
 }

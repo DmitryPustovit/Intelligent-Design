@@ -15,7 +15,7 @@ for module in moduleLocation:
         data = json.load(open(moduleRoot + "/" + module +'/config.json'))
         modules.append([data["order"],data["name"], moduleRoot + "/" + module + "/" +
                         data["icon_src"], moduleRoot + "/" + module + "/" + data["page_src"], data["popout"],
-                       data["defaultX"], data["defaultY"], data["id"]])
+                       data["defaultX"], data["defaultY"], data["id"], data["action"], data["action_function"]])
 
 modules = sorted(modules,key=lambda l:l[0], reverse=False)
 

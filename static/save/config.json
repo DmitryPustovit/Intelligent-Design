@@ -8,5 +8,6 @@
   "defaultX" : null,
   "defaultY" : null,
   "action" : true,
+  "action_function" : "displayUI('static/save/save.html', saveButton);",
   "disable" : false
 }
