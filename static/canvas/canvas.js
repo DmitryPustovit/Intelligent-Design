@@ -1,7 +1,14 @@
+var image = {
+  name : "",
+  layers : [],
+  counter : 0,
+  width: $('#sketch').width(),
+  height: $('#sketch').height()
+};
 
 //Onload Code
-var canvas, ctx, width = $('#sketch').width(), height = $('#sketch').height();
-createLayer(1);
+var canvas, ctx;
+createLayer();
 selectLayer(1);
 
 //Fills first layer with white
@@ -149,7 +156,7 @@ $(document).mouseup(function(e) {
 			pastedImage.src = source;
 		}
 
-		var brushWorking = false;
+	var brushWorking = false;
 	function assignBrush(brush)
  	 {
 		 brushWorking = true;
@@ -171,41 +178,6 @@ $(document).mouseup(function(e) {
     if(brush == "s")
          spaz.assign();
  	 }
-
-
-//Universal Listerer
-window.addEventListener('message', receiver, false);
-
-function receiver(e) {
-   if (e.origin == '*') {
-     return;
-   } else {
-		 var data = e.data.split(',');
-		 if(data[0] == 'createLayer')
-		 		createLayer(data[1]);
-
-		if(data[0] == 'selectLayer')
-	 		 selectLayer(data[1]);
-
-		if(data[0] == 'mergeLayer')
-			mergeLayers(data[1], data[2]);
-
-		if(data[0] == 'flattenLayers')
-			flattenLayers();
-
-		if(data[0] == 'removeLayer')
-				removeLayer(data[1]);
-
-		if(data[0] == 'hideLayer')
-				hideLayer(data[1], data[1]);
-
-		if(data[0] == 'assign')
-			assignBrush(data[1]);
-
-		 console.log(data);
-   }
-}
-
 
 
 

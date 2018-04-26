@@ -42,6 +42,10 @@ input{
   overflow-y: scroll;
 }
 
+.material-icons{
+  cursor: pointer;
+}
+
 .rotate180 {
 -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
 -moz-transform: rotate(180deg);        /* FF */

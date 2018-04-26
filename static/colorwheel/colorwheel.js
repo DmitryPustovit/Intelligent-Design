@@ -349,4 +349,3 @@ function receiver(e) {
 
 //TODO
 //Get Color indicator circle working
-//Get HSV fully working

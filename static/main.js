@@ -10,7 +10,6 @@ $(document).delegate( ".menuButton", "click", function() {
   $('#' + $(this).data("id")).toggle();
   $('#' + $(this).data("id") + " iframe").height($('#' + $(this).data("id") + " iframe").contents().find("body").height());
   $('#' + $(this).data("id") + " iframe").width($('#' + $(this).data("id") + " iframe").contents().find("body").width());
-  console.log("width: " + $('#' + $(this).data("id") + " iframe").contents().find("body").height() + " height: " + $('#' + $(this).data("id") + " iframe").contents().find("body").width());
 });
 
 $( function() {
