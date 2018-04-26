@@ -69,8 +69,9 @@ function drawLayers(){
 
 //Update Layer Preview
 function updateLayerPreview(data, width, height){
-  var ctx = document.getElementsByClassName('selected')[0].getElementsByTagName('canvas')[0].getContext('2d');
-  ctx.width = width;
-  ctx.height = height;
+  var canvas = document.getElementsByClassName('selected')[0].getElementsByTagName('canvas')[0];
+  var ctx = canvas.getContext('2d');
+  canvas.width = width;
+  canvas.height = height;
   ctx.putImageData(data,0,0);
 }
