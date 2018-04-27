@@ -40,6 +40,11 @@ $( "#down" ).click(function() {
   $('#' + id).addClass('selected');
 });
 
+//Settings
+$( "#settings" ).click(function() {
+  parent.displayUI('static/layers/settings.html', parent.changeLayerSettings);
+});
+
 //Select Layer
 $(document).delegate( ".layer", "click", function() { //delegate will eventually be removed from Jquery
   $(".layer").removeClass('selected'); //Removes the selected layer style from all the layers
@@ -61,11 +66,15 @@ function drawLayers(){
 
   for(var i = 0; i < image.layers.length; i++)
   {
+    var checked = "";
+    if(image.layers[i].visable)
+      checked = "checked";
+
     $('#layers').prepend(
       '<div class="layer" id="' + image.layers[i].id + '">' +
       '<div class="canvasHolder"><canvas></canvas></div>' +
       '<span> ' +  image.layers[i].name  +  '</span>' +
-      '<input class="check" type="checkbox" checked>' +
+      '<input class="check" type="checkbox"' + checked + ' >' +
       '</div>' );
   }
 
@@ -74,12 +83,11 @@ function drawLayers(){
     updateLayerPreview(image.layers[i], image.width, image.height);
   }
 
-  //$('#' + id).addClass('selected');
+  $('#' + id).addClass('selected');
 }
 
 //Update Layer Preview
 function updateLayerPreview(layer, width, height){
-  console.log(layer);
   var canvas = document.getElementById(layer.id).getElementsByTagName('canvas')[0];
   var ctx = canvas.getContext('2d');
   canvas.width = width;

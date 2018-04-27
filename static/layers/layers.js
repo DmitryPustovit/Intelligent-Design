@@ -119,6 +119,15 @@ function moveLayerDown(id){
   return performed;
 }
 
+//Change Layer Settings
+function changeLayerSettings(data)
+{
+  image.layers[image.selected].name = data[0];
+  image.layers[image.selected].opacity = data[1] / 255;
+  setLayerOpacity(data[1] / 255);
+  document.getElementById('layers_iframe').contentWindow.drawLayers();
+}
+
 //Flattens all of the layer canvases into one for saving
 function flattenLayers(){
   if(image.layers.length > 1)
@@ -130,16 +139,9 @@ function flattenLayers(){
   document.getElementById('layers_iframe').contentWindow.drawLayers();
 }
 
-function setLayerOpacity(id, opacity) {
-  var modifyCanvas = document.getElementById(id);
-  var ctx = canvas.getContext("2d");
-
-	hidden_context.drawImage(canvas, 0, 0);
-
-
-	var ctx = canvas.getContext("2d");
-	ctx.globalAlpha=opacity;
-	ctx.drawImage(hidden_canvas, 0, 0);
+function setLayerOpacity(opacity) {
+  canvas.style.opacity = opacity;
+  document.getElementById('layers_iframe').contentWindow.updateLayerPreview(image.layers[image.selected], image.width, image.height);
 }
 
 //Returns the layers array

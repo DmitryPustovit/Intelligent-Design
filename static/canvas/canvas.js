@@ -116,7 +116,8 @@ $(document).mouseup(function(e) {
 //Change Color Feature
 		function updateColor(){
 			var storedNames = JSON.parse(localStorage.getItem("color1"));
-			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
+      console.log(storedNames);
+			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',' + storedNames[3]/ 255 + ')';
 
 			/*
       bPencil.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
