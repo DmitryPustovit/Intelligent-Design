@@ -29,13 +29,15 @@ $( "#up" ).click(function() {
   var id = $('.selected').attr('id');
   if(parent.moveLayerUp(id))
     drawLayers();
-  $(id).addClass('selected');
+  $('#' + id).addClass('selected');
 });
 
 //Merge Layer Down
 $( "#down" ).click(function() {
+  var id = $('.selected').attr('id');
   if(parent.moveLayerDown($('.selected').attr('id')))
     drawLayers();
+  $('#' + id).addClass('selected');
 });
 
 //Select Layer
