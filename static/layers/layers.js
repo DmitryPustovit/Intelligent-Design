@@ -56,13 +56,11 @@ function mergeLayers(id){
 
   if(image.layers[position].id != image.layers[0].id
     && image.layers.length > 1) {
-      if(image.layers[position].visable)
-      {
-        var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
-        ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
-      }
+    var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
+    ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
     $(document.getElementById(image.layers[position].id)).remove();
     image.layers.splice(position, 1);
+    image.selected = null;
     performed = true;
   }
 
