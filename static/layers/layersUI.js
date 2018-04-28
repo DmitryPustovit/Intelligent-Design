@@ -61,7 +61,6 @@ $(document).delegate( ".check", "change", function() { //delegate will eventuall
 //Redraws layers
 function drawLayers(){
   var image = parent.getImage();
-  var id = $('.selected').attr('id');
   div.innerHTML = "";
 
   for(var i = 0; i < image.layers.length; i++)
@@ -83,7 +82,7 @@ function drawLayers(){
     updateLayerPreview(image.layers[i], image.width, image.height);
   }
 
-  $('#' + id).addClass('selected');
+  $('#' + image.layers[image.selected].id).addClass('selected');
 }
 
 //Update Layer Preview

@@ -6,6 +6,7 @@ body{
   padding-left: 100px;
   background: #e2e1e0;
   position: relative;
+  height: 100%;
   font-family: Tahoma, Verdana, Segoe, sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -14,6 +15,87 @@ body{
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                       supported by Chrome and Opera */
+}
+
+.preloaderHolder{
+        z-index: 100;
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+      }
+      .preloader{
+          display: block;
+          position: relative;
+          left: 50%;
+          top:  50%;
+          height: 100px;
+          width: 100px;
+          margin: -75px 0 0 -75px;
+          border: 3px solid transparent;
+          border-top-color: #ff7f50;
+          border-radius: 50%;
+          z-index: 8;
+          -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+      }
+      .preloader:before {
+          content: "";
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          right: 5px;
+          bottom: 5px;
+          border: 3px solid transparent;
+          border-top-color: #eccc68;
+          border-radius: 50%;
+          -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+      }
+      .preloader:after {
+          content: "";
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          right: 15px;
+          bottom: 15px;
+          border: 3px solid transparent;
+          border-top-color: #70a1ff;
+          border-radius: 50%;
+          -webkit-animation: spin 1.5s linear infinite;
+animation: spin 1.5s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+          0%   {
+              -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+              -ms-transform: rotate(0deg);  /* IE 9 */
+              transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+          }
+          100% {
+              -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+              -ms-transform: rotate(360deg);  /* IE 9 */
+              transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+          }
+    }
+    @keyframes spin {
+        0%   {
+            -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+            -ms-transform: rotate(0deg);  /* IE 9 */
+            transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+        }
+        100% {
+            -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+            -ms-transform: rotate(360deg);  /* IE 9 */
+            transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+        }
+    }
+
+.animated{
+width: 0;
+height: 0;
 }
 
 #canvas{

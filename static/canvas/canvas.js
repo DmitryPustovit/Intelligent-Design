@@ -9,12 +9,14 @@ var image = {
 
 //Onload Code
 var canvas, ctx;
+
 createLayer();
 selectLayer(1);
 
 //Fills first layer with white
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
 
 bPencil = new Brush(pencil);
 bPen = new Brush(pen);

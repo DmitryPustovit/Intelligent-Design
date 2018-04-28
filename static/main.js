@@ -16,3 +16,12 @@ $( function() {
   $( ".window" ).draggable({cancel: ".window_inside", snap: '#outerside, #sidemenu, .window', snapMode: "outer", containment: "window"});
   //$( "#sidemenu" ).resizable();
 });
+
+$(document).delegate( ".noneAction[data-id='layers']", "click", function() {
+  document.getElementById('layers_iframe').contentWindow.drawLayers();
+});
+
+$(window).load(function() {
+  $(".preloader").fadeOut();
+  $(".preloaderHolder").delay(1000).fadeOut("slow");
+});
