@@ -1,6 +1,6 @@
 Intelligent-Design (WIP name :P)
 ================================
-Current Build - Build 2.1.0
+Current Build - Build 2.2.0
 
 Branch Statuses:  
 Master - Safe, OUTDATE , AVOID!  
@@ -37,14 +37,17 @@ http://dmitrypustovit.com/Intelligent-Design/
 
 Application Links
 ==================
+Build 2.3.0  
+- aobrush 2.0  
+- Save work protection  
+- More to comme  
+
 Build 2.2.0
 - Layer Manger, revap of layer system
 - UI rework
 - More dependable canvas
-- Save work protection
 - Color Wheel 2.0
-- aobrush 2.0
-- More to come
+- Bug Fixes  
 
 Build 2.1.0
 - Merged in advanced save functions and save UI
