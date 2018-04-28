@@ -51,7 +51,7 @@ $('#sketch').mousemove(function(e) {
 
 var brush;
 
-$(document).mousedown(function(e) {
+$('#canvasHolder').mousedown(function(e) {
 		if (localStorage.getItem("tool") != "none")
 				blank.assign();
 
@@ -74,7 +74,7 @@ $(document).mousedown(function(e) {
 		document.addEventListener('mousemove', onPaint, false);
 });
 
-$(document).mouseup(function(e) {
+$('#canvasHolder').mouseup(function(e) {
 	 document.removeEventListener('mousemove', onPaint, false);
    image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
    document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
