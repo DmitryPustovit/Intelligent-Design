@@ -1,10 +1,10 @@
-Intelligent-Design (WIP name :P)
+Tomo Editor
 ================================
 Current Build - Build 2.2.0
 
 Branch Statuses:  
-Master - Safe, OUTDATE , AVOID!  
-Release - Hostile, up to date, Branch from this one!  
+Master - Hostile, up to date , Branch from this one!  
+Release - Hostile, OUTDATE, AVOID!  
 Production - Safe, OUTDATE , AVOID!  
 
 Notice
