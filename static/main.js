@@ -25,3 +25,16 @@ $(window).load(function() {
   $(".preloader").fadeOut();
   $(".preloaderHolder").delay(1000).fadeOut("slow");
 });
+
+
+//Pressure Support Testing has begun :D
+document.addEventListener('touchstart', function(e) {
+   // Iterate through the list of touch points and log each touch
+   // point's force.
+   for (var i=0; i < e.targetTouches.length; i++) {
+     // Add code to "switch" based on the force value. For example
+     // minimum pressure vs. maximum pressure could result in
+     // different handling of the user's input.
+     console.log("targetTouches[" + i + "].force = " + e.targetTouches[i].force);
+   }
+}, false);
