@@ -116,6 +116,11 @@ height: 0;
   z-index: 4;
 }
 
+.menuSection{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
 #outerside{
   position: fixed;
   right: 0;

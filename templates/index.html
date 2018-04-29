@@ -19,9 +19,13 @@
     <!-- Main Menu Buttons -->
     <div id="sidemenu">
       <div style="position: absolute; top: 50%; transform: translateY(-50%);">
-        {% for module in modules %}
-          <div class="menuButton {% if module[8] == false %} noneAction {% endif %}" data-id="{{ module[7] }}" {% if module[8] %} onclick="{{ module[9] }}" {% endif %}>
-            <img src="{{ module[2] }}"/>
+        {% for moduleSection in moduleSections %}
+          <div class="menuSection">
+            {% for module in moduleSection["modules"] %}
+              <div class="menuButton {% if module["action"] == false %} noneAction {% endif %}" data-id="{{ module["id"] }}" {% if module["action"] %} onclick="{{ module["action_function"] }}" {% endif %}>
+                <img src="{{ module["icon_src"] }}"/>
+              </div>
+            {% endfor %}
           </div>
         {% endfor %}
       </div>
@@ -34,17 +38,16 @@
       </div>
     </div>
 
-    <div id="outerside"></div>
-
-    {% for module in modules %}
-        {% if module[4] %}
-          <div id="{{ module[7] }}" class="window" style="{{ module[5] }} {{ module[6] }}">
-            <div class="window_inside">
-              <iframe id="{{ module[7] }}_iframe" src="{{ module[3] }}"></iframe>
-            </div>
-          </div>
-        {% endif %}
+    <!-- Windows -->
+    {% for module in moduleSections[1]["modules"] %}
+         <div id="{{ module["id"] }}" class="window" style="{{ module["defaultX"] }} {{ module["defaultY"] }}">
+           <div class="window_inside">
+             <iframe id="{{ module["id"] }}_iframe" src="{{ module["page_src"] }}"></iframe>
+           </div>
+         </div>
     {% endfor %}
+
+    <div id="outerside"></div>
 
     <div id="dev-build"> Developer Build - 2.2.0 </div>
 

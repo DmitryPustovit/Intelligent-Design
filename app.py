@@ -5,31 +5,35 @@ app = Flask(__name__)
 
 print ("Generating Amazingness. Please Hold.")
 
-moduleRoot ='static'
-moduleLocation = os.listdir(moduleRoot)
-modules = []
+moduleSections = []
+modulesRoot ='static'
+modulesLocation = os.listdir(modulesRoot)
 
-for module in moduleLocation:
-    if os.path.isfile(moduleRoot + '/' + module +'/config.json'):
-        #Order, Name, icon location, page location, popout, x, y, id
-        data = json.load(open(moduleRoot + "/" + module +'/config.json'))
-        modules.append([data["order"],data["name"], moduleRoot + "/" + module + "/" +
-                        data["icon_src"], moduleRoot + "/" + module + "/" + data["page_src"], data["popout"],
-                       data["defaultX"], data["defaultY"], data["id"], data["action"], data["action_function"]])
+if os.path.isfile('config.json'):
+    data = json.load(open('config.json'))
+    for moduleSection in data["groups"]:
+        moduleSections.append(moduleSection)
 
-modules = sorted(modules,key=lambda l:l[0], reverse=False)
+for module in modulesLocation:
+    if os.path.isfile(modulesRoot + '/' + module +'/config.json'):
+        data = json.load(open(modulesRoot + "/" + module +'/config.json'))
+        data["icon_src"] = modulesRoot + "/" + module + "/" + data["icon_src"]
+        data["page_src"] = modulesRoot + "/" + module + "/" + data["page_src"]
+        moduleSections[data["section"]]["modules"].append(data)
 
-#for subdir, dirs, files in os.walk(moduleRoot):
-#    for file in files:
-#       print os.path.join(subdir, file)
 
-#@app.errorhandler(500)
-#def page_not_found(e):
-#    return render_template('500.html'), 500
+for moduleSection in moduleSections:
+    moduleSection["modules"] = sorted(moduleSection["modules"],key=lambda l:l["order"], reverse=False)
+    
+moduleSections = sorted(moduleSections,key=lambda l:l["order"], reverse=False)
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    return render_template('index.html', modules = modules)
+    return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == "__main__":
     app.run()

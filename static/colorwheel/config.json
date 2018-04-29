@@ -9,5 +9,6 @@
   "defaultY" : "top:0px;",
   "action" : false,
   "action_function" : null,
-  "disable" : false
+  "disable" : false,
+  "section" : 1
 }
