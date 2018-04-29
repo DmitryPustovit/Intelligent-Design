@@ -35,12 +35,14 @@ https://polar-falls-71423.herokuapp.com/
 Development To Do List aka Hit List:   
 http://dmitrypustovit.com/Intelligent-Design/  
 
-Application Links
+Patch Notes
 ==================
 Build 2.3.0  
 - aobrush 2.0  
 - Save work protection  
-- More to comme  
+- UI rework  
+- Draw Sync  
+- More to come  
 
 Build 2.2.0
 - Layer Manger, revap of layer system
