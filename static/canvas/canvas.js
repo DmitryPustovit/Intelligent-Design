@@ -106,8 +106,7 @@ $('#canvasHolder').mouseup(function(e) {
 			{
 				var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
 	      var data = pixel.data;
-				parent.eyedropper(data);
-				console.log("eyedropper drag");
+        document.getElementById('colorwheel_iframe').contentWindow.setColor(data);
 			}
 			mouse.oX = mouse.x;
 			mouse.oY = mouse.y;
