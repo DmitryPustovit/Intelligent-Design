@@ -5,7 +5,7 @@ function createLayer() {
   newCanvas.width = image.width;
   newCanvas.height = image.height;
   newCanvas.style.zIndex = newCanvas.id;
-
+  
   image.layers.push({
     id : newCanvas.id,
     zindex : newCanvas.id,
@@ -36,6 +36,10 @@ function selectLayer(id){
   image.selected = position;
   canvas = document.getElementById(id);
   ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.msImageSmoothingEnabled = false;
 }
 
 //Hides a layer

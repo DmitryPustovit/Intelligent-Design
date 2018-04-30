@@ -1,3 +1,4 @@
+//Creates a canvas element named picker that will be used to hold the color wheel
 var canvas = document.getElementById("picker");
 var ctx = canvas.getContext("2d");
 canvas.height = 140;
@@ -5,9 +6,15 @@ canvas.width = 140;
 var x = canvas.height / 2;
 var y = canvas.width / 2;
 
+//finds the radius that will be used for the color wheel
 var radius = canvas.height / 2;
 var counterClockwise = false;
 
+
+/*
+ * loops through the picker canvas element
+ * creates a radial gradient that holds all the colors of the color wheel
+ */
 for(var angle=0; angle<=360; angle++)
 {
   var startAngle = (angle-2)*Math.PI/180;
@@ -34,15 +41,51 @@ var alpha = document.getElementById('alpha');
 
 var currentColor = document.getElementById('color1');
 
+/**
+ * This function listens for a mouse down event and then calls the pick function.
+ *
+ * @since 1.1.0
+ *
+ * @static
+ *
+ * @see pick()
+ *
+ * @param {MouseEvent) e
+ * 
+ */
 $(document).mousedown(function(e) {
   pick(e);
   document.addEventListener('mousemove', pick, false);
 });
 
+/**
+ * This function listens for the mouse up event and then removes an event listener.
+ *
+ * @since 1.1.0
+ *
+ * @static
+ *
+ * @param {MouseEvent) e
+ * 
+ */
 $(document).mouseup(function(e) {
 	 document.removeEventListener('mousemove', pick, false);
 });
 
+/**
+ * This function allows you to pick a color from a color wheel.
+ *
+ * Description.
+ *
+ * @since 2.2.0
+ *
+ * @static
+ *
+ * @see mousedown function
+ * @see setColor()
+ *
+ * @param {MouseEvent}	event
+ */
 function pick(event) {
     var mouseX = event.pageX;
     var mouseY = event.pageY;
@@ -56,6 +99,19 @@ function pick(event) {
   }
 }
 
+/**
+ * This function sets the color that will be used to draw on the canvas with.
+ *
+ * Description.
+ *
+ * @since 2.2.0
+ *
+ * @static
+ *
+ * @see pick()
+ *
+ * @param {array}	data	this contains the RGB values along with the alpha of the selected color
+ */
 function setColor(data){
   localStorage.setItem($('.top').attr('id'), JSON.stringify(data));
   var hsv = RGBToHSV(data[0], data[1], data[2]);
@@ -107,6 +163,12 @@ function setColor(data){
   document.getElementById("hueSlider").value = hsv[0] ;
 }
 
+
+/*
+ * This checks to see if there is a color that is stored in the local Starage of the broswer 
+ * If there is nope, it sets the stored colors to white and black
+ * if there are colors present, it parses the information and adds the colors to the two available color boxs.
+ */
 if (localStorage.getItem("color1") === null) {
   localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
   localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
@@ -236,6 +298,21 @@ $('.restBox').click(function() {
   setColor(JSON.parse(localStorage.getItem($('.top').attr('id'))));
 });
 
+/**
+ * This function translates the HSV values to an RGB value
+ *
+ * Description.
+ *
+ * @since 2.2.0
+ *
+ * @static
+ *
+ * @param {var} h hue
+ * @param {var} s saturation
+ * @param {var} v value
+ *
+ * @return {array} an array that holds the equivalent RGB values
+ */
 function HSVToRGB(h, s, v)
 {
   var r,g,b;
@@ -288,8 +365,21 @@ function HSVToRGB(h, s, v)
   return [ r, g, b ];
 }
 
-
-function RGBToHSV(r, g, b)
+/**
+ * This function translates the RGB values to HSV values
+ *
+ * Description.
+ *
+ * @since 2.2.0
+ *
+ * @static
+ *
+ * @param {var} r red
+ * @param {var} g green
+ * @param {var} b blue
+ *
+ * @return {array} an array that holds the equivalent HSV values
+ */function RGBToHSV(r, g, b)
 {
   r /= 255;
   g /= 255;
@@ -331,6 +421,15 @@ function RGBToHSV(r, g, b)
 
 window.addEventListener('message', receiver, false);
 
+/**
+ * This function logs what the other functions are doing, including errors.
+ *
+ * @since 1.2.0
+ *
+ * @static
+ *
+ * @param {} event
+ */
 function receiver(e) {
    if (e.origin == '*') {
      console.log("baka");
