@@ -1,10 +1,10 @@
-Intelligent-Design (WIP name :P)
+Tomo Editor
 ================================
-Current Build - Build 2.1.0
+Current Build - Build 2.2.0
 
 Branch Statuses:  
-Master - Safe, OUTDATE , AVOID!  
-Release - Hostile, up to date, Branch from this one!  
+Master - Hostile, up to date , Branch from this one!  
+Release - Hostile, OUTDATE, AVOID!  
 Production - Safe, OUTDATE , AVOID!  
 
 Notice
@@ -35,16 +35,23 @@ https://polar-falls-71423.herokuapp.com/
 Development To Do List aka Hit List:   
 http://dmitrypustovit.com/Intelligent-Design/  
 
-Application Links
+Patch Notes
 ==================
+Build 2.3.0  
+- aobrush 2.0  
+- Save work protection  
+- UI rework  
+- Draw Sync  
+- Pressure Sensitivity  
+- Touch Screen Support  
+- More to come  
+
 Build 2.2.0
 - Layer Manger, revap of layer system
 - UI rework
 - More dependable canvas
-- Save work protection
 - Color Wheel 2.0
-- aobrush 2.0
-- More to come
+- Bug Fixes  
 
 Build 2.1.0
 - Merged in advanced save functions and save UI

@@ -3,11 +3,12 @@
   "id": "layers",
   "icon_src" : "ic_layers_black_48dp_2x.png",
   "page_src" : "layers.html",
-  "order" : 5,
+  "order" : 3,
   "popout" : true,
   "defaultX" : "left: calc(100% - 300px);",
   "defaultY" : "top: calc(100vh - 400px);",
   "action" : false,
   "action_function" : null,
-  "disable" : false
+  "disable" : false,
+  "section" : 1
 }

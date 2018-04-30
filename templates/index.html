@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="Pragma" content="no-cache">
 
     <link href="static/main.css" rel="stylesheet">
@@ -12,12 +12,20 @@
     <title>Tomo Editor</title>
   </head>
   <body>
+    <div class="preloaderHolder">
+       <div class="preloader"> </div>
+     </div>
+
     <!-- Main Menu Buttons -->
     <div id="sidemenu">
       <div style="position: absolute; top: 50%; transform: translateY(-50%);">
-        {% for module in modules %}
-          <div class="menuButton {% if module[8] == false %} noneAction {% endif %}" data-id="{{ module[7] }}" {% if module[8] %} onclick="{{ module[9] }}" {% endif %}>
-            <img src="{{ module[2] }}"/>
+        {% for moduleSection in moduleSections %}
+          <div class="menuSection">
+            {% for module in moduleSection["modules"] %}
+              <div class="menuButton {% if module["action"] == false %} noneAction {% endif %}" data-id="{{ module["id"] }}" {% if module["action"] %} onclick="{{ module["action_function"] }}" {% endif %}>
+                <img src="{{ module["icon_src"] }}"/>
+              </div>
+            {% endfor %}
           </div>
         {% endfor %}
       </div>
@@ -30,25 +38,24 @@
       </div>
     </div>
 
-    <div id="outerside"></div>
-
-    {% for module in modules %}
-        {% if module[4] %}
-          <div id="{{ module[7] }}" class="window" style="{{ module[5] }} {{ module[6] }}">
-            <div class="window_inside">
-              <iframe id="{{ module[7] }}_iframe" src="{{ module[3] }}"></iframe>
-            </div>
-          </div>
-        {% endif %}
+    <!-- Windows -->
+    {% for module in moduleSections[1]["modules"] %}
+         <div id="{{ module["id"] }}" class="window" style="{{ module["defaultX"] }} {{ module["defaultY"] }}">
+           <div class="window_inside">
+             <iframe id="{{ module["id"] }}_iframe" src="{{ module["page_src"] }}"></iframe>
+           </div>
+         </div>
     {% endfor %}
 
-    <div id="dev-build"> Developer Build - 2.1.2 </div>
+    <div id="outerside"></div>
+
+    <div id="dev-build"> Developer Build - 2.2.0 </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
     <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>-->
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="static/jquery-1.12.4.js"></script>
+    <script src="static/jquery-ui.js"></script>
     <script src="static/main.js"></script>
     <script src="static/UI/PerfectUI.js"></script>
     <script src="static/save/save.js"></script>
@@ -57,6 +64,7 @@
     <script src="static/brushes/brushes.js"></script>
     <script src="static/layers/layers.js"></script>
     <script src="static/canvas/canvas.js"></script>
+<<<<<<< HEAD
     <script src="static/zoom/zoom.js"></script>
     <script>
       function eyedropper(data)
@@ -64,4 +72,6 @@
         document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
       }
     </script>
+=======
+>>>>>>> master
 </html>

@@ -9,12 +9,14 @@ var image = {
 
 //Onload Code
 var canvas, ctx;
+
 createLayer();
 selectLayer(1);
 
 //Fills first layer with white
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
 
 bPencil = new Brush(pencil);
 bPen = new Brush(pen);
@@ -41,17 +43,30 @@ if (localStorage.getItem("tool") === null) {
 }
 
 
-//Univeral Mouse Movement Tracker
+//Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
+<<<<<<< HEAD
 $('#sketch').mousemove(function(e) {
   mouse.x = (e.pageX - $('#sketch').offset().left)/currentscale;
 	mouse.y = (e.pageY - $('#sketch').offset().top)/currentscale;
   //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
 });
+=======
+//$('#canvasHolder').pointermove(function(e) {
+//  mouse.x = e.pageX - $('#sketch').offset().left;
+//	mouse.y = e.pageY - $('#sketch').offset().top;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+//});
+
+document.getElementById('canvasHolder').addEventListener("pointermove", function(e) {
+  mouse.x = e.pageX - $('#sketch').offset().left;
+	mouse.y = e.pageY - $('#sketch').offset().top;
+}, false);
+>>>>>>> master
 
 var brush;
 
-$(document).mousedown(function(e) {
+document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
 		if (localStorage.getItem("tool") != "none")
 				blank.assign();
 
@@ -71,11 +86,15 @@ $(document).mousedown(function(e) {
 		mouse.oX = mouse.x;
 		mouse.oY = mouse.y;``
     onPaint();
-		document.addEventListener('mousemove', onPaint, false);
+		document.addEventListener('pointermove', onPaint, false);
 });
 
-$(document).mouseup(function(e) {
-	 document.removeEventListener('mousemove', onPaint, false);
+document.getElementById('canvasHolder').addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, false);
+
+document.getElementById('canvasHolder').addEventListener("pointerup",function(e) {
+	 document.removeEventListener('pointermove', onPaint, false);
    image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
    document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
      image.layers[image.selected], image.width, image.height);
@@ -104,8 +123,7 @@ $(document).mouseup(function(e) {
 			{
 				var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
 	      var data = pixel.data;
-				parent.eyedropper(data);
-				console.log("eyedropper drag");
+        document.getElementById('colorwheel_iframe').contentWindow.setColor(data);
 			}
 			mouse.oX = mouse.x;
 			mouse.oY = mouse.y;

@@ -3,11 +3,12 @@
   "id": "save",
   "icon_src" : "ic_save_black_48dp_2x.png",
   "page_src" : "save.html",
-  "order" : 10,
+  "order" : 2,
   "popout" : false,
   "defaultX" : null,
   "defaultY" : null,
   "action" : true,
   "action_function" : "displayUI('static/save/save.html', saveButton);",
-  "disable" : false
+  "disable" : false,
+  "section" : 0
 }

@@ -61,7 +61,9 @@ function mergeLayers(id){
   if(image.layers[position].id != image.layers[0].id
     && image.layers.length > 1) {
     var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
+    ctx.globalAlpha = image.layers[position].opacity;
     ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
+    ctx.globalAlpha = 1;
     $(document.getElementById(image.layers[position].id)).remove();
     image.layers.splice(position, 1);
     image.selected = null;
@@ -134,16 +136,26 @@ function changeLayerSettings(data)
 function flattenLayers(){
   if(image.layers.length > 1)
   {
-    for(var i = image.layers.length - 1; i > 0; i--)
-      mergeLayers(image.layers[i].id);
-  }
+    //image.layers[0].visable = true;
+    for(var i = image.layers.length-1; i >= 0; i--)
+    {
+      if(image.layers[i].visable == false)
+        removeLayer(image.layers[i].id)
+    }
 
+    for(var i = image.layers.length - 1; i > 0; i--)
+    {
+      mergeLayers(image.layers[i].id);
+    }
+    selectLayer(image.layers[0].id);
+  }
+  image.layers[0].name = image.name;
   document.getElementById('layers_iframe').contentWindow.drawLayers();
 }
 
+//Sets opacity of a layer
 function setLayerOpacity(opacity) {
   canvas.style.opacity = opacity;
-  document.getElementById('layers_iframe').contentWindow.updateLayerPreview(image.layers[image.selected], image.width, image.height);
 }
 
 //Returns the layers array

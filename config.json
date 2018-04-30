@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name" : "File Options",
+      "order" : "1",
+      "id" : "file",
+      "modules" : []
+    },
+    {
+      "name" : "Windows",
+      "order" : "2",
+      "id" : "windows",
+      "modules" : []
+    },
+    {
+      "name" : "Modify Image",
+      "order" : "3",
+      "id" : "modify",
+      "modules" : []
+    }
+  ],
+  "Load_Message" : ["Loading Amazingness. Please Hold"]
+}

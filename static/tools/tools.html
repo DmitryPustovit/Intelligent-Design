@@ -4,48 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Pragma" content="no-cache">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../icon.css" rel="stylesheet">
     <link href="tools.css" rel="stylesheet">
 
     <title>Tools</title>
   </head>
   <body>
-    <!-- Funtional Tools -->
-
-        <!-- <i class="material-icons" onclick="localStorage.setItem("tool", "brush");">brush</i> -->
         <i id="pencil" class="clicky material-icons" onclick='localStorage.setItem("tool", "pencil");'>create</i>
-        <i class="clicky material-icons" onclick='localStorage.setItem("tool", "er");'><svg class="clicky" id="er" style="width:34px;height:34px" viewBox="0 0 24 24">
+        <i id="er" class="clicky material-icons" onclick='localStorage.setItem("tool", "er");'><svg style="width:34px;height:34px" viewBox="0 0 24 24">
           <path fill="#000000" d="M15.14,3C14.63,3 14.12,3.2 13.73,3.59L2.59,14.73C1.81,15.5 1.81,16.77 2.59,17.56L5.03,20H12.69L21.41,11.27C22.2,10.5 22.2,9.23 21.41,8.44L16.56,3.59C16.17,3.2 15.65,3 15.14,3M17,18L15,20H22V18" />
           </svg>
         </i>
-        <!-- <i class="material-icons">remove_circle</i> -->
         <i class="clicky material-icons">brush</i>
         <i class="clicky material-icons"><img src="fill.png"/></i>
         <i id="eyedropper" class="clicky material-icons" onclick='localStorage.setItem("tool", "eyedropper");'>colorize</i>
         <i class="clicky material-icons">&#xE264;</i>
-    <!--Brandon's crap
 
-        <hr>
-        <i ><img class="clicky" id="pencil" src = "../brushes/BrushTextures/pixel.png" style="padding: 17px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("pencil");'></i>
-        <i><img class="clicky" id="pen" src = "../brushes/BrushTextures/pen.png"  style="padding: 1px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("pen");'></i>
-        <i><img  class="clicky" id="horizontalBar" src = "../brushes/BrushTextures/horizontal_bar.png" style="padding: 10px 2px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("h");'></i>
-        <i><img class="clicky" id="verticalBar" src = "../brushes/BrushTextures/vertical_bar.png" style="padding: 2px 10px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("v");'></i>
-        <i><img class="clicky" id="bubbles" src = "../brushes/BrushTextures/bubble.png" style="width: 36px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("b");'></i>
-        <i> <img class="clicky" id="clouds" src = "../brushes/BrushTextures/cloud.png" style="padding: 2px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("c");'></i>
-        <i><img  class="clicky" id="twirl" src = "../brushes/BrushTextures/horizontal_bar.png" style="padding: 10px 2px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("t");'></i>
-        <i><img  class="clicky" id="spaz" src = "../brushes/BrushTextures/horizontal_bar.png" style="padding: 10px 2px;" onclick='localStorage.setItem("tool", "none"); parent.assignBrush("s");'></i>
- -->
-        <!-- <i class="material-icons">color_lens</i> -->
-        <!-- i class="material-icons">clear</i> -->
-
-
-    <!--Below is the added save feature, added by Jeff-->
-
-        <!-- <hr> -->
-        <!-- <i class="material-icons">layers</i>
-	      <a href="#" onclick='parent.displayUI("static/resize/resize.html", parent.resizeButton);'><i class="material-icons" style="color: black;">photo_size_select_small</i></a>
-        <a href="#" onclick='parent.displayUI("static/save/save.html", parent.saveButton);'><i class="material-icons" style="color: blue;">save</i> </a>
--->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="../jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="tools.js"></script>
 </html>

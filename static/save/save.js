@@ -1,4 +1,5 @@
 function saveButton(data){
+  image.name = data[0];
   $.when($.ajax(flattenLayers())).then(function () {
      save(data[0], data[1]);
   });
