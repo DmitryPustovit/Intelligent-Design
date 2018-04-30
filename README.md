@@ -42,6 +42,8 @@ Build 2.3.0
 - Save work protection  
 - UI rework  
 - Draw Sync  
+- Pressure Sensitivity  
+- Touch Screen Support  
 - More to come  
 
 Build 2.2.0
