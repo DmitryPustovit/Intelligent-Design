@@ -25,7 +25,7 @@ for module in modulesLocation:
 
 for moduleSection in moduleSections:
     moduleSection["modules"] = sorted(moduleSection["modules"],key=lambda l:l["order"], reverse=False)
-    
+
 moduleSections = sorted(moduleSections,key=lambda l:l["order"], reverse=False)
 
 @app.errorhandler(500)
@@ -38,3 +38,4 @@ def main():
 
 if __name__ == "__main__":
     app.run()
+    #app.run(host='0.0.0.0', port=8080)
