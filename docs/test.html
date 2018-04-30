@@ -28,4 +28,17 @@ document.addEventListener('touchmove', function(e) {
    }
 }, false);
 
+document.addEventListener('touchend', function(e) {
+   // Iterate through the list of touch points and log each touch
+   // point's force.
+   document.getElementById('pressure').innerHTML = "";
+   for (var i=0; i < e.targetTouches.length; i++) {
+     // Add code to "switch" based on the force value. For example
+     // minimum pressure vs. maximum pressure could result in
+     // different handling of the user's input.
+     console.log("targetTouches[" + i + "].force = " + e.targetTouches[i].force);
+     document.getElementById('pressure').innerHTML = document.getElementById('pressure').innerHTML + "<br/>targetTouches[" + i + "].force = " + e.targetTouches[i].force
+   }
+}, false);
+
 </script>
