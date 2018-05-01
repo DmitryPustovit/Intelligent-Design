@@ -18,7 +18,7 @@ pencil = {
 pen = {
 	"name": "Pen",
 	"textures": [
-		"static/brushes/BrushTextures/pen.png"
+		"BrushTextures/pen.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
