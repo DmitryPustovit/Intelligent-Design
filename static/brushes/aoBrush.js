@@ -27,6 +27,7 @@ function getMousePos(canvas, evt) {
 /* Used to check if a value is between two values (Inclusive) */
 function between(x, min, max) { return x >= min && x <= max; }
 
+/* Takes an html color and converts it to rgb */
 function colorToRGBA(color) {
     // Returns the color as an array of [r, g, b, a] -- all range from 0 - 255
     // Examples:
@@ -108,14 +109,32 @@ function Brush(bData){
 		this.image = this.textures[this.cT];
 	}
 
-	this.drawLine = function(context, p1, p2){
-		this.draw(context,[p1, p2]);
+	/* Generates a brush stroke icon*/
+	this.getIcon = function(){
+		tScale = this.getScale();
+		this.setScale(1);
+		tOpacity = this.getOpacity();
+		this.setOpacity(1);
+		var c = document.createElement('canvas');
+		c.width = 300;
+		c.height = 300;
+		this.drawLine(c.getContext('2d'), new Point(50, 50), new Point(250,250));
+		this.setOpacity(tOpacity);
+		this.setScale(tScale);
+		return c;
+	}
+
+	/* Draws a line between two points */
+	this.drawLine = function(context, p1, p2, erase){
+		this.draw(context,[p1, p2], erase);
 	}
 
 	/*
 		Updates the canvas when the mouse moves
 	*/
-	this.draw = function(context, path) {
+	this.draw = function(context, path, erase) {
+		erase = erase | false;
+
 		var last = path[0];
 		for (var u = 1; u < path.length; u++){
 
@@ -136,6 +155,10 @@ function Brush(bData){
 
 					/* Save the state of the context */
 					context.save();
+
+					if (erase){
+						context.globalCompositeOperation = "destination-out";
+					}
 
 					/* It's easier to transform the canvas than it is the image */
 		    		context.translate(x, y);
