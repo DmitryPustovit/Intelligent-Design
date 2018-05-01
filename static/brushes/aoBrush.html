@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="aoBrush.css">
+	<script src="aoBrush.js"></script>
+	<script src="brushes.js"></script>
+	<title></title>
+</head>
+<body>
+	<canvas id = "canvas"> </canvas>
+	<script>
+		el = document.getElementById("canvas");
+		el.width = document.body.clientWidth;
+		el.height = document.body.clientHeight * .8;
+		bPen = new Brush(pen);
+		
+
+
+		//brush1 = new Brush(el, "brush1.png");
+	</script>
+
+	<div>
+		 <button onclick='bPen.draw(el.getContext("2d"),[new Point(1,1), new Point(100,100)])'><img src = "BrushTextures/pen.png"></button>
+	</div>
+	<!--<div><input type="text" name="" onmouseover="brush1"></div>
+	-->
+</body>
+</html>
