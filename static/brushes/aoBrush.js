@@ -55,7 +55,8 @@ function colorToRGBA(color) {
 		"mtRand": true,		//Randomly select brush textures
 		"minRotation": 0,	//The minimum rotation to make each update
 		"maxRotation": 0,	//The maximum rotation to make each update
-		"step": 4,		 	//The number of pixels skipped when the brush is moved quickly
+		"step": 1,		 	//The number of pixels skipped when the brush is moved quickly
+		"drawGap": 1,		//The number of pixels skipped in general
 		"yOffset": 16,	 	//The x image offset
 		"xOffset": 16,		//The y image offset
 		"minScale": 1.0,	//The minimum the brush can randomly be scaled by
