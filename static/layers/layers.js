@@ -5,6 +5,11 @@ function createLayer() {
   newCanvas.width = image.width;
   newCanvas.height = image.height;
   newCanvas.style.zIndex = newCanvas.id;
+  var ctx = newCanvas.getContext('2d')
+  ctx.mozImageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.msImageSmoothingEnabled = false;
+  ctx.imageSmoothingEnabled = false;;
 
   image.layers.push({
     id : newCanvas.id,
@@ -36,6 +41,10 @@ function selectLayer(id){
   image.selected = position;
   canvas = document.getElementById(id);
   ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.msImageSmoothingEnabled = false;
 }
 
 //Hides a layer
