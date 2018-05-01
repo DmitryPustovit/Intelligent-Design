@@ -71,16 +71,11 @@ function Brush(bData){
 	/* The current state of the brush */
 	this.drawing = false;
 	this.cT = 0;
-	this.lastPoint = new Point(0,0);
 	this.lastAngle = 0;
 
 	/* Extra properties */
 	this.opacity = 1;
 	this.scale = 1;
-
-	/* Canvas information */
-	this.canvas = canvas;
-	this.context = canvas.getContext('2d');
 
 	/* Texture array */
 	this.textures = {};
@@ -111,93 +106,60 @@ function Brush(bData){
 		this.image = this.textures[this.cT];
 	}
 
-	/* When the mouse is pushed down, enable drawing */
-	this.mouseDown = function(e) {
-		this.drawing = true;
-		this.lastPoint = getMousePos(this.canvas, e);
-	}
-
-   var mouse = {x: 0, y: 0, oX: 0, oY: 0};
-  $(document).mousemove(function(e) {
-    mouse.x = e.pageX;
-    mouse.y = e.pageY;
-  });
 	/*
 		Updates the canvas when the mouse moves
 	*/
-	this.mouseMove = function(e) {
+	this.draw = function(context, path) {
+		var last = path[0];
+		for (var u = 1; u < path.length; u++){
 
-		/* If we aren't drawing ignore mouse movements*/
-		if (!this.drawing) return;
+			/* Get some initial values*/
+			var cP = path[u];
+			var dist = distBetween(last, cP);
+			var ang = angBetween(last, cP);
 
-		/* Get some initial values*/
-		var cP = getMousePos(this.canvas, e);
-		var dist = distBetween(this.lastPoint, cP);
-		var ang = angBetween(this.lastPoint, cP);
+			/*	For iterate through all spaces between where the mouse
+				last was and where it is currently*/
+			for (var i = 0; i < dist; i += this.bData.step){
+				/* Calculate the x and y point where the drawing should take place*/
+				x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
+				y = (last.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
 
-		/*	For iterate through all spaces between where the mouse
-			last was and where it is currently*/
-		for (var i = 0; i < dist; i += this.bData.step){
-			/* Calculate the x and y point where the drawing should take place*/
-			x = (this.lastPoint.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
-			y = (this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
+				/* Save the state of the context */
+				context.save();
 
-			/* Save the state of the context */
-			this.context.save();
+				/* It's easier to transform the canvas than it is the image */
+	    		context.translate(x, y);
 
-			/* It's easier to transform the canvas than it is the image */
-    		this.context.translate(x, y);
+	    		/* Apply the random scaling */
+	    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
+	    		context.scale(scale, scale);
 
-    		/* Apply the random scaling */
-    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
-    		this.context.scale(scale, scale);
+	    		/* If a rotation is needed, apply it */
+				if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
+					this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
+	    			context.rotate(Math.PI / 180 * this.lastAngle);
+	    		}
 
-    		/* If a rotation is needed, apply it */
-			if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
-				this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
-    			this.context.rotate(Math.PI / 180 * this.lastAngle);
-    		}
+	    		/* If opacity changes are needed, apply them */
+	    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
+	    			var op = context.globalAlpha;
+	    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
+	    		}
 
-    		/* If opacity changes are needed, apply them */
-    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
-    			var op = this.context.globalAlpha;
-    			this.context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
-    		}
+	    		/* Draw the image to the canvas */
+	    		context.drawImage(this.image, 0, 0);
 
-    		/* Draw the image to the canvas */
-    		this.context.drawImage(this.image, 0, 0);
+	    		/* Restore the canvas back to it's orignal configuration */
+	    		context.restore();
 
-    		/* Restore the canvas back to it's orignal configuration */
-    		this.context.restore();
-
-    		/* Cycle the texture used */
-    		this.cycleTexture();
+	    		/* Cycle the texture used */
+	    		this.cycleTexture();
+			}
+			/* Set this point as the last point */
+			last = cP;
 		}
-
-		/* Set this point as the last point */
-		this.lastPoint = cP;
 	}
-
-	/*
-		Used to stop the drawing when the mouse is lifted
-	*/
-	this.mouseUp = function(e){
-		this.drawing = false;
-	}
-
-	/*
-		Assigns the brush to the canvas, returns true on success
-	*/
-	this.assign = function(e){
-		if (!this.image.complete) return false;
-		var that = this;
-		console.log("Assigning brush:" + this.bData.name);
-		document.onmousedown = function(e) { that.mouseDown(e) };
-		document.onmousemove = function(e) { that.mouseMove(e) };
-		document.onmouseup = function(e) { that.mouseUp(e) };
-		return true;
-	}
-
 
 	/* Set the brush's opacity */
 	this.setOpacity = function(opacity) { this.opacity = opacity; }
@@ -224,12 +186,6 @@ function Brush(bData){
 		if (!this.image.complete) return false;
 		this.applyColor();
 		return true;
-	}
-
-	/* Reassign's the brush's canvas */
-	this.setCanvas = function(canvas) {
-		this.canvas = canvas;
-		this.context = canvas.getContext('2d');
 	}
 
 	/*
