@@ -72,6 +72,7 @@ function Brush(bData){
 	this.drawing = false;
 	this.cT = 0;
 	this.lastAngle = 0;
+	this.distMoved = 0;
 
 	/* Extra properties */
 	this.opacity = 1;
@@ -106,6 +107,10 @@ function Brush(bData){
 		this.image = this.textures[this.cT];
 	}
 
+	this.drawLine = function(context, p1, p2){
+		this.draw(context,[p1, p2])
+	}
+
 	/*
 		Updates the canvas when the mouse moves
 	*/
@@ -120,41 +125,45 @@ function Brush(bData){
 
 			/*	For iterate through all spaces between where the mouse
 				last was and where it is currently*/
-			for (var i = 0; i < dist; i += this.bData.step){
-				/* Calculate the x and y point where the drawing should take place*/
-				x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
-				y = (last.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
+			for (var i = 0; i < dist; i += this.bData.stepSize){
+				this.distMoved = (this.distMoved + 1) % this.bData.drawGap;
+				console.log(this.distMoved);
+				if (this.distMoved == 0){
+					/* Calculate the x and y point where the drawing should take place*/
+					x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
+					y = (last.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
 
-				/* Save the state of the context */
-				context.save();
+					/* Save the state of the context */
+					context.save();
 
-				/* It's easier to transform the canvas than it is the image */
-	    		context.translate(x, y);
+					/* It's easier to transform the canvas than it is the image */
+		    		context.translate(x, y);
 
-	    		/* Apply the random scaling */
-	    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
-	    		context.scale(scale, scale);
+		    		/* Apply the random scaling */
+		    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
+		    		context.scale(scale, scale);
 
-	    		/* If a rotation is needed, apply it */
-				if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
-					this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
-	    			context.rotate(Math.PI / 180 * this.lastAngle);
+		    		/* If a rotation is needed, apply it */
+					if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
+						this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
+		    			context.rotate(Math.PI / 180 * this.lastAngle);
+		    		}
+
+		    		/* If opacity changes are needed, apply them */
+		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
+		    			var op = context.globalAlpha;
+		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
+		    		}
+
+		    		/* Draw the image to the canvas */
+		    		context.drawImage(this.image, 0, 0);
+
+		    		/* Restore the canvas back to it's orignal configuration */
+		    		context.restore();
+
+		    		/* Cycle the texture used */
+		    		this.cycleTexture();
 	    		}
-
-	    		/* If opacity changes are needed, apply them */
-	    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
-	    			var op = context.globalAlpha;
-	    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
-	    		}
-
-	    		/* Draw the image to the canvas */
-	    		context.drawImage(this.image, 0, 0);
-
-	    		/* Restore the canvas back to it's orignal configuration */
-	    		context.restore();
-
-	    		/* Cycle the texture used */
-	    		this.cycleTexture();
 			}
 			/* Set this point as the last point */
 			last = cP;
