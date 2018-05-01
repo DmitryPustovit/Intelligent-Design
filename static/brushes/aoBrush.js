@@ -22,7 +22,7 @@ function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     //return new Point(mouse.x, mouse.y);
     return new Point(evt.clientX - rect.left, evt.clientY - rect.top);
-  }
+}
 
 /* Used to check if a value is between two values (Inclusive) */
 function between(x, min, max) { return x >= min && x <= max; }
@@ -108,7 +108,7 @@ function Brush(bData){
 	}
 
 	this.drawLine = function(context, p1, p2){
-		this.draw(context,[p1, p2])
+		this.draw(context,[p1, p2]);
 	}
 
 	/*
