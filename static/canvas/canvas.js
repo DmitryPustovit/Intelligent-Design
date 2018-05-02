@@ -1,6 +1,7 @@
 //Onload Code
-var brush = new Brush(pen), pencil = new Brush(pencil), pen = new Brush(pen);
+var brush = new Brush(pen), pencil = new Brush(pencil), pen = new Brush(pen), eraser = new Brush(pen);
 var canvas, ctx;
+var erase;
 
 if (localStorage.getItem("color1") == null ) {
   localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
@@ -24,12 +25,26 @@ document.getElementById('sketch').addEventListener("pointermove", function(e) {
 	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
 }, false);
 
+/* When the pointer comes in contact with the canvas */
 document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
-		updateColor();
-		mouse.oX = mouse.x;
-		mouse.oY = mouse.y;``
+	mouse.oX = mouse.x;
+	mouse.oY = mouse.y;
+
+	erase = false;
+	/* Detect the brush and set it to draw */
+	var tool = localStorage.getItem("tool");
+	if (tool == "pencil")
+		brush = pencil;
+	else if (tool == "brush")
+		brush = pen;
+	else if (tool == "er")
+		erase = true; //Simply used as a flag, erase with all the brushes!
+
+	/* Prime the brush with color */
+    updateColor();
+
     onPaint();
-		document.addEventListener('pointermove', onPaint, false);
+	document.addEventListener('pointermove', onPaint, false);
 });
 
 document.getElementById('canvasHolder').addEventListener('touchmove', function(event) {
@@ -43,31 +58,22 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
      image.layers[image.selected], image.width, image.height);
 });
 
+/* 'Paints' on the canvas */
 var onPaint = function() {
-		if(localStorage.getItem("tool") == "pencil"){
-      brush = pencil;
-      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
-		}
 
-		if (localStorage.getItem("tool") == "er"){
-      brush = pen;
-	    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), true);
-	  }
-
-		if (localStorage.getItem("tool") == "eyedropper") {
-			var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
-      document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
+	if (localStorage.getItem("tool") == "eyedropper") {
+		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+    	document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
+		return;
     }
 
-    if (localStorage.getItem("tool") == "brush") {
-      brush = pen;
-      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
-    }
+    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
 
-		mouse.oX = mouse.x;
+	mouse.oX = mouse.x;
     mouse.oY = mouse.y;
 };
 
+/* Updates the current brush's color */
 function updateColor(){
 	var storedNames = JSON.parse(localStorage.getItem("color1"));
   brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
