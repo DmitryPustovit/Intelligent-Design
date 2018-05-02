@@ -1,10 +1,14 @@
 function newButton(data){
   console.log(data);
-  new(data[0], data[1]);
+  newImage(data[0], data[1]);
 }
 
-function new(width, height)
+function newImage(width, height)
 {
   createLayer();
   selectLayer(1);
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
 }

@@ -147,7 +147,6 @@ function Brush(bData){
 				last was and where it is currently*/
 			for (var i = 0; i < dist; i += this.bData.stepSize){
 				this.distMoved = (this.distMoved + 1) % this.bData.drawGap;
-				console.log(this.distMoved);
 				if (this.distMoved == 0){
 					/* Calculate the x and y point where the drawing should take place*/
 					x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
@@ -235,6 +234,7 @@ function Brush(bData){
 		Applies the color to all the loaded textures
 	*/
 	this.applyColor = function(){
+    console.log("apply color");
 
 		/* Iterate through all the brush textures*/
 		for (var u=0; u < this.bData.textures.length; u++){

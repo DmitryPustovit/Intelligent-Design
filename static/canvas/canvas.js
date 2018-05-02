@@ -7,26 +7,10 @@ var image = {
   height: $('#sketch').height()
 };
 
+var brush = new Brush(pen);
+
 //Onload Code
 var canvas, ctx;
-
-createLayer();
-selectLayer(1);
-
-//Fills first layer with white
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
-
-bPencil = new Brush(pencil);
-bPen = new Brush(pen);
-bHorizontalBar = new Brush(horizontalBar);
-bVerticalBar = new Brush(verticalBar);
-bBubbles = new Brush(bubbles);
-bClouds = new Brush(clouds);
-blank = new Brush(blank);
-bTwirl = new Brush(twirl);
-spaz = new Brush(spaz);
 
 if (localStorage.getItem("color1") == null ) {
   localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
@@ -36,7 +20,7 @@ if (localStorage.getItem("color2") == null ) {
   localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
 }
 
-updateColor();
+//updateColor();
 
 if (localStorage.getItem("tool") === null) {
 	ctx.strokeStyle = 'pencil';
@@ -59,24 +43,12 @@ var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 document.getElementById('sketch').addEventListener("pointermove", function(e) {
   mouse.x = (e.pageX - $('#sketch').offset().left); /// currentscale;
 	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
-  console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
 }, false);
 
 var brush;
 
 document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
-		if (localStorage.getItem("tool") != "none")
-				blank.assign();
-
-    bPencil.setCanvas(canvas);
-    bPen.setCanvas(canvas);
-    bHorizontalBar.setCanvas(canvas);
-    bVerticalBar.setCanvas(canvas);
-    bBubbles.setCanvas(canvas);
-    bClouds.setCanvas(canvas);
-    blank.setCanvas(canvas);
-    bTwirl.setCanvas(canvas);
-    spaz.setCanvas(canvas);
 
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
@@ -113,9 +85,7 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 			}
 			if (localStorage.getItem("tool") == "er")
 			{
-	      ctx.globalCompositeOperation = "destination-out";
-	      ctx.arc(mouse.oX,mouse.oY,8,0,Math.PI*2,false);
-	      ctx.fill();
+	      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), true);
 	    }
 			if (localStorage.getItem("tool") == "eyedropper")
 			{
@@ -123,6 +93,10 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 	      var data = pixel.data;
         document.getElementById('colorwheel_iframe').contentWindow.setColor(data);
 			}
+      if (localStorage.getItem("tool") == "brush")
+      {
+        brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
+      }
 			mouse.oX = mouse.x;
 			mouse.oY = mouse.y;
 
@@ -133,18 +107,7 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 //Change Color Feature
 		function updateColor(){
 			var storedNames = JSON.parse(localStorage.getItem("color1"));
-			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',' + storedNames[3]/ 255 + ')';
-
-			/*
-      bPencil.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bPen.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bHorizontalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bVerticalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bBubbles.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bClouds.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      blank.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bTwirl.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      spaz.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);  */
+      brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
 		}
 
 //Paste img feature
@@ -176,29 +139,6 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 			}
 			pastedImage.src = source;
 		}
-
-	var brushWorking = false;
-	function assignBrush(brush)
- 	 {
-		 brushWorking = true;
-
-		 if(brush == "pencil")
- 		     bPencil.assign();
-		 if(brush == "pen")
-			   bPen.assign();
-		 if(brush == "h")
-	 		   bHorizontalBar.assign();
-		 if(brush == "v")
-		 		 bVerticalBar.assign();
-	 	 if(brush == "b")
-			 	 bBubbles.assign();
-		 if(brush == "c")
-				 bClouds.assign();
-    if(brush == "t")
-     		 bTwirl.assign();
-    if(brush == "s")
-         spaz.assign();
- 	 }
 
 
 
