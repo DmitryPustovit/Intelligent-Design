@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import os
 import json
-from flask import Flask, redirect, session, render_template, url_for
+from flask import Flask, redirect, request, session, render_template, url_for
 import requests
 
 import google.oauth2.credentials
@@ -56,9 +58,11 @@ def authorize():
             scopes=SCOPES,
             )
 
-    flow.redirect_uri = 'https://127.0.0.1:5000/oauth2callback'
+    flow.redirect_uri = url_for('oauth2callback', _external=True)
 
-    authorization_url, state = flow.authorization_url( access_type='offline', include_granted_scopes='true')
+    authorization_url, state = flow.authorization_url( 
+            access_type='offline',
+            include_granted_scopes='true')
 
     session['state'] = state
 
@@ -79,7 +83,7 @@ def oauth2callback():
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
 
-    return redirect('/')
+    return redirect("/")
 
 
 @app.route('/upload')
@@ -100,6 +104,7 @@ def upload():
 
     return redirect('/')
 
+
 @app.route('/revoke')
 def revoke():
   if 'credentials' not in flask.session:
@@ -113,6 +118,7 @@ def revoke():
       params={'token': credentials.token},
       headers = {'content-type': 'application/x-www-form-urlencoded'})
   return
+  
 
 def credentials_to_dict(credentials):
   return {'token': credentials.token,
@@ -124,7 +130,7 @@ def credentials_to_dict(credentials):
 
 if __name__ == "__main__":
     
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #do not let this into live
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
     
     app.run()
 
