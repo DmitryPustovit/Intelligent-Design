@@ -50,12 +50,6 @@ function drawRectangle(context, brush, p1, p2){
 	brush.draw(context, [p1, new Point(p2.x,p1.y), p2, new Point(p1.x,p2.y), p1]);
 }
 
-/* Draws a rectangle */
-function drawSquare(context, brush, p1, p2){
-	var p = new Point(Math.min(p1.x,p2.x), Math.min(p1.y,p2.y));
-	drawRectangle(context, brush, p, p);
-}
-
 /* Draws a circle */
 function drawCircle(context, brush, topLeftPoint, radius){
 	var center = new Point(topLeftPoint.x + r, topLeftPoint.y + r);
@@ -83,10 +77,6 @@ function drawCircleFromPoints(context, brush, p1, p2){
 function drawTriangle(context, brush, p1, p2){
 	var point = new Point(p1.x,p2,y);
 	brush.draw(context, [point, new Point(p1.x + Math.floor(Math.abs(p1.x - p2.x) / 2), p2, point]);
-}
-
-function drawEqualateral(){
-	
 }
 
 
