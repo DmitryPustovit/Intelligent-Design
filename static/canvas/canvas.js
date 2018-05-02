@@ -37,8 +37,10 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 		brush = pencil;
 	else if (tool == "brush")
 		brush = pen;
-	else if (tool == "er")
+	else if (tool == "er") {
 		erase = true; //Simply used as a flag, erase with all the brushes!
+		//brush = eraser; //Uncomment me for no funsies.
+	}
 
 	/* Prime the brush with color */
     updateColor();
