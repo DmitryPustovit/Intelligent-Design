@@ -4,6 +4,7 @@ window.addEventListener("mousewheel", zoomhandler, false);
 window.addEventListener("DOMMouseScroll", zoomhandler, false);
 
 function zoomhandler(e) {
+	e.preventDefault();
 	if(e.wheelDelta > 0) {
 		zoom(.05, currentscale);
 	} else {
@@ -19,3 +20,18 @@ function zoom(zoomlevel, currentscale) {
 		window["currentscale"] = currentscale + zoomlevel;
 		zoom.style.transform = "translate(-50%, -50%) scale(" + currentscale +"," + currentscale + ")";
 }
+
+/*
+$(window).bind('mousewheel DOMMouseScroll', function(event)
+{
+    if(event.ctrlKey == true)
+    {
+        event
+        if(event.originalEvent.detail > 0) {
+             console.log('Down');
+         }else {
+             console.log('Up');
+         }
+    }
+});
+*/
