@@ -1,0 +1,13 @@
+{
+  "name": "Cloud",
+  "id": "cloud",
+  "icon_src" : "ic_cloud_upload_black_48dp_2x.png",
+  "page_src" : "cloud.html",
+  "order" : 10,
+  "popout" : false,
+  "defaultX" : null,
+  "defaultY" : null,
+  "action" : true,
+  "action_function" : "displayUI('static/cloud/cloud.html', cloudButton);",
+  "disable" : false
+}
