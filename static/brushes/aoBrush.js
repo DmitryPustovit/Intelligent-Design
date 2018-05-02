@@ -175,7 +175,8 @@ function Brush(bData){
 		    		/* If opacity changes are needed, apply them */
 		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
 		    			var op = context.globalAlpha;
-		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
+		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * (1/32);
+              console.log(getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity);
 		    		}
 
 		    		/* Draw the image to the canvas */
@@ -214,9 +215,10 @@ function Brush(bData){
 	/* Set's the brush's red, green, blue and alpha channels */
 	this.setRGBA = function(r, g, b, a){
 		//if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
-		this.color = {r, g, b, a};
+		this.color = [r, g, b, a];
 		if (!this.image.complete) return false;
 		this.applyColor();
+    this.setOpacity(a);
 		return true;
 	}
 
@@ -234,8 +236,6 @@ function Brush(bData){
 		Applies the color to all the loaded textures
 	*/
 	this.applyColor = function(){
-    console.log("apply color");
-
 		/* Iterate through all the brush textures*/
 		for (var u=0; u < this.bData.textures.length; u++){
 
