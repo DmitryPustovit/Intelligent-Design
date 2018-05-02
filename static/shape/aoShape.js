@@ -47,20 +47,20 @@ Math.tand = function(degrees){
 
 /* Draws a rectangle given two points */
 function drawRectangle(context, brush, p1, p2){
-	brush.draw(context, brush, [p1, new Point(p2.x,p1.y), p2, new Point(p1.x,p2.y), p1]);
+	brush.draw(context, [p1, new Point(p2.x,p1.y), p2, new Point(p1.x,p2.y), p1]);
 }
 
 /* Draws a rectangle */
 function drawSquare(context, brush, p1, p2){
-	p = new Point(Math.min(p1.x,p2.x), Math.min(p1.y,p2.y));
+	var p = new Point(Math.min(p1.x,p2.x), Math.min(p1.y,p2.y));
 	drawRectangle(context, brush, p, p);
 }
 
 /* Draws a circle */
 function drawCircle(context, brush, topLeftPoint, radius){
-	center = new Point(topLeftPoint.x + r, topLeftPoint.y + r);
+	var center = new Point(topLeftPoint.x + r, topLeftPoint.y + r);
 	var firstP = new Point(center.x + radius * Math.cosd(0), center.y + radius * Math.sind(theta));
-	path = [];
+	var path = [];
 	path.push(firstP);
 	for (var theta = 1; theta < 359; theta++){
 		x = center.x + radius * Math.cosd(theta);
@@ -71,11 +71,22 @@ function drawCircle(context, brush, topLeftPoint, radius){
 		}
 	}
 	path.push(firstP);
-	brush.draw(context, brush, path);
+	brush.draw(context, path);
 }
 
+/* Draws a circle given two points */
 function drawCircleFromPoints(context, brush, p1, p2){
 	drawCircle(context, brush, p1, Math.floor(Math.min(Math.min(p1.x,p2.x), Math.min(p1.y,p2.y)) / 2));
+}
+
+/* Draws a triangle */
+function drawTriangle(context, brush, p1, p2){
+	var point = new Point(p1.x,p2,y);
+	brush.draw(context, [point, new Point(p1.x + Math.floor(Math.abs(p1.x - p2.x) / 2), p2, point]);
+}
+
+function drawEqualateral(){
+	
 }
 
 
