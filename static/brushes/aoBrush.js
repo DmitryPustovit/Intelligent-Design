@@ -175,8 +175,8 @@ function Brush(bData){
 		    		/* If opacity changes are needed, apply them */
 		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
 		    			var op = context.globalAlpha;
-		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * (1/32);
-              console.log(getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity);
+		    			var opScale = Math.max(Math.min((this.bData.drawGap * 2) / (this.image.width / 4),1), 0);
+		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
 		    		}
 
 		    		/* Draw the image to the canvas */
