@@ -159,7 +159,6 @@ function Brush(bData){
 				last was and where it is currently*/
 			for (var i = 0; i < dist; i += this.bData.stepSize){
 				this.distMoved = (this.distMoved + 1) % this.bData.drawGap;
-				console.log(this.distMoved);
 				if (this.distMoved == 0){
 					/* Calculate the x and y point where the drawing should take place*/
 					x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
@@ -188,7 +187,8 @@ function Brush(bData){
 		    		/* If opacity changes are needed, apply them */
 		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
 		    			var op = context.globalAlpha;
-		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
+		    			var opScale = Math.max(Math.min((this.bData.drawGap * 2) / (this.image.width / 4),1), 0);
+		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
 		    		}
 
 		    		/* Draw the image to the canvas */
@@ -227,9 +227,10 @@ function Brush(bData){
 	/* Set's the brush's red, green, blue and alpha channels */
 	this.setRGBA = function(r, g, b, a){
 		//if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
-		this.color = {r, g, b, a};
+		this.color = [r, g, b, a];
 		if (!this.image.complete) return false;
 		this.applyColor();
+    this.setOpacity(a);
 		return true;
 	}
 
@@ -247,7 +248,6 @@ function Brush(bData){
 		Applies the color to all the loaded textures
 	*/
 	this.applyColor = function(){
-
 		/* Iterate through all the brush textures*/
 		for (var u=0; u < this.bData.textures.length; u++){
 
