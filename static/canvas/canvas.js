@@ -1,15 +1,5 @@
-var image = {
-  name : "",
-  layers : [],
-  selected : null,
-  counter : 0,
-  width: $('#sketch').width(),
-  height: $('#sketch').height()
-};
-
-var brush = new Brush(pen);
-
 //Onload Code
+var brush = new Brush(pen), pencil = new Brush(pencil), pen = new Brush(pen);
 var canvas, ctx;
 
 if (localStorage.getItem("color1") == null ) {
@@ -20,38 +10,21 @@ if (localStorage.getItem("color2") == null ) {
   localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
 }
 
-//updateColor();
-
 if (localStorage.getItem("tool") === null) {
 	ctx.strokeStyle = 'pencil';
 }
 
+updateColor();
 
 //Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
-//$('#sketch').mousemove(function(e) {
-//  mouse.x = (e.pageX - $('#sketch').offset().left)/currentscale;
-//	mouse.y = (e.pageY - $('#sketch').offset().top)/currentscale;
-  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
-//});
-//$('#canvasHolder').pointermove(function(e) {
-//  mouse.x = e.pageX - $('#sketch').offset().left;
-//	mouse.y = e.pageY - $('#sketch').offset().top;
-  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
-//});
 
 document.getElementById('sketch').addEventListener("pointermove", function(e) {
   mouse.x = (e.pageX - $('#sketch').offset().left); /// currentscale;
 	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
-  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
 }, false);
 
-var brush;
-
 document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
-
-    ctx.beginPath();
-    ctx.moveTo(mouse.x, mouse.y);
 		updateColor();
 		mouse.oX = mouse.x;
 		mouse.oY = mouse.y;``
@@ -70,90 +43,32 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
      image.layers[image.selected], image.width, image.height);
 });
 
-//Paint feature
-		var onPaint = function() {
-			ctx.lineWidth = 1;
-			ctx.lineJoin = 'round';
-			ctx.lineCap = 'round';
-			ctx.imageSmoothingEnabled = true;
-			ctx.beginPath();
-			if(localStorage.getItem("tool") == "pencil"){
-				ctx.globalCompositeOperation = "source-over";
-				ctx.moveTo(mouse.oX,mouse.oY);
-				ctx.lineTo(mouse.x,mouse.y);
-				ctx.stroke();
-			}
-			if (localStorage.getItem("tool") == "er")
-			{
-	      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), true);
-	    }
-			if (localStorage.getItem("tool") == "eyedropper")
-			{
-				var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
-	      var data = pixel.data;
-        document.getElementById('colorwheel_iframe').contentWindow.setColor(data);
-			}
-      if (localStorage.getItem("tool") == "brush")
-      {
-        brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
-      }
-			mouse.oX = mouse.x;
-			mouse.oY = mouse.y;
-
-		    //ctx.lineTo(mouse.x, mouse.y);
-		    //ctx.stroke();
-		};
-
-//Change Color Feature
-		function updateColor(){
-			var storedNames = JSON.parse(localStorage.getItem("color1"));
-      brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
+var onPaint = function() {
+		if(localStorage.getItem("tool") == "pencil"){
+      brush = pencil;
+      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
 		}
 
-//Paste img feature
-		window.addEventListener('paste', pasteHere);
+		if (localStorage.getItem("tool") == "er"){
+      brush = pen;
+	    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), true);
+	  }
 
-		function pasteHere(e) {
-			if(e.clipboardData == false) {
-				return false; //there is nothing to paste
-			}
-		    	var paste = e.clipboardData.items;
-		    	if(paste == undefined) {
-				return false //there is nothing to paste
-			}
-		    	for (var i = 0; i < paste.length; i++) {
-		        if (paste[i].type.indexOf("image") == -1) {
-				continue; //means there is no image
-			}
-		        var blob = paste[i].getAsFile();
-		        var URLObj = window.URL || window.webkitURL;
-		        var source = URLObj.createObjectURL(blob);
-		        pasteTheImage(source);
-		        }
-		}
-			//draw pasted object
-		function pasteTheImage(source) {
-			var pastedImage = new Image();
-			pastedImage.onload = function() {
-		        	ctx.drawImage(pastedImage, mouse.x, mouse.y);
-			}
-			pastedImage.src = source;
-		}
+		if (localStorage.getItem("tool") == "eyedropper") {
+			var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+      document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
+    }
 
+    if (localStorage.getItem("tool") == "brush") {
+      brush = pen;
+      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y));
+    }
 
+		mouse.oX = mouse.x;
+    mouse.oY = mouse.y;
+};
 
-
-
-///JUNK
-//var img = new Image();
-
- //drawing of the test image - img1
- //img.onload = function () {
-	 //draw background image
-		 //ctx.drawImage(img, 0, canvas.height - 500);
-		 //draw a box over the top
-		 //ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
-		 //ctx.fillRect(0, 0, 500, 500);
- //};
-
- //img.src = 'intro.jpg';
+function updateColor(){
+	var storedNames = JSON.parse(localStorage.getItem("color1"));
+  brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
+}
