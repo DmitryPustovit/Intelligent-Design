@@ -16,7 +16,6 @@ if (localStorage.getItem("tool") === null) {
 
 updateColor();
 
-
 //Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 
@@ -44,7 +43,6 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
      image.layers[image.selected], image.width, image.height);
 });
 
-//Paint feature
 var onPaint = function() {
 		if(localStorage.getItem("tool") == "pencil"){
       brush = pencil;
