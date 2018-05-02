@@ -177,21 +177,3 @@ pacMan = {
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
 };
-
-pawPrint = {
-	"name": "Paw Print",
-	"textures": [
-		"http://i.pinimg.com/originals/ae/4f/b7/ae4fb7139a6300da30c8c8f086cf771a.png"
-	],
-	"mtRand": false,
-	"minRotation": 0,
-	"maxRotation": 90,
-	"stepSize": 1,
-	"drawGap": 32,
-	"yOffset": 16,
-	"xOffset": 16,
-	"minScale": 0.25,
-	"maxScale": 0.25,
-	"minOpacity": 1.0,
-	"maxOpacity": 1.0,
-};
