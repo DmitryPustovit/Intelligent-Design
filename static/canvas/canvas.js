@@ -21,8 +21,9 @@ updateColor();
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 
 document.getElementById('sketch').addEventListener("pointermove", function(e) {
-  mouse.x = (e.pageX - $('#sketch').offset().left); /// currentscale;
-	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
+  var ratio = window.devicePixelRatio;
+  mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
+	mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
 }, false);
 
 /* When the pointer comes in contact with the canvas */
@@ -71,7 +72,7 @@ var onPaint = function() {
 
     brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
 
-	mouse.oX = mouse.x;
+	  mouse.oX = mouse.x;
     mouse.oY = mouse.y;
 };
 
