@@ -1,5 +1,17 @@
 /*
 	By: aowolfie (Brandon Beckwith)
+                      .
+                     / V\
+                   / '  /
+                  < <  |
+       .          /    |
+      / \        /      |
+     /  /      /        |
+    |  |     /    \  \ /
+     \  \   (      ) | |
+      \  \__|   _/__/| |
+       \____\______) \__)
+       
 	References:
 		For general brush information:
 		http://perfectionkills.com/exploring-canvas-drawing-techniques/
