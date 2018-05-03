@@ -5,26 +5,35 @@ var LOWER_BOUND = 0.05;
 $(window).bind('mousewheel DOMMouseScroll', function(event) {
     if(event.ctrlKey == true) {
         event.preventDefault();
-        console.log(event.originalEvent.wheelDelta);
+        var zoom = .5;
 		if(event.originalEvent.wheelDelta > 0) {
-			currentScaleRatio  = currentScaleRatio * 1.2;
+			zoom  = currentScaleRatio * 1.2;
 		} else {
-			currentScaleRatio  = currentScaleRatio * 0.8;
+			zoom  = currentScaleRatio * 0.8;
 		}
-
-		currentScaleRatio = Math.max(Math.min(currentScaleRatio, UPPER_BOUND), LOWER_BOUND);
-		console.log(currentScaleRatio);
-
-		$('#sketch').css('width', image.width * window.devicePixelRatio * currentScaleRatio);
-		$('#sketch').css('height', image.height * window.devicePixelRatio * currentScaleRatio);
-		
-		if($('#sketchScroll').width() < $(window).width())
-			$('#sketchScroll').css('width', $('#sketch').width() * 1.4);
-
-		if($('#sketchScroll').height() < $(window).height())
-			$('#sketchScroll').css('height', $('#sketch').height() * 1.4);
+		doZoom(zoom);
     }
 });
+
+function doZoom(zoom) {
+	setZoom(zoom);
+	applyZoom();
+}
+
+function applyZoom(){
+	$('#sketch').css('width', image.width * window.devicePixelRatio * currentScaleRatio);
+	$('#sketch').css('height', image.height * window.devicePixelRatio * currentScaleRatio);
+		
+	if($('#sketchScroll').width() < $(window).width())
+		$('#sketchScroll').css('width', $('#sketch').width() * 1.4);
+
+	if($('#sketchScroll').height() < $(window).height())
+		$('#sketchScroll').css('height', $('#sketch').height() * 1.4);
+}
+
+function setZoom(zoom){
+	currentScaleRatio = Math.max(Math.min(zoom, UPPER_BOUND), LOWER_BOUND);
+}
 
 /*
 function zoomhandler(e) {
