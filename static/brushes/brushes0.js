@@ -188,4 +188,4 @@ pacMan = {
 	"icon": "icons/pacMan.png",
 };
 
-brushList = [pencil, pen, solidPen, horizontalBar, verticalBar, bubbles, clouds, twirl, spaz, pacMan];
+brushList = [pencil, pen, horizontalBar, verticalBar, bubbles, clouds, twirl, spaz, pacMan];
