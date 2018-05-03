@@ -14,6 +14,7 @@ pencil = {
 	"maxScale": 8.0,
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
+	"icon": "icons/pencil.png",
 };
 
 pen = {
@@ -32,6 +33,7 @@ pen = {
 	"maxScale": 0.5,
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
+	"icon": "icons/pen.png",
 };
 
 solidPen = {
@@ -50,6 +52,7 @@ solidPen = {
 	"maxScale": 0.5,
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
+	"icon": "icons/penSolid.png",
 };
 
 horizontalBar = {
@@ -68,6 +71,7 @@ horizontalBar = {
 	"maxScale": 0.5,
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
+	"icon": "icons/horizontalBar.png",
 };
 
 verticalBar = {
@@ -85,6 +89,7 @@ verticalBar = {
 	"minScale": 0.5,
 	"maxScale": 0.5,
 	"minOpacity": 1.0,
+	"icon": "icons/verticalBar.png",
 };
 
 bubbles = {
@@ -103,6 +108,7 @@ bubbles = {
 	"maxScale": 0.5,
 	"minOpacity": 0.5,
 	"maxOpacity": 1.0,
+	"icon": "icons/bubbles.png",
 };
 
 clouds = {
@@ -121,6 +127,7 @@ clouds = {
 	"maxScale": 1.0,
 	"minOpacity": 0.1,
 	"maxOpacity": 0.5,
+	"icon": "icons/clouds.png",
 };
 
 twirl = {
@@ -139,6 +146,7 @@ twirl = {
 	"maxScale": 1.0,
 	"minOpacity": 0.1,
 	"maxOpacity": 0.5,
+	"icon": "icons/twirl.png",
 };
 
 spaz = {
@@ -157,6 +165,7 @@ spaz = {
 	"maxScale": 0.5,
 	"minOpacity": 0.4,
 	"maxOpacity": 0.8,
+	"icon": "icons/spaz.png",
 };
 
 
@@ -177,6 +186,7 @@ pacMan = {
 	"maxScale": 1,
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
+	"icon": "icons/pacMan.png",
 };
 
 brushList = [pencil, pen, solidPen, horizontalBar, verticalBar, bubbles, clouds, twirl, spaz, pacMan];

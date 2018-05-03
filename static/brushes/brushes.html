@@ -109,9 +109,12 @@
          //console.log("add");
          for(var i = 0; i < brushList.length; i++)
          {
-           brush = new Brush(brushList[i]);
            $('#optionsHolder').append('<div class="option" id="' + brushList[i].name + '"> <div class="label">' + brushList[i].name + '</div> </div>')
-           $('#' + brushList[i].name).append(brush.getIcon());
+           var img = new Image();
+           img.src = brushList[i].icon;
+           img.style.width = '100px';
+           img.style.geight = '100px';
+           $('#' + brushList[i].name).append(img);
            if(i == 0)
             $('#' + brushList[i].name).find('.label').addClass('selected');
          }
