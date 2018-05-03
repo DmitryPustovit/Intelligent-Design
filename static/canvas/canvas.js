@@ -44,20 +44,25 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	mouse.oX = mouse.x;
 	mouse.oY = mouse.y;
 
-  	var b = localStorage.getItem("brush");
-  	console.log(b);
+  	var b = localStorage.getItem("brush").replace(/"/g,"");;
+
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
-	
+      console.log(b);
+
 	if ("Pencil" == b){
 		console.log("Assigning");
 		brush = Pencil;
-	} else if ("Pen" == b){
+	}
+  if ("Pen" == b){
 		brush = Pen;
-	} else if ("Solid Pen" == b){
+	}
+  if (b == "Solid Pen"){
+    console.log("solidPen");
 		brush = Solid_Pen;
-	} else if ("H-Bar" == b){
+	}
+  else if ("H-Bar" == b){
 		brush = H_Bar;
 	} else if ("V-Bar" == b){
 		brush = V_Bar;
@@ -71,7 +76,7 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 		brush = spaz;
 	} else if ("Pac-Man" == b){
 		brush = Pac_Man;
-	} 
+	}
 
 	if (tool == "er") {
 		erase = true; //Simply used as a flag, erase with all the brushes!
