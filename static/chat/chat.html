@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<style type="text/css">
+		#container {
+			width: 400px;
+			height: 375px;
+			margin: auto;
+			border: 1px solid rgba(128, 128, 128, 0.5);
+		}
+
+		#title {
+			background-color: rgba(147, 112, 219, 0.5);
+			color: white;
+			text-align: center;
+			height: 25px;
+		}
+
+		#messages {
+			height: 300px;
+			text-align: center;
+		}
+
+		#messages a {
+			text-decoration: none;
+			color: rgba(147, 112, 219, 0.5);
+			font-weight: bold;
+			margin: auto;
+		}
+
+		#messages a:visited {
+			color: rgba(147, 112, 219, 0.5);;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		#text {
+			border-top: 1px solid gray;
+			text-align: center;
+			height: 30px;
+			padding: 10px;
+		}
+		#text input {
+			width: 80%;
+		}
+	</style>
+</head>
+<body>
+	<button id="exchangeBtn" style="display:none;"></button>
+	<button id="checkToken">Check token</button>
+	<button id="deleteToken">Delete token</button>
+	<div id="container">
+		<div id="title">Discord Chat</div>
+		<div id="messages">
+			<!-- <a id="login" href="https://discordapp.com/api/oauth2/authorize?client_id=431276338138316801&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fchat.html&response_type=code&scope=messages.read">Sign in to read messages</a> -->
+			<a id="login" href="https://discordapp.com/api/oauth2/authorize?client_id=431276338138316801&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fchat.html&response_type=code&scope=identify%20guilds%20email%20guilds.join%20connections%20gdm.join%20messages.read">Sign in to read messages</a>
+		</div>
+		<div id="text">
+			<input type="text" name="message" placeholder="Send a message">
+			<button>Send</button>
+			<button id="getMessages">Get Messages</button>
+		</div>
+	</div>
+
+	<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+	<script src="chat.js"></script>
+</body>
+</html>
