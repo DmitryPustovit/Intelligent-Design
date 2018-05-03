@@ -5,8 +5,11 @@ import json
 import base64
 from flask import Flask, redirect, request, session, render_template, url_for
 import requests
+import re
+from apiclient.http import MediaFileUpload
 
 import google.oauth2.credentials
+from oauth2client.file import Storage
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
@@ -22,7 +25,7 @@ CLIENT_SECRETS_FILE = "client_secret.json"
 
 SCOPES =['https://www.googleapis.com/auth/drive']
 API_SERVICE_NAME = "drive"
-API_VERSION = "v2"
+API_VERSION = "v3"
 
 app.secret_key = os.urandom(24)
 
@@ -90,16 +93,18 @@ def oauth2callback():
 @app.route('/upload', methods=['POST'])
 def upload():
 
-    image_b64 = request.value['imageBase64']
+    image_b64 = request.values['imageBase64']
     image_data = re.sub('^data:image/.+;base64,', '', image_b64)
     future = open("image.png", "wb")
-    future.write(img_data.decode('base64'))
+    future.write(image_data.decode('base64'))
     future.close()
 
     if 'credentials' not in session:
         return redirect(url_for('authorize'))
 
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+
+    drive_service = googleapiclient.discovery.build( API_SERVICE_NAME, API_VERSION, credentials=credentials)
 
     file_metadata = {'newimage': 'photo.png'}
     
