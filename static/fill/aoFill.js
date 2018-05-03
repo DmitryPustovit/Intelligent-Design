@@ -16,6 +16,7 @@
 
 var neigh = [[-1,0],[1,0],[0,-1],[0,1]];
 
+/* A fill function that fills from a point */
 function fillFromPoint(context, p1, rI, gI, bI){
   var frontier = [];
   var width = context.canvas.clientWidth;
@@ -45,4 +46,6 @@ function fillFromPoint(context, p1, rI, gI, bI){
       }
     }
   }
+  context.putImageData(data, 0, 0);
+  return context;
 }
