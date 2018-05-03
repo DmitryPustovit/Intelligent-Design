@@ -141,7 +141,7 @@ function Brush(bData){
 		var c = document.createElement('canvas');
 		c.width = 300;
 		c.height = 300;
-		this.drawLine(c.getContext('2d'), new Point(50, 50), new Point(250,250));
+		this.draw(c.getContext('2d'), [new Point(50, 50), new Point(150,100), new Point(100, 150), new Point(250,250)]);
 		this.setOpacity(tOpacity);
 		this.setScale(tScale);
 		return c;

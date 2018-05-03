@@ -144,7 +144,7 @@ blank = {
 twirl = {
 	"name": "bTwirl",
 	"textures": [
-		"static/brushes/BrushTextures/horizontal_bar.png"
+		"BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 5,
