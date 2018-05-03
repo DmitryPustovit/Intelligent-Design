@@ -3,6 +3,7 @@ var currentscale = 1;
 $(window).bind('mousewheel DOMMouseScroll', function(event) {
     if(event.ctrlKey == true) {
         event.preventDefault();
+        console.log(event.originalEvent.wheelDelta);
         if(event.originalEvent.wheelDelta > 0) {
 					$('#sketch').css('width', $('#sketch').width() * 2);
 					$('#sketch').css('height', $('#sketch').height() * 2);

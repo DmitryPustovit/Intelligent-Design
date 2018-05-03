@@ -9,8 +9,76 @@
     <title>Brushes</title>
   </head>
   <body>
+    <button type="button" onclick="loaded()">Click Me!</button>
+    <div id="test"><div id="load"> </div></div>
+
+    <!-- <script src="../jquery-1.12.4.js" crossorigin="anonymous"></script> -->
+    <!-- TEMP -->
+    <script src="jquery-1.12.4.js"></script>
+     <script src="aoBrush.js"> </script>
+    <script src="brushes0.js"> </script>
+    <script>
+
+      var bPen;
+      bPen = new Brush(pen);
+
+       $(document).ready(function() {
+           var tmpImg = new Image() ;
+           tmpImg.src = 'BrushTextures/pen.png';
+           tmpImg.onload = function() {
+                loaded();
+           };
+       }) ;
+      //$(window).on('change', 'body', function(){
+      //  document.body.appendChild(bPen.getIcon());
+      //})
+
+      //async function asyncTest ()
+      //{
+      //  bPen = new Brush(pen);
+      //  await add();
+      //  document.body.appendChild(bPen.getIcon());
+      //}
+      //asyncTest();
+
+      //var noLoaded = true;
+      //$.when($.ajax(add())).then(function () {
+       //document.body.appendChild(bPen.getIcon());
+      //});
+      //while(noLoaded)
+      //{
+        //console.log(bPen.isLoaded());
+        //if(bPen.isLoaded())
+          //{
+          //  noLoaded = false;
+          //  document.body.appendChild(bPen.getIcon());
+          //}
+      //}
 
 
-    <script src="../jquery-1.12.4.js" crossorigin="anonymous"></script>
+      //bCloud = new Brush(pacMan);
+
+      function add()
+      {
+        $('#load').prepend($('<img>',{id:'theImg',src:'BrushTextures/pen.png'}))
+      }
+
+      function loaded() {
+        document.body.append(bPen.getIcon());
+        console.log("load");
+      }
+
+      /*
+      $.getScript( "brushes0.js" )
+        .done(function( script, textStatus ) {
+          //console.log( textStatus );
+          bPen = new Brush(pen);
+          loaded();
+        })
+        .fail(function( jqxhr, settings, exception ) {
+          //$( "div.log" ).text( "Triggered ajaxError handler." );
+          console.log("ERROR");
+      }); */
+    </script>
   </body>
 </html>

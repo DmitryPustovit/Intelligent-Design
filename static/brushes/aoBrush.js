@@ -11,7 +11,7 @@
      \  \   (      ) | |
       \  \__|   _/__/| |
        \____\______) \__)
-       
+
 	References:
 		For general brush information:
 		http://perfectionkills.com/exploring-canvas-drawing-techniques/
@@ -120,6 +120,17 @@ function Brush(bData){
 		/* Update the current texture */
 		this.image = this.textures[this.cT];
 	}
+
+  this.isLoaded = function(){
+       for (var i=0; i < this.textures.length; i++)
+            console.log(this.textures[i].src);
+           if (!this.textures[i].complete || this.textures[i].src == null)
+           {
+             console.log("false");
+               return false;
+             }
+       return true;
+   }
 
 	/* Generates a brush stroke icon*/
 	this.getIcon = function(){
