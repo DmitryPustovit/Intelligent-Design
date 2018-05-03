@@ -99,7 +99,7 @@ function Brush(bData){
 	for (var i=0; i < this.bData.textures.length; i++) {
 		this.textures[i] = new Image();
 		this.textures[i].src = this.bData.textures[i];
-		this.textures[i].crossOrigin = "anonymous"
+		this.textures[i].crossOrigin = "anonymous";
 	}
 
 	/* Assign the current brush texture */
