@@ -1,8 +1,10 @@
 import os
 import json
 from flask import Flask, render_template, url_for
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 print ("Generating Amazingness. Please Hold.")
 
@@ -37,5 +39,5 @@ def main():
     return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == "__main__":
-    app.run()
+    socketio.run(app)
     #app.run(host='0.0.0.0', port=8080)
