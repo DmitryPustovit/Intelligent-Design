@@ -1,5 +1,5 @@
 //Onload Code
-var brush = new Brush(solidPen), pencil = new Brush(pencil), pen = new Brush(solidPen), eraser = new Brush(pen);
+var brush = new Brush(solidPen), pencil = new Brush(pencil), pen = new Brush(solidPen), eraser = new Brush(solidPen);
 var canvas, ctx;
 var erase;
 
@@ -38,7 +38,7 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	else if (tool == "brush")
 		brush = pen;
 	else if (tool == "er") {
-		//erase = true; //Simply used as a flag, erase with all the brushes!
+		erase = true; //Simply used as a flag, erase with all the brushes!
 		brush = eraser; //Uncomment me for no funsies.
 	}
 
