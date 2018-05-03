@@ -29,6 +29,7 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	mouse.oX = mouse.x;
 	mouse.oY = mouse.y;
 
+  console.log(localStorage.getItem("brush"));
 
 	erase = false;
 	/* Detect the brush and set it to draw */

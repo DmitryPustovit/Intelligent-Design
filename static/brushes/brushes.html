@@ -120,6 +120,7 @@
        $('body').on('click', '.option', function(){
          $('.option').find('.label').removeClass('selected');
          $(this).find('.label').addClass('selected');
+         localStorage.setItem('brush', JSON.stringify($(this).attr('id')));
        });
     </script>
   </body>

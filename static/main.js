@@ -48,4 +48,4 @@ if (event.ctrlKey==true && (event.which == '61' || event.which == '107' || event
     // 109 Num Key  -
     // 173 Min Key  hyphen/underscor Hey
     // 61 Plus key  +/= key
-});s
+});
