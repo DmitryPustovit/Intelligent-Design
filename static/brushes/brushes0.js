@@ -131,7 +131,7 @@ clouds = {
 };
 
 twirl = {
-	"name": "bTwirl",
+	"name": "Twirl",
 	"textures": [
 		"BrushTextures/horizontal_bar.png"
 	],
@@ -150,7 +150,7 @@ twirl = {
 };
 
 spaz = {
-	"name": "spaz",
+	"name": "Spaz",
 	"textures": [
 		"BrushTextures/horizontal_bar.png"
 	],
@@ -167,7 +167,6 @@ spaz = {
 	"maxOpacity": 0.8,
 	"icon": "icons/spaz.png",
 };
-
 
 
 pacMan = {

@@ -49,30 +49,26 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
-      console.log(b);
+	console.log(b);
 
 	if ("Pencil" == b){
 		console.log("Assigning");
 		brush = Pencil;
-	}
-  if ("Pen" == b){
+	} else if ("Pen" == b){
 		brush = Pen;
-	}
-  if (b == "Solid Pen"){
-    console.log("solidPen");
+	} else if (b == "Solid Pen"){
 		brush = Solid_Pen;
-	}
-  else if ("H-Bar" == b){
+	} else if ("H-Bar" == b){
 		brush = H_Bar;
 	} else if ("V-Bar" == b){
 		brush = V_Bar;
 	} else if ("Bubbles" == b){
 		brush = Bubbles;
-	} else if ("clouds" == b){
+	} else if ("Clouds" == b){
 		brush = clouds;
-	} else if ("bTwirl" == b){
+	} else if ("Twirl" == b){
 		brush = bTwirl;
-	} else if ("spaz" == b){
+	} else if ("Spaz" == b){
 		brush = spaz;
 	} else if ("Pac-Man" == b){
 		brush = Pac_Man;

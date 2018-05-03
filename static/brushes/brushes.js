@@ -142,9 +142,9 @@ blank = {
 };
 
 twirl = {
-	"name": "bTwirl",
+	"name": "Twirl",
 	"textures": [
-		"BrushTextures/horizontal_bar.png"
+		"static/brushes/BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 5,
@@ -160,7 +160,7 @@ twirl = {
 };
 
 spaz = {
-	"name": "spaz",
+	"name": "Spaz",
 	"textures": [
 		"static/brushes/BrushTextures/horizontal_bar.png"
 	],
