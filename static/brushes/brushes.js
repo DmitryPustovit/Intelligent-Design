@@ -34,6 +34,24 @@ pen = {
 	"maxOpacity": 1.0,
 };
 
+solidPen = {
+	"name": "Solid Pen",
+	"textures": [
+		"static/brushes/BrushTextures/pen_solid.png"
+	],
+	"mtRand": false,
+	"minRotation": 0,
+	"maxRotation": 0,
+	"stepSize": 1,
+	"drawGap": 1,
+	"yOffset": 8,
+	"xOffset": 8,
+	"minScale": 0.5,
+	"maxScale": 0.5,
+	"minOpacity": 1.0,
+	"maxOpacity": 1.0,
+};
+
 horizontalBar = {
 	"name": "H-Bar",
 	"textures": [
@@ -158,6 +176,7 @@ spaz = {
 	"minOpacity": 0.4,
 	"maxOpacity": 0.8,
 };
+
 
 
 pacMan = {

@@ -1,5 +1,5 @@
 //Onload Code
-var brush = new Brush(pen), pencil = new Brush(pencil), pen = new Brush(pen), eraser = new Brush(pen);
+var brush = new Brush(pen), pencil = new Brush(pencil), pen = new Brush(solidPen), eraser = new Brush(pen);
 var canvas, ctx;
 var erase;
 
@@ -15,8 +15,6 @@ if (localStorage.getItem("tool") === null) {
 	ctx.strokeStyle = 'pencil';
 }
 
-updateColor();
-
 //Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 
@@ -30,6 +28,7 @@ document.getElementById('sketch').addEventListener("pointermove", function(e) {
 document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
 	mouse.oX = mouse.x;
 	mouse.oY = mouse.y;
+
 
 	erase = false;
 	/* Detect the brush and set it to draw */
@@ -72,7 +71,7 @@ var onPaint = function() {
 
     brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
 
-	  mouse.oX = mouse.x;
+	mouse.oX = mouse.x;
     mouse.oY = mouse.y;
 };
 
