@@ -10,6 +10,7 @@ var clouds = new Brush(clouds);
 var bTwirl = new Brush(twirl);
 var spaz = new Brush(spaz);
 var Pac_Man = new Brush(pacMan);
+var pixel = new brush(pixel);
 
 var canvas, ctx;
 var erase;
