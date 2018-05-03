@@ -1,5 +1,16 @@
 //Onload Code
-var brush = new Brush(solidPen), pencil = new Brush(pencil), pen = new Brush(solidPen), eraser = new Brush(solidPen);
+var brush = new Brush(solidPen);
+var Pencil = new Brush(pencil);
+var Pen = new Brush(pen);
+var Solid_Pen = new Brush(solidPen);
+var H_Bar = new Brush(horizontalBar);
+var V_Bar = new Brush(verticalBar);
+var Bubbles = new Brush(bubbles);
+var clouds = new Brush(clouds);
+var bTwirl = new Brush(twirl);
+var spaz = new Brush(spaz);
+var Pac_Man = new Brush(pacMan);
+
 var canvas, ctx;
 var erase;
 
@@ -19,9 +30,13 @@ if (localStorage.getItem("tool") === null) {
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 
 document.getElementById('sketch').addEventListener("pointermove", function(e) {
-  var ratio = window.devicePixelRatio;
-  mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
-	mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
+var ratio = window.devicePixelRatio;
+	var sScroll = document.getElementById('sketchScroll');
+	var sSketch = document.getElementById('sketch');
+	//mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
+	//mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
+	mouse.x = sScroll.clientX;
+	mouse.y = sScroll.clientY;
 }, false);
 
 /* When the pointer comes in contact with the canvas */
@@ -29,18 +44,38 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	mouse.oX = mouse.x;
 	mouse.oY = mouse.y;
 
-  console.log(localStorage.getItem("brush"));
-
+  	var b = localStorage.getItem("brush");
+  	console.log(b);
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
-	if (tool == "pencil")
-		brush = pencil;
-	else if (tool == "brush")
-		brush = pen;
-	else if (tool == "er") {
+	
+	if ("Pencil" == b){
+		console.log("Assigning");
+		brush = Pencil;
+	} else if ("Pen" == b){
+		brush = Pen;
+	} else if ("Solid Pen" == b){
+		brush = Solid_Pen;
+	} else if ("H-Bar" == b){
+		brush = H_Bar;
+	} else if ("V-Bar" == b){
+		brush = V_Bar;
+	} else if ("Bubbles" == b){
+		brush = Bubbles;
+	} else if ("clouds" == b){
+		brush = clouds;
+	} else if ("bTwirl" == b){
+		brush = bTwirl;
+	} else if ("spaz" == b){
+		brush = spaz;
+	} else if ("Pac-Man" == b){
+		brush = Pac_Man;
+	} 
+
+	if (tool == "er") {
 		erase = true; //Simply used as a flag, erase with all the brushes!
-		brush = eraser; //Uncomment me for no funsies.
+		//brush = eraser; //Uncomment me for no funsies.
 	}
 
 	/* Prime the brush with color */
