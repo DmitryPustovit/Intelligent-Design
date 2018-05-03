@@ -1,54 +1,170 @@
 //Creates Layer in the sketch div, canvas holder
-function createLayer(number) {
-  var canvas = document.createElement('canvas');
-  canvas.id = number;
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.zIndex = number ;
-  $('#sketch').append(canvas);
-}
+function createLayer() {
+  var newCanvas = document.createElement('canvas');
+  newCanvas.id = ++image.counter;
+  newCanvas.width = image.width;
+  newCanvas.height = image.height;
+  newCanvas.style.zIndex = newCanvas.id;
+  var ctx = newCanvas.getContext('2d')
+  ctx.mozImageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.msImageSmoothingEnabled = false;
+  ctx.imageSmoothingEnabled = false;;
 
-//Selects the active canvas layer
-function selectLayer(number)
-{
-  canvas = document.getElementById(number);
-  ctx = canvas.getContext('2d');
-}
+  image.layers.push({
+    id : newCanvas.id,
+    zindex : newCanvas.id,
+    name : "layer " + newCanvas.id,
+    opacity : 1,
+    visable : true,
+    data : null
+  });
+  $('#sketch').append(newCanvas);
 
-//Merges two layer canvases together
-//TODO layer opactiy HERE
-function mergeLayers(top, bottom){
-  console.log(top + " " + bottom);
-  var ctx = document.getElementById(bottom).getContext('2d');
-  //ctx.setOpacity(top.getOpacity, bottom);
-  ctx.drawImage(document.getElementById(top), 0, 0);
-  //ctx.setOpacity(1, bottom);
-  $(document.getElementById(top)).remove();
+  return image.layers[image.layers.length - 1];
 }
 
 //Removes a Layer
-function removeLayer(num)
-{
-  $(document.getElementById(num)).remove();
+function removeLayer(id){
+  $(document.getElementById(id)).remove();
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+  image.layers.splice(position, 1);
 }
 
-//Flattens all of the layer canvases into one for saving
-function flattenLayers()
-{
-  var layers = [];
-  $('#sketch').children('canvas').each(function () {
-    layers.push($(this).attr('id'));
+//Selects the active canvas layer
+function selectLayer(id){
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
   });
-
-  if(layers.length > 1)
-  {
-    for(var i = layers.length - 1; i > 0; i--)
-      mergeLayers(layers[i], layers[i-1]);
-  }
+  image.selected = position;
+  canvas = document.getElementById(id);
+  ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.msImageSmoothingEnabled = false;
 }
 
 //Hides a layer
-function hideLayer(num, val)
+function changeLayerVisability(id){
+    $(document.getElementById(id)).toggle();
+    var position = image.layers.findIndex(function(e) {
+      return e.id == id
+    });
+    image.layers[position].visable = !image.layers[position].visable;
+}
+
+//Merges two layer canvases together
+function mergeLayers(id){
+  var performed = false;
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+
+  if(image.layers[position].id != image.layers[0].id
+    && image.layers.length > 1) {
+    var ctx = document.getElementById(image.layers[position-1].id).getContext('2d');
+    ctx.globalAlpha = image.layers[position].opacity;
+    ctx.drawImage(document.getElementById(image.layers[position].id), 0, 0);
+    ctx.globalAlpha = 1;
+    $(document.getElementById(image.layers[position].id)).remove();
+    image.layers.splice(position, 1);
+    image.selected = null;
+    performed = true;
+  }
+
+  return performed;
+}
+
+//Moves layer up
+function moveLayerUp(id){
+  var performed = false;
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+
+  if(image.layers[position].id != image.layers[image.layers.length-1].id
+    && image.layers.length > 1) {
+      var z = $('#' + image.layers[position].id).css('z-index');
+      $('#' + image.layers[position].id).css('z-index', $('#' + image.layers[position+1].id).css('z-index'));
+      image.layers[position].zIndex = image.layers[position+1].zIndex;
+      $('#' + image.layers[position+1].id).css('z-index', z);
+      image.layers[position+1].zIndex = z;
+
+      var tempLayer = image.layers[position]
+      image.layers[position] = image.layers[position+1];
+      image.layers[position+1] = tempLayer;
+      selectLayer(image.layers[position+1].id);
+      performed = true;
+  }
+
+  return performed;
+}
+
+//Move Layer down
+function moveLayerDown(id){
+  var performed = false;
+  var position = image.layers.findIndex(function(e) {
+    return e.id == id
+  });
+
+  if(image.layers[position].id != image.layers[0].id
+    && image.layers.length > 1) {
+      var z = $('#' + image.layers[position].id).css('z-index');
+      $('#' + image.layers[position].id).css('z-index', $('#' + image.layers[position-1].id).css('z-index'));
+      image.layers[position].zIndex = image.layers[position-1].zIndex;
+      $('#' + image.layers[position-1].id).css('z-index', z);
+      image.layers[position-1].zIndex = z;
+
+      var tempLayer = image.layers[position]
+      image.layers[position] = image.layers[position-1];
+      image.layers[position-1] = tempLayer;
+      selectLayer(image.layers[position-1].id);
+      performed = true;
+  }
+
+  return performed;
+}
+
+//Change Layer Settings
+function changeLayerSettings(data)
 {
-    $(document.getElementById(num)).toggle();
+  image.layers[image.selected].name = data[0];
+  image.layers[image.selected].opacity = data[1] / 255;
+  setLayerOpacity(data[1] / 255);
+  document.getElementById('layers_iframe').contentWindow.drawLayers();
+}
+
+//Flattens all of the layer canvases into one for saving
+function flattenLayers(){
+  if(image.layers.length > 1)
+  {
+    //image.layers[0].visable = true;
+    for(var i = image.layers.length-1; i >= 0; i--)
+    {
+      if(image.layers[i].visable == false)
+        removeLayer(image.layers[i].id)
+    }
+
+    for(var i = image.layers.length - 1; i > 0; i--)
+    {
+      mergeLayers(image.layers[i].id);
+    }
+    selectLayer(image.layers[0].id);
+  }
+  image.layers[0].name = image.name;
+  document.getElementById('layers_iframe').contentWindow.drawLayers();
+}
+
+//Sets opacity of a layer
+function setLayerOpacity(opacity) {
+  canvas.style.opacity = opacity;
+}
+
+//Returns the layers array
+function getImage()
+{
+  return image;
 }

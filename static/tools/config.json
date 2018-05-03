@@ -1,0 +1,14 @@
+{
+  "name": "Tools",
+  "id": "tools",
+  "icon_src" : "tools.png",
+  "page_src" : "tools.html",
+  "order" : 1,
+  "popout" : true,
+  "defaultX" : "left:50px;",
+  "defaultY" : "top: 100px;",
+  "action" : false,
+  "action_function" : null,
+  "disable" : false,
+  "section" : 1
+}

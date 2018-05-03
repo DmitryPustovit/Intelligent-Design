@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstr ap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
-      dmitry{
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+    dmitry{
         background: #5352ed;
         color: white;
       }
@@ -19,12 +20,15 @@
       }
       jeff{
         background: #ff7f50;
+        color: white;
       }
       jon{
         background: #2ed573;
+        color: white;
       }
       bryson{
         background: #ff6b81;
+        color:white;
       }
       michael{
         background: #70a1ff;
@@ -34,73 +38,103 @@
         text-decoration: line-through;
         color: #ff4757;
       }
+      .header{
+        padding: 10px;
+        background:white;
+        text-align: center;
+      }
+
+      h1{
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+      }
+      body{
+        background: #f5f6fa;
+      }
+      .img{
+        background: white;
+        padding-top: 10px;
+      }
+      .row{
+        width: 100%;
+      }
     </style>
     <title>Feature Hit List</title>
   </head>
   <body>
-    <h1>Current Features Hit List: (PLEASE SAVE ME)</h1>
-    Things being worked on : <dmitry>Dmitry</dmitry>, <brandon>Brandon</brandon>, <jeff>Jeff</jeff>, <jon>Jon</jon>, <bryson>Bryson</bryson>, <michael>Michael</michael>
-    <h3>Things To Get DONE</h3>
-    <ul>
-      <li><michael>Save to Google Drive</michael></li>
-      <li>Fill Tool & Magic Select Wand tool (Both are sort of the same)</li>
-      <li>Undo Queue</li>
-      <li>Send pics to discord</li>
-      <li><dmitry>Move layer position</dmitry></li>
-      <li><done>transparancy indicator in the actual canvas</done></li>
-      <li><dmitry>layer opacity</dmitry></li>
-      <li><jon>text tool and text paste support</jon></li>
-      <li><jon>selected tool highlights</jon></li>
-      <li><bryson>canvas image zoom</bryson></li>
-      <li> hook up discord chat </li>
-      <li><done>color wheel to start at correct color</done></li>
-      <li><done>eye dropper tool</done></li>
-      <li> eye dropper tool debug </li>
-      <li><jon>selection tools</jon></li>
-      <li><jeff>scale photos on paste in</jeff></li>
-      <li> pressure sense </li>
-      <li> touch screen comptible </li>
-      <li><bryson>canvas resize</bryson></li>
-      <li> specific layer name and opacity setting with UI </li>
-      <li> layer visibilty carries over to save file ...</li>
-      <li><brandon>brushes and erasor cursors</brandon></li>
-      <li><brandon>brushes and erasor SIZE SETTING</brandon></li>
-      <li><jeff> open files </jeff></li>
-      <li><michael> save files with specific name and file type</michael></li>
-      <li><done>aowolfie brush tool</done></li>
-      <li><brandon>aowolfie brushes color suppor</brandon></li>
-      <li>Add transparancy to color wheel, canvas preview, colors in general, etc</li>
-      <li><dmitry>Layer preview</dmitry></li>
-      <li><brandon>Brush selection menu</brandon></li>
-      <li><brandon>Brush optimizations and rewrite</brandon></li>
-    </ul>
+    <div class="header">
+      <h1>Current Features Hit List: (PLEASE SAVE ME)</h1>
+      Things being worked on : <dmitry>Dmitry</dmitry>, <brandon>Brandon</brandon>, <jeff>Jeff</jeff>, <jon>Jon</jon>, <bryson>Bryson</bryson>, <michael>Michael</michael>
+    </div>
 
-    <h3> Sprint Three </h3>
-    <ul>
-      <li>Sync user photos</li>
-    </ul>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-4">
+        <h3>Things To Get DONE</h3>
+        <ul>
+          <li><bryson>canvas image zoom</bryson></li>
+          <li><bryson>canvas resize</bryson></li>
+          <li><bryson>canvas scale DPI fix</bryson></li>
+          <li><jon>selection tools</jon></li>
+          <li><jon>text tool and text paste support - Being edited and Added by Dmitry/Bryson</jon></li>
+          <li><jeff>scale photos on paste in</jeff></li>
+          <li><jeff> open files - Being edited and Added by Dmitry</jeff></li>
+          <li><brandon>brushes and erasor cursors</brandon></li>
+          <li><brandon>brushes and erasor SIZE SETTING</brandon></li>
+          <li><brandon>aowolfie brushes color suppor</brandon></li>
+          <li><brandon>Brush selection menu</brandon></li>
+          <li><brandon>Brush optimizations and rewrite</brandon></li>
+          <li><brandon>Fill Tool & Magic Select Wand tool (Both are sort of the same)</brandon></li>
+          <li><done>eye dropper tool debug</done></li>
+          <li><done>layer visibilty carries over to save file ...</done></li>
+          <li><done>Move layer position</done></li>
+          <li><done>transparancy indicator in the actual canvas</done></li>
+          <li><done>layer opacity</done></li>
+          <li><done>selected tool highlights</done></li>
+          <li><done>color wheel to start at correct color</done></li>
+          <li><done>eye dropper tool</done></li>
+          <li> <done>specific layer name and opacity setting with UI</done></li>
+          <li><done> save files with specific name and file type</done></li>
+          <li><done>aowolfie brush tool</done></li>
+          <li><done>Add transparancy to color wheel, canvas preview, colors in general, etc</done></li>
+          <li><done>Layer preview</done></li>
+        </ul>
+      </div>
+      <div class="col-4">
+        <h3>Optimizations and Bug Fixes</h3>
+        <ul>
+          <li><brandon>standardize canvas functions</brandon></li>
+          <li><brandon>Brushes do not use color given to them</brandon></li>
+          <li> Brushes only work when pencil tool was selected before hand </li>
+          <li>brush tool does not rememeber upong reload </li>
+          <li><done>All drawing tools, and erasor, will only function when mouse moved. They do not draw on click.</done></li>
+          <li><done>standardize the cross window communication</done></li>
+          <li><done> external file for all css, js, etc </done></li>
+          <li><done>Fix the fact that there is legit a delay function for the saving...</done></li>
+          <li><done>Fix snapping UI</done></li>
+          <li><done>Sizable UI / UI FIX</done></li>
+          <li><done>MAKE HTML "COMPLIANT"</done>  </li>
+          <li><done>Layer Save Borken</done></li>
+          <li><done>Brushes only work with already defined layer</done></li>
+          <li><done>Base Layer does not hide after merge</done></li>
+          <li><done>Tools not selected on first load</done></li>
+        </ul>
+      </div>
+      <div class="col-4">
+        <h3> Sprint Three </h3>
+        <ul>
+          <li> <dmitry>Sync user photos</dmitry></li>
+          <li> <dmitry>pressure sense</dmitry></li>
+          <li> touch screen comptible </li>
+          <li>Undo Queue</li>
+          <li>Send pics to discord</li>
+          <li><michael>hook up discord chat</michael></li>
+          <li><michael>Save to Google Drive</michael></li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Optimizations and Bug Fixes</h3>
-    <ul>
-      <li><done>standardize the cross window communication</done></li>
-      <li> standardize canvas functions </li>
-      <li><done> external file for all css, js, etc </done></li>
-      <li>Fix the fact that there is legit a delay function for the saving...</li>
-      <li><done>Fix snapping UI</done></li>
-      <li><done>Sizable UI / UI FIX</done></li>
-      <li><done>MAKE HTML "COMPLIANT"</done></li>
-      <li><done>Layer Save Borken</done></li>
-      <li><done>Brushes only work with already defined layer</done></li>
-      <li> Brushes only work when pencil tool was selected before hand </li>
-      <li><done>Base Layer does not hide after merge</done></li>
-      <li><brandon>Brushes do not use color given to them</brandon></li>
-      <li>Tools not selected on first load</li>
-      <li>brush tool does not rememeber upong reload </li>
-    </ul>
+    <div class="img"><center><a href="pic.png"> <img src="pic.png" width="800px;"/> </a></center> </div>
 
-    <center><a href="pic.png"> <img src="pic.png" width="800px;"/> </a></center>
-
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

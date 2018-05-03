@@ -1,5 +1,17 @@
 /*
 	By: aowolfie (Brandon Beckwith)
+                      .
+                     / V\
+                   / '  /
+                  < <  |
+       .          /    |
+      / \        /      |
+     /  /      /        |
+    |  |     /    \  \ /
+     \  \   (      ) | |
+      \  \__|   _/__/| |
+       \____\______) \__)
+       
 	References:
 		For general brush information:
 		http://perfectionkills.com/exploring-canvas-drawing-techniques/
@@ -22,11 +34,12 @@ function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     //return new Point(mouse.x, mouse.y);
     return new Point(evt.clientX - rect.left, evt.clientY - rect.top);
-  }
+}
 
 /* Used to check if a value is between two values (Inclusive) */
 function between(x, min, max) { return x >= min && x <= max; }
 
+/* Takes an html color and converts it to rgb */
 function colorToRGBA(color) {
     // Returns the color as an array of [r, g, b, a] -- all range from 0 - 255
     // Examples:
@@ -55,7 +68,8 @@ function colorToRGBA(color) {
 		"mtRand": true,		//Randomly select brush textures
 		"minRotation": 0,	//The minimum rotation to make each update
 		"maxRotation": 0,	//The maximum rotation to make each update
-		"step": 4,		 	//The number of pixels skipped when the brush is moved quickly
+		"step": 1,		 	//The number of pixels skipped when the brush is moved quickly
+		"drawGap": 1,		//The number of pixels skipped in general
 		"yOffset": 16,	 	//The x image offset
 		"xOffset": 16,		//The y image offset
 		"minScale": 1.0,	//The minimum the brush can randomly be scaled by
@@ -71,16 +85,12 @@ function Brush(bData){
 	/* The current state of the brush */
 	this.drawing = false;
 	this.cT = 0;
-	this.lastPoint = new Point(0,0);
 	this.lastAngle = 0;
+	this.distMoved = 0;
 
 	/* Extra properties */
 	this.opacity = 1;
 	this.scale = 1;
-
-	/* Canvas information */
-	this.canvas = canvas;
-	this.context = canvas.getContext('2d');
 
 	/* Texture array */
 	this.textures = {};
@@ -111,93 +121,90 @@ function Brush(bData){
 		this.image = this.textures[this.cT];
 	}
 
-	/* When the mouse is pushed down, enable drawing */
-	this.mouseDown = function(e) {
-		this.drawing = true;
-		this.lastPoint = getMousePos(this.canvas, e);
+	/* Generates a brush stroke icon*/
+	this.getIcon = function(){
+		tScale = this.getScale();
+		this.setScale(1);
+		tOpacity = this.getOpacity();
+		this.setOpacity(1);
+		var c = document.createElement('canvas');
+		c.width = 300;
+		c.height = 300;
+		this.drawLine(c.getContext('2d'), new Point(50, 50), new Point(250,250));
+		this.setOpacity(tOpacity);
+		this.setScale(tScale);
+		return c;
 	}
 
-   var mouse = {x: 0, y: 0, oX: 0, oY: 0};
-  $(document).mousemove(function(e) {
-    mouse.x = e.pageX;
-    mouse.y = e.pageY;
-  });
+	/* Draws a line between two points */
+	this.drawLine = function(context, p1, p2, erase){
+		this.draw(context,[p1, p2], erase);
+	}
+
 	/*
 		Updates the canvas when the mouse moves
 	*/
-	this.mouseMove = function(e) {
+	this.draw = function(context, path, erase) {
+		erase = erase | false;
 
-		/* If we aren't drawing ignore mouse movements*/
-		if (!this.drawing) return;
+		var last = path[0];
+		for (var u = 1; u < path.length; u++){
 
-		/* Get some initial values*/
-		var cP = getMousePos(this.canvas, e);
-		var dist = distBetween(this.lastPoint, cP);
-		var ang = angBetween(this.lastPoint, cP);
+			/* Get some initial values*/
+			var cP = path[u];
+			var dist = distBetween(last, cP);
+			var ang = angBetween(last, cP);
 
-		/*	For iterate through all spaces between where the mouse
-			last was and where it is currently*/
-		for (var i = 0; i < dist; i += this.bData.step){
-			/* Calculate the x and y point where the drawing should take place*/
-			x = (this.lastPoint.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
-			y = (this.lastPoint.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
+			/*	For iterate through all spaces between where the mouse
+				last was and where it is currently*/
+			for (var i = 0; i < dist; i += this.bData.stepSize){
+				this.distMoved = (this.distMoved + 1) % this.bData.drawGap;
+				if (this.distMoved == 0){
+					/* Calculate the x and y point where the drawing should take place*/
+					x = (last.x + (Math.sin(ang) * i) - this.bData.xOffset) * this.scale;
+					y = (last.y + (Math.cos(ang) * i) - this.bData.yOffset) * this.scale;
 
-			/* Save the state of the context */
-			this.context.save();
+					/* Save the state of the context */
+					context.save();
 
-			/* It's easier to transform the canvas than it is the image */
-    		this.context.translate(x, y);
+					if (erase){
+						context.globalCompositeOperation = "destination-out";
+					}
 
-    		/* Apply the random scaling */
-    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
-    		this.context.scale(scale, scale);
+					/* It's easier to transform the canvas than it is the image */
+		    		context.translate(x, y);
 
-    		/* If a rotation is needed, apply it */
-			if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
-				this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
-    			this.context.rotate(Math.PI / 180 * this.lastAngle);
-    		}
+		    		/* Apply the random scaling */
+		    		scale = getRandomDouble(this.bData.minScale, this.bData.maxScale) * this.scale;
+		    		context.scale(scale, scale);
 
-    		/* If opacity changes are needed, apply them */
-    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
-    			var op = this.context.globalAlpha;
-    			this.context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity;
-    		}
+		    		/* If a rotation is needed, apply it */
+					if (this.bData.minRotation != 0 || this.bData.maxRotation != 0 ){
+						this.lastAngle = Math.abs((getRandomInt(this.bData.minRotation, this.bData.maxRotation) + this.lastAngle) % 360);
+		    			context.rotate(Math.PI / 180 * this.lastAngle);
+		    		}
 
-    		/* Draw the image to the canvas */
-    		this.context.drawImage(this.image, 0, 0);
+		    		/* If opacity changes are needed, apply them */
+		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
+		    			var op = context.globalAlpha;
+		    			var opScale = Math.max(Math.min((this.bData.drawGap * 2) / (this.image.width / 4),1), 0);
+		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
+		    		}
 
-    		/* Restore the canvas back to it's orignal configuration */
-    		this.context.restore();
+		    		/* Draw the image to the canvas */
+		    		context.drawImage(this.image, 0, 0);
 
-    		/* Cycle the texture used */
-    		this.cycleTexture();
+		    		/* Restore the canvas back to it's orignal configuration */
+		    		context.restore();
+
+		    		/* Cycle the texture used */
+		    		this.cycleTexture();
+	    		}
+			}
+			/* Set this point as the last point */
+			last = cP;
 		}
-
-		/* Set this point as the last point */
-		this.lastPoint = cP;
 	}
-
-	/*
-		Used to stop the drawing when the mouse is lifted
-	*/
-	this.mouseUp = function(e){
-		this.drawing = false;
-	}
-
-	/*
-		Assigns the brush to the canvas, returns true on success
-	*/
-	this.assign = function(e){
-		if (!this.image.complete) return false;
-		var that = this;
-		console.log("Assigning brush:" + this.bData.name);
-		document.onmousedown = function(e) { that.mouseDown(e) };
-		document.onmousemove = function(e) { that.mouseMove(e) };
-		document.onmouseup = function(e) { that.mouseUp(e) };
-		return true;
-	}
-
 
 	/* Set the brush's opacity */
 	this.setOpacity = function(opacity) { this.opacity = opacity; }
@@ -220,16 +227,11 @@ function Brush(bData){
 	/* Set's the brush's red, green, blue and alpha channels */
 	this.setRGBA = function(r, g, b, a){
 		//if (!(between(r, 0, 255) && between(g, 0, 255) && between(b, 0, 255) && between(a, 0, 1))) { return false; }
-		this.color = {r, g, b, a};
+		this.color = [r, g, b, a];
 		if (!this.image.complete) return false;
 		this.applyColor();
+    this.setOpacity(a);
 		return true;
-	}
-
-	/* Reassign's the brush's canvas */
-	this.setCanvas = function(canvas) {
-		this.canvas = canvas;
-		this.context = canvas.getContext('2d');
 	}
 
 	/*
@@ -246,7 +248,6 @@ function Brush(bData){
 		Applies the color to all the loaded textures
 	*/
 	this.applyColor = function(){
-
 		/* Iterate through all the brush textures*/
 		for (var u=0; u < this.bData.textures.length; u++){
 

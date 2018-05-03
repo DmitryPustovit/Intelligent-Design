@@ -1,0 +1,14 @@
+{
+  "name": "Open",
+  "id": "open",
+  "icon_src" : "ic_insert_drive_file_black_48dp_2x.png",
+  "page_src" : "open.html",
+  "order" : 1,
+  "popout" : false,
+  "defaultX" : null,
+  "defaultY" : null,
+  "action" : true,
+  "action_function" : "displayUI('static/new/new.html', newButton);",
+  "disable" : false,
+  "section" : 0
+}
