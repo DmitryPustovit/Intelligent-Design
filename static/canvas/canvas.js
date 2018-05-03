@@ -49,10 +49,8 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
-	console.log(b);
 
 	if ("Pencil" == b){
-		console.log("Assigning");
 		brush = Pencil;
 	} else if ("Pen" == b){
 		brush = Pen;
