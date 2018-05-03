@@ -188,6 +188,8 @@ function Brush(bData){
 		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
 		    			var op = context.globalAlpha;
 		    			var opScale = Math.max(Math.min((this.bData.drawGap * 2) / (this.image.width / 4),1), 0);
+		    			if(this.opacity >= .98)
+		    				opScale = 1;
 		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
 		    		}
 
