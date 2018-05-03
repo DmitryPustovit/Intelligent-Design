@@ -12,7 +12,7 @@
 		el = document.getElementById("canvas");
 		el.width = document.body.clientWidth;
 		el.height = document.body.clientHeight * .8;
-		bPen = new Brush(pen);
+		bPen = new Brush(twirl);
 		bCloud = new Brush(pacMan);
 		bCloud.setScale(1.5);
 
@@ -22,7 +22,7 @@
 	</script>
 
 	<div>
-		 <button onclick='bPen.drawLine(el.getContext("2d"),new Point(1,1), new Point(500,500)); document.body.appendChild(bPen.getIcon());'><img src = "BrushTextures/pen.png"></button>
+		 <button onclick='bPen.drawLine(el.getContext("2d"),new Point(1,1), new Point(500,500)); document.body.appendChild(bPen.getIcon());'><img src = "BrushTextures/horizontal_bar.png"></button>
 		 <button onclick='bCloud.drawLine(el.getContext("2d"),new Point(1,1), new Point(500,500)); document.body.appendChild(bCloud.getIcon());'><img src = "https://i.pinimg.com/originals/ae/4f/b7/ae4fb7139a6300da30c8c8f086cf771a.png"></button>
 	</div>
 	<!--<div><input type="text" name="" onmouseover="brush1"></div>
