@@ -2,6 +2,7 @@
 
 import os
 import json
+import base64
 from flask import Flask, redirect, request, session, render_template, url_for
 import requests
 
@@ -86,19 +87,23 @@ def oauth2callback():
     return redirect("/")
 
 
-@app.route('/upload')
+@app.route('/upload', methods=['POST'])
 def upload():
+
+    image_b64 = request.value['imageBase64']
+    image_data = re.sub('^data:image/.+;base64,', '', image_b64)
+    future = open("image.png", "wb")
+    future.write(img_data.decode('base64'))
+    future.close()
 
     if 'credentials' not in session:
         return redirect(url_for('authorize'))
 
-    imagefile = flask.request.files.get('imagefile', '')
-
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
 
-    file_metadata = {'name': 'photo.jpg'}
+    file_metadata = {'newimage': 'photo.png'}
     
-    media = MediaFileUpload('files/photo.jpg', mimetype='image/jpeg')
+    media = MediaFileUpload('image.png', mimetype='image/png')
     
     file = drive_service.files().create(body=file_metadata, media_body=media, fields='id').execute()
 
@@ -107,9 +112,8 @@ def upload():
 
 @app.route('/revoke')
 def revoke():
-  if 'credentials' not in flask.session:
-    return ('You need to <a href="/authorize">authorize</a> before ' +
-            'testing the code to revoke credentials.')
+  if 'credentials' not in session:
+    return 
 
   credentials = google.oauth2.credentials.Credentials(
     **session['credentials'])
@@ -117,7 +121,12 @@ def revoke():
   revoke = requests.post('https://accounts.google.com/o/oauth2/revoke',
       params={'token': credentials.token},
       headers = {'content-type': 'application/x-www-form-urlencoded'})
-  return
+  
+  status_code = getattr(revoke, 'status_code')
+  if status_code == 200:
+    return('Credentials successfully revoked.')
+  else:
+    return('An error occurred.')
   
 
 def credentials_to_dict(credentials):
@@ -130,7 +139,7 @@ def credentials_to_dict(credentials):
 
 if __name__ == "__main__":
     
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #do not let this into live
     
     app.run()
 
