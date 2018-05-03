@@ -178,9 +178,9 @@ spaz = {
 };
 
 pixel = {
-	"name": "Pencil",
+	"name": "Pixel",
 	"textures": [
-		"BrushTextures/pixel.png"
+		"static/brushes/BrushTextures/pixel.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,

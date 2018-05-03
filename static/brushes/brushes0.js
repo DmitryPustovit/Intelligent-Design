@@ -169,7 +169,7 @@ spaz = {
 };
 
 pixel = {
-	"name": "Pencil",
+	"name": "Pixel",
 	"textures": [
 		"BrushTextures/pixel.png"
 	],
