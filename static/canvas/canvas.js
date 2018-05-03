@@ -33,10 +33,10 @@ document.getElementById('sketch').addEventListener("pointermove", function(e) {
 var ratio = window.devicePixelRatio;
 	var sScroll = document.getElementById('sketchScroll');
 	var sSketch = document.getElementById('sketch');
-	//mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
-	//mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
-	mouse.x = sScroll.clientX;
-	mouse.y = sScroll.clientY;
+	mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
+	mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
+	//mouse.x = sScroll.clientX;
+	//mouse.y = sScroll.clientY;
 }, false);
 
 /* When the pointer comes in contact with the canvas */
