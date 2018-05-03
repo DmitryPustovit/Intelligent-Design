@@ -177,7 +177,23 @@ spaz = {
 	"maxOpacity": 0.8,
 };
 
-
+pixel = {
+	"name": "Pencil",
+	"textures": [
+		"BrushTextures/pixel.png"
+	],
+	"mtRand": false,
+	"minRotation": 0,
+	"maxRotation": 0,
+	"stepSize": 1,
+	"drawGap": 1,
+	"yOffset": 0,
+	"xOffset": 0,
+	"minScale": 0.5,
+	"maxScale": 0.5,
+	"minOpacity": 1.0,
+	"maxOpacity": 1.0,
+};
 
 pacMan = {
 	"name": "Pac-Man",
