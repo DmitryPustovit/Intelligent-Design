@@ -6,11 +6,11 @@ var Solid_Pen = new Brush(solidPen);
 var H_Bar = new Brush(horizontalBar);
 var V_Bar = new Brush(verticalBar);
 var Bubbles = new Brush(bubbles);
-var clouds = new Brush(clouds);
+var Clouds = new Brush(clouds);
 var bTwirl = new Brush(twirl);
-var spaz = new Brush(spaz);
+var Spaz = new Brush(spaz);
 var Pac_Man = new Brush(pacMan);
-var pixel = new brush(pixel);
+var Pixel = new Brush(pixel);
 
 var canvas, ctx;
 var erase;
@@ -64,11 +64,11 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	} else if ("Bubbles" == b){
 		brush = Bubbles;
 	} else if ("Clouds" == b){
-		brush = clouds;
+		brush = Clouds;
 	} else if ("Twirl" == b){
 		brush = bTwirl;
 	} else if ("Spaz" == b){
-		brush = spaz;
+		brush = Spaz;
 	} else if ("Pac-Man" == b){
 		brush = Pac_Man;
 	}
@@ -76,6 +76,10 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	if (tool == "er") {
 		erase = true; //Simply used as a flag, erase with all the brushes!
 		//brush = eraser; //Uncomment me for no funsies.
+	}
+
+	if (tool == "pencil"){
+		brush = Pixel;
 	}
 
 	/* Prime the brush with color */
