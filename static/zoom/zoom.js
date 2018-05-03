@@ -6,20 +6,6 @@ $(window).bind('mousewheel DOMMouseScroll', function(event) {
     if(event.ctrlKey == true) {
         event.preventDefault();
 
-        if(event.originalEvent.wheelDelta > 0) {
-					$('#sketch').css('width', $('#sketch').width() * 2);
-					$('#sketch').css('height', $('#sketch').height() * 2);
-         }else {
-					 $('#sketch').css('width', $('#sketch').width() / 2);
-	 				$('#sketch').css('height', $('#sketch').height() / 2);
-         }
-
-				 if($('#sketchScroll').width() < $(window).width())
-					 $('#sketchScroll').css('width', $('#sketch').width() + ($('#sketch').width() * .4));
-
-				 if($('#sketchScroll').height() < $(window).height())
-				 	$('#sketchScroll').css('height', $('#sketch').height() + ($('#sketch').height() * .4));
-
         var zoom = .5;
 		if(event.originalEvent.wheelDelta > 0) {
 			zoom  = currentScaleRatio * 1.2;
@@ -30,11 +16,13 @@ $(window).bind('mousewheel DOMMouseScroll', function(event) {
     }
 });
 
+/* Sets and applies a zoom */
 function doZoom(zoom) {
 	setZoom(zoom);
 	applyZoom();
 }
 
+/* Applies the current zoom */
 function applyZoom(){
 	$('#sketch').css('width', image.width * window.devicePixelRatio * currentScaleRatio);
 	$('#sketch').css('height', image.height * window.devicePixelRatio * currentScaleRatio);
@@ -46,6 +34,7 @@ function applyZoom(){
 		$('#sketchScroll').css('height', $('#sketch').height() * 1.4);
 }
 
+/* Sets the current zoom */
 function setZoom(zoom){
 	currentScaleRatio = Math.max(Math.min(zoom, UPPER_BOUND), LOWER_BOUND);
 }
