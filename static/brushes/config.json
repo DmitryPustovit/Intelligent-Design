@@ -1,0 +1,14 @@
+{
+  "name": "Brush",
+  "id": "brush",
+  "icon_src" : "ic_apps_black_48dp_2x.png",
+  "page_src" : "brushes.html",
+  "order" : 4,
+  "popout" : true,
+  "defaultX" : "left: 40px",
+  "defaultY" : "top: calc(100vh - 400px);",
+  "action" : false,
+  "action_function" : null,
+  "disable" : false,
+  "section" : 1
+}
