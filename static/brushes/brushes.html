@@ -5,12 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="brushes.css">
+    <style>
+    body{
+        width: 324px;
+        height: 206px;
+        margin: 0;
+        padding: 0;
+        font-family: Tahoma, Verdana, Segoe, sans-serif;
+    }
+
+    #optionsHolder{
+      height: 206px;
+      overflow-y: scroll;
+      width: 324px;
+      background: #f1f2f6;
+    }
+
+      .option{
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        //border: 1px solid black;
+        overflow: hidden;
+        position: relative;
+        margin-top: 2px;
+        margin-bottom: -2px;
+        margin-right: 2px;
+        background: white;
+        //border: 2px solid white;
+        cursor: pointer;
+      }
+
+      canvas{
+        width: 130px;
+        height: 130px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .label{
+        position: absolute;
+        background: #747d8c;
+        color:white;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        width: 100px;
+        font-size: 14px;
+        text-align: center;
+        //opacity: .8;
+      }
+
+      .selected{
+        background: #a4b0be !important;
+      }
+    </style>
 
     <title>Brushes</title>
   </head>
   <body>
-    <button type="button" onclick="loaded()">Click Me!</button>
-    <div id="test"><div id="load"> </div></div>
+    <div id="optionsHolder">
+
+    </div>
 
     <!-- <script src="../jquery-1.12.4.js" crossorigin="anonymous"></script> -->
     <!-- TEMP -->
@@ -19,66 +79,48 @@
     <script src="brushes0.js"> </script>
     <script>
 
-      var bPen;
-      bPen = new Brush(pen);
+      var brush;
 
        $(document).ready(function() {
-           var tmpImg = new Image() ;
-           tmpImg.src = 'BrushTextures/pen.png';
-           tmpImg.onload = function() {
-                loaded();
-           };
-       }) ;
-      //$(window).on('change', 'body', function(){
-      //  document.body.appendChild(bPen.getIcon());
-      //})
+         var countTextures = 0;
+         var loaded = 0;
+           for(var i = 0; i < brushList.length; i++)
+            for(var j = 0; j < brushList[i].textures.length; j++)
+              countTextures++;
 
-      //async function asyncTest ()
-      //{
-      //  bPen = new Brush(pen);
-      //  await add();
-      //  document.body.appendChild(bPen.getIcon());
-      //}
-      //asyncTest();
+           for(var i = 0; i < brushList.length; i++)
+           {
+             for(var j = 0; j < brushList[i].textures.length; j++)
+             {
+               var lengthTextures = brushList[i].textures.length;
+               var tmpImg = new Image() ;
+               tmpImg.src = brushList[i].textures[j];
 
-      //var noLoaded = true;
-      //$.when($.ajax(add())).then(function () {
-       //document.body.appendChild(bPen.getIcon());
-      //});
-      //while(noLoaded)
-      //{
-        //console.log(bPen.isLoaded());
-        //if(bPen.isLoaded())
-          //{
-          //  noLoaded = false;
-          //  document.body.appendChild(bPen.getIcon());
-          //}
-      //}
+               tmpImg.onload = function() {
+                 loaded++;
+                 if(loaded == countTextures)
+                    addPreview();
+               };
+             }
+           }
+       });
 
+       function addPreview() {
+         //console.log("add");
+         for(var i = 0; i < brushList.length; i++)
+         {
+           brush = new Brush(brushList[i]);
+           $('#optionsHolder').append('<div class="option" id="' + brushList[i].name + '"> <div class="label">' + brushList[i].name + '</div> </div>')
+           $('#' + brushList[i].name).append(brush.getIcon());
+           if(i == 0)
+            $('#' + brushList[i].name).find('.label').addClass('selected');
+         }
+       }
 
-      //bCloud = new Brush(pacMan);
-
-      function add()
-      {
-        $('#load').prepend($('<img>',{id:'theImg',src:'BrushTextures/pen.png'}))
-      }
-
-      function loaded() {
-        document.body.append(bPen.getIcon());
-        console.log("load");
-      }
-
-      /*
-      $.getScript( "brushes0.js" )
-        .done(function( script, textStatus ) {
-          //console.log( textStatus );
-          bPen = new Brush(pen);
-          loaded();
-        })
-        .fail(function( jqxhr, settings, exception ) {
-          //$( "div.log" ).text( "Triggered ajaxError handler." );
-          console.log("ERROR");
-      }); */
+       $('body').on('click', '.option', function(){
+         $('.option').find('.label').removeClass('selected');
+         $(this).find('.label').addClass('selected');
+       });
     </script>
   </body>
 </html>

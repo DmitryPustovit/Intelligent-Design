@@ -37,7 +37,7 @@ pen = {
 solidPen = {
 	"name": "Solid Pen",
 	"textures": [
-		"static/brushes/BrushTextures/pen_solid.png"
+		"BrushTextures/pen_solid.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -55,7 +55,7 @@ solidPen = {
 horizontalBar = {
 	"name": "H-Bar",
 	"textures": [
-		"static/brushes/BrushTextures/horizontal_bar.png"
+		"BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -73,7 +73,7 @@ horizontalBar = {
 verticalBar = {
 	"name": "V-Bar",
 	"textures": [
-		"static/brushes/BrushTextures/vertical_bar.png"
+		"BrushTextures/vertical_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 0,
@@ -90,7 +90,7 @@ verticalBar = {
 bubbles = {
 	"name": "Bubbles",
 	"textures": [
-		"static/brushes/BrushTextures/bubble.png", "static/brushes/BrushTextures/bubble_small.png"
+		"BrushTextures/bubble.png", "BrushTextures/bubble_small.png"
 	],
 	"mtRand": true,
 	"minRotation": 25,
@@ -108,25 +108,7 @@ bubbles = {
 clouds = {
 	"name": "Clouds",
 	"textures": [
-		"static/brushes/BrushTextures/cloud.png"
-	],
-	"mtRand": false,
-	"minRotation": -90,
-	"maxRotation": 90,
-	"stepSize": 1,
-	"drawGap": 1,
-	"yOffset": 8,
-	"xOffset": 8,
-	"minScale": 0.5,
-	"maxScale": 1.0,
-	"minOpacity": 0.1,
-	"maxOpacity": 0.5,
-};
-
-blank = {
-	"name": "blank",
-	"textures": [
-		""
+		"BrushTextures/cloud.png"
 	],
 	"mtRand": false,
 	"minRotation": -90,
@@ -144,7 +126,7 @@ blank = {
 twirl = {
 	"name": "bTwirl",
 	"textures": [
-		"static/brushes/BrushTextures/horizontal_bar.png"
+		"BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 5,
@@ -162,7 +144,7 @@ twirl = {
 spaz = {
 	"name": "spaz",
 	"textures": [
-		"static/brushes/BrushTextures/horizontal_bar.png"
+		"BrushTextures/horizontal_bar.png"
 	],
 	"mtRand": false,
 	"minRotation": 1,
@@ -196,3 +178,5 @@ pacMan = {
 	"minOpacity": 1.0,
 	"maxOpacity": 1.0,
 };
+
+brushList = [pencil, pen, solidPen, horizontalBar, verticalBar, bubbles, clouds, twirl, spaz, pacMan];

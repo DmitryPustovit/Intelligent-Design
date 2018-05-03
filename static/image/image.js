@@ -18,11 +18,8 @@ function newImage(width, height, fill)
   $('#sketch').empty();
   $('#sketch').css('width', width / ratio);
   $('#sketch').css('height', height / ratio);
-  if($('#sketchScroll').width() < $('#sketch').width())
-    $('#sketchScroll').css('width', $('#sketch').width() + ($('#sketch').width() * .4));
-
-  if($('#sketchScroll').height() < $('#sketch').height())
-  $('#sketchScroll').css('height', $('#sketch').height() + ($('#sketch').height() * .4));
+  $('#sketchScroll').css('width', $('#sketch').width() * 1.1);
+	$('#sketchScroll').css('height', $('#sketch').height() * 1.1);
 
   createLayer();
   selectLayer(1);

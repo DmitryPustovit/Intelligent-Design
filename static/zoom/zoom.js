@@ -30,9 +30,18 @@ function applyZoom(){
 	$('#sketch').css('height', image.height * window.devicePixelRatio * currentScaleRatio);
 
 	$('#sketchScroll').css('width', $('#sketch').width() * SKETCH_BORDER);
-
 	$('#sketchScroll').css('height', $('#sketch').height() * SKETCH_BORDER);
+  //document.getElementById('canvasHolder').scrollTop = $('#canvasHolder').prop("scrollHeight") / 2;
+  //console.log(document.getElementById('canvasHolder').scrollTop);
+  $("#canvasHolder").scrollTop($("#canvasHolder").scrollTop() + $("#sketchScroll").position().top
+  - $("#canvasHolder").height()/2 + $("#sketchScroll").height()/2);
+  $("#canvasHolder").scrollLeft($("#canvasHolder").scrollTop() + $("#sketchScroll").position().top
+  - $("#canvasHolder").width()/2 + $("#sketchScroll").width()/2);
 }
+
+  document.getElementById('canvasHolder').addEventListener("scroll", function (){
+    console.log(document.getElementById('canvasHolder').scrollTop);
+  });
 
 /* Sets the current zoom */
 function setZoom(zoom){
