@@ -34,6 +34,10 @@ function fillFromPoint(canvas, p1, rI, gI, bI){
   var g = imgData.data[pos + 1];
   var b = imgData.data[pos + 2];
 
+  if (rI == r && g == gI && b == bI){
+    return;
+  }
+
   imgData.data[pos] = rI;
   imgData.data[pos + 1] = gI;
   imgData.data[pos + 2] = bI;
@@ -53,7 +57,6 @@ function fillFromPoint(canvas, p1, rI, gI, bI){
         var tPos = ((tPosY * width + tPosX) * 4);
 
         if (imgData.data[tPos] == r && imgData.data[tPos + 1] == g && imgData.data[tPos + 2] == b){
-          console.log("Adding!");
           imgData.data[pos] = rI;
           imgData.data[pos + 1] = gI;
           imgData.data[pos + 2] = bI;
