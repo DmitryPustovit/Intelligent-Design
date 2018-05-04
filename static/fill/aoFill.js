@@ -51,7 +51,7 @@ function fillFromPoint(canvas, p1, rI, gI, bI, aI){
         var tPosX = point.x + neigh[i][0];
         var tPosY = point.y + neigh[i][1];
         if (tPosX >= 0 && tPosX < width && tPosY >= 0 && tPosY < height){
-          var tPos = (tPosX * width + tPosY * 4);
+          var tPos = ((tPosY * width + tPosX) * 4);
           if (imgData.data[tPos] == r && imgData.data[tPos + 1] == g && imgData.data[tPos + 2] == b){
             frontier.push(new Point(tPosX, tPosY));
           }
