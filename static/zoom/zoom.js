@@ -9,7 +9,7 @@ $(window).bind('mousewheel DOMMouseScroll', function(event) {
         event.preventDefault();
 
         var zoom = .5;
-		if(event.originalEvent.wheelDelta > 0) {
+		if(event.originalEvent.detail > 0) {
 			zoom  = currentScaleRatio * (1 + SIZE_RATIO);
 		} else {
 			zoom  = currentScaleRatio * (1 - SIZE_RATIO);
