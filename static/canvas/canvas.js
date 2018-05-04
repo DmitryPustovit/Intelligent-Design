@@ -51,7 +51,12 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
 
-	if ("Pencil" == b){
+  if (tool == "pencil"){
+		brush = Pixel;
+	} else if (tool == "fill"){
+    var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
+    fillFromPoint(ctx, new Point(mouse.x,mouse.xy), pixel[0], pixel[1], pixel[2]);
+	} else if ("Pencil" == b){
 		brush = Pencil;
 	} else if ("Pen" == b){
 		brush = Pen;
@@ -78,10 +83,6 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 		//brush = eraser; //Uncomment me for no funsies.
 	}
 
-	if (tool == "pencil"){
-		brush = Pixel;
-	}
-
 	/* Prime the brush with color */
     updateColor();
 
@@ -103,15 +104,16 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 /* 'Paints' on the canvas */
 var onPaint = function() {
 
-	if (localStorage.getItem("tool") == "eyedropper") {
-		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+	  if (localStorage.getItem("tool") == "eyedropper") {
+		  var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
     	document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
-		return;
+    }
+    else if(localStorage.getItem("tool") == "brush")
+    {
+      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
     }
 
-    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
-
-	mouse.oX = mouse.x;
+	  mouse.oX = mouse.x;
     mouse.oY = mouse.y;
 };
 
