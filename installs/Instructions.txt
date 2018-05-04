@@ -2,3 +2,5 @@
 	Run the python-2.7.14.amd64.msi
 2) Install Flask - Windows Users
 	Run this command in command prompt C:/Python27/Scripts/pip.exe install Flask
+	and C:/Python27/Scripts/pip.exe install flask-socketio
+

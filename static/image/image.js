@@ -1,6 +1,8 @@
+var image;
+
 function newImage(width, height, fill)
 {
-  this.image = {
+  image = {
     name : "",
     layers : [],
     selected : null,
@@ -10,12 +12,14 @@ function newImage(width, height, fill)
   };
 
   var ratio = window.devicePixelRatio;
-  this.image.width = width;
-  this.image.height = height;
+  image.width = width;
+  image.height = height;
 
   $('#sketch').empty();
   $('#sketch').css('width', width / ratio);
   $('#sketch').css('height', height / ratio);
+  $('#sketchScroll').css('width', $('#sketch').width() * 1.1);
+	$('#sketchScroll').css('height', $('#sketch').height() * 1.1);
 
   createLayer();
   selectLayer(1);
@@ -24,5 +28,5 @@ function newImage(width, height, fill)
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
-  this.image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
+  image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
 }
