@@ -105,13 +105,16 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 /* 'Paints' on the canvas */
 var onPaint = function() {
 
-	if (localStorage.getItem("tool") == "eyedropper") {
+	var tool = localStorage.getItem("tool");
+	if (tool == "eyedropper") {
 		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
 		document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
 		mouse.oX = mouse.x;
 		mouse.oY = mouse.y;
 		return;
-    }
+    } else if (tool == "fill"){
+		return;
+	}
 
     //MUST BE EXPOSED, DO NOT ADD THIS TO AN IF STATEMENT!
     brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
