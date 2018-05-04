@@ -7,8 +7,8 @@
   "popout" : false,
   "defaultX" : "left: 40px;",
   "defaultY" : "top: 40px;",
-  "action" : true,
+  "action" : false,
   "action_function" : "sync = !sync;",
   "disable" : false,
-  "section" : 0
+  "section" : 1
 }

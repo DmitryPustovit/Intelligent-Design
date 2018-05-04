@@ -44,5 +44,6 @@ def main():
     return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == "__main__":
-    socketio.run(app)
+    port = int(os.environ.get("PORT", 5000))
+    socketio.run(app, host='0.0.0.0', port=os.environ.get("PORT", 5000))
     #app.run(host='0.0.0.0', port=8080)
