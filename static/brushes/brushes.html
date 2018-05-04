@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="brushes.css">
+    <style>
+    body{
+        width: 324px;
+        height: 206px;
+        margin: 0;
+        padding: 0;
+        font-family: Tahoma, Verdana, Segoe, sans-serif;
+    }
+
+    #optionsHolder{
+      height: 206px;
+      overflow-y: scroll;
+      width: 324px;
+      background: #f1f2f6;
+    }
+
+      .option{
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        //border: 1px solid black;
+        overflow: hidden;
+        position: relative;
+        margin-top: 2px;
+        margin-bottom: -2px;
+        margin-right: 2px;
+        background: white;
+        //border: 2px solid white;
+        cursor: pointer;
+      }
+
+      canvas{
+        width: 130px;
+        height: 130px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .label{
+        position: absolute;
+        background: #747d8c;
+        color:white;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        width: 100px;
+        font-size: 14px;
+        text-align: center;
+        //opacity: .8;
+      }
+
+      .selected{
+        background: #a4b0be !important;
+      }
+    </style>
+
+    <title>Brushes</title>
+  </head>
+  <body>
+    <div id="optionsHolder">
+
+    </div>
+
+    <!-- <script src="../jquery-1.12.4.js" crossorigin="anonymous"></script> -->
+    <!-- TEMP -->
+    <script src="jquery-1.12.4.js"></script>
+     <script src="aoBrush.js"> </script>
+    <script src="brushes0.js"> </script>
+    <script>
+
+      var brush;
+
+       $(document).ready(function() {
+         var countTextures = 0;
+         var loaded = 0;
+           for(var i = 0; i < brushList.length; i++)
+            for(var j = 0; j < brushList[i].textures.length; j++)
+              countTextures++;
+
+           for(var i = 0; i < brushList.length; i++)
+           {
+             for(var j = 0; j < brushList[i].textures.length; j++)
+             {
+               var lengthTextures = brushList[i].textures.length;
+               var tmpImg = new Image() ;
+               tmpImg.src = brushList[i].textures[j];
+
+               tmpImg.onload = function() {
+                 loaded++;
+                 if(loaded == countTextures)
+                    addPreview();
+               };
+             }
+           }
+       });
+
+       function addPreview() {
+         //console.log("add");
+         for(var i = 0; i < brushList.length; i++)
+         {
+           $('#optionsHolder').append('<div class="option" id="' + brushList[i].name + '"> <div class="label">' + brushList[i].name + '</div> </div>')
+           var img = new Image();
+           img.src = brushList[i].icon;
+           img.style.width = '100px';
+           img.style.geight = '100px';
+           $('#' + brushList[i].name).append(img);
+           if(i == 0)
+            $('#' + brushList[i].name).find('.label').addClass('selected');
+         }
+       }
+
+       $('body').on('click', '.option', function(){
+         $('.option').find('.label').removeClass('selected');
+         $(this).find('.label').addClass('selected');
+         localStorage.setItem('brush', JSON.stringify($(this).attr('id')));
+       });
+    </script>
+  </body>
+</html>

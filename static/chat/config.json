@@ -1,0 +1,14 @@
+{
+  "name": "Chat",
+  "id": "chat",
+  "icon_src" : "discord.png",
+  "page_src" : "chat.html",
+  "order" : 5,
+  "popout" : true,
+  "defaultX" : "left: 40px;",
+  "defaultY" : "top: 40px;",
+  "action" : false,
+  "action_function" : null,
+  "disable" : false,
+  "section" : 1
+}

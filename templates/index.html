@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Pragma" content="no-cache">
 
     <link rel="icon" href="static/favicon.ico">
@@ -68,5 +68,30 @@
     <script src="static/brushes/brushes.js"></script>
     <script src="static/layers/layers.js"></script>
     <script src="static/canvas/canvas.js"></script>
-    <!-- <script src="static/zoom/zoom.js"></script> -->
+    <script src="static/zoom/zoom.js"></script>
+    <script src="static/fill/aoFill.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        //var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var socket = io.connect();
+        socket.on('connect', function() {
+            //ocket.emit('con', {data: 'I\'m connected!'});
+        });
+
+        var sync = false;
+
+        socket.on('update IMG', function(msg) {
+                if(sync)
+                {
+
+                var send = new Image();
+                send.src = msg["data"];
+                  send.onload = function() {
+                    ctx.drawImage(send, 0, 0);
+                  };
+                }
+
+            });
+    </script>
+
 </html>

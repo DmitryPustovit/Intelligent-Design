@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<style type="text/css">
+
+		#welcome {
+			background-color: rgba(147, 112, 219, 0.5);
+			color: white;
+			text-align: center;
+			height: 25px;
+		}
+
+		a {
+			text-decoration: none;
+			color: rgba(147, 112, 219, 0.5);
+			font-weight: bold;
+			margin: auto;
+		}
+
+		a:visited {
+			color: rgba(147, 112, 219, 0.5);;
+			text-decoration: none;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<button id="checkTokens" style="display:none">Check tokens</button>
+	<button id="deleteTokens" style="display: none">Delete tokens</button>
+	<p id="welcome"></p>
+	<a id="login" href="https://discordapp.com/api/oauth2/authorize?client_id=431276338138316801&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fchat.html&response_type=code&scope=identify%20guilds%20email%20messages.read">Sign in to Discord</a>
+	<button id="getUser" style="display:none">Get User</button>
+
+	<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+	<script src="chat.js"></script>
+</body>
+</html>

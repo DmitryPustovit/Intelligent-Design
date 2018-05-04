@@ -11,7 +11,7 @@
      \  \   (      ) | |
       \  \__|   _/__/| |
        \____\______) \__)
-       
+
 	References:
 		For general brush information:
 		http://perfectionkills.com/exploring-canvas-drawing-techniques/
@@ -99,7 +99,7 @@ function Brush(bData){
 	for (var i=0; i < this.bData.textures.length; i++) {
 		this.textures[i] = new Image();
 		this.textures[i].src = this.bData.textures[i];
-		this.textures[i].crossOrigin = "anonymous"
+		this.textures[i].crossOrigin = "anonymous";
 	}
 
 	/* Assign the current brush texture */
@@ -121,6 +121,17 @@ function Brush(bData){
 		this.image = this.textures[this.cT];
 	}
 
+  this.isLoaded = function(){
+       for (var i=0; i < this.textures.length; i++)
+            console.log(this.textures[i].src);
+           if (!this.textures[i].complete || this.textures[i].src == null)
+           {
+             console.log("false");
+               return false;
+             }
+       return true;
+   }
+
 	/* Generates a brush stroke icon*/
 	this.getIcon = function(){
 		tScale = this.getScale();
@@ -130,7 +141,7 @@ function Brush(bData){
 		var c = document.createElement('canvas');
 		c.width = 300;
 		c.height = 300;
-		this.drawLine(c.getContext('2d'), new Point(50, 50), new Point(250,250));
+		this.draw(c.getContext('2d'), [new Point(50, 50), new Point(150,100), new Point(100, 150), new Point(250,250)]);
 		this.setOpacity(tOpacity);
 		this.setScale(tScale);
 		return c;
@@ -188,7 +199,10 @@ function Brush(bData){
 		    		if (this.bData.minOpacity != 0 || this.bData.maxOpacity != 0 ){
 		    			var op = context.globalAlpha;
 		    			var opScale = Math.max(Math.min((this.bData.drawGap * 2) / (this.image.width / 4),1), 0);
-		    			context.globalAlpha = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
+		    			if(this.opacity >= .98)
+		    				opScale = 1;
+		    			var opacity = getRandomDouble(this.bData.minOpacity, this.bData.maxOpacity) * op * this.opacity * opScale;
+		    			context.globalAlpha = opacity;
 		    		}
 
 		    		/* Draw the image to the canvas */

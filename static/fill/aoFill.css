@@ -1,0 +1,28 @@
+html, body {
+	height: 100%;
+	position: relative;
+	margin: ;
+	background: gray;
+}
+
+body button {
+	height: 5em;
+	width: 5em;
+}
+
+body button img {
+	height: 1.5em;
+	width: auto;
+}
+
+div.color button{
+	height: auto;
+	width: auto;
+}
+
+canvas { 
+	border: 3px solid #ccc;
+	left: 0;
+	right: 0;
+	background: white;
+}
