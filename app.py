@@ -30,6 +30,10 @@ for moduleSection in moduleSections:
 
 moduleSections = sorted(moduleSections,key=lambda l:l["order"], reverse=False)
 
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message)
+
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
