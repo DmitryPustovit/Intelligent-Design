@@ -22,10 +22,10 @@ var neigh = [[-1,0],[1,0],[0,-1],[0,1]];
 /* A fill function that fills from a point */
 function fillFromPoint(canvas, p1, rI, gI, bI, aI){
   var frontier = [];
-  var context = canvas.getContext('2d');
+  var context = ctx;
   var width = canvas.clientWidth;
   var height = canvas.clientHeight;
-  var data = context.getImageData(0, 0, width, height);
+  var data = ctx.getImageData(0, 0, image.width, image.height);
   var pos = (p1.y * width + p1.x) * 4;
   frontier.push(p1);
   var r = data[pos];
@@ -57,5 +57,6 @@ function fillFromPoint(canvas, p1, rI, gI, bI, aI){
       }
     }
   }
-  return data;
+  //return data;
+  ctx.putImageData(data,0,0);
 }
