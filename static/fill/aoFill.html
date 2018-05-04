@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="aoFill.css">
+	<script src="aoFill.js"></script>
+	<title></title>
+</head>
+<body>
+	<canvas id = "canvas"> </canvas>
+	<script>
+		el = document.getElementById("canvas");
+		el.width = 100; //document.body.clientWidth;
+		el.height = 100; //document.body.clientHeight * .8;
+
+
+
+		//brush1 = new Brush(el, "brush1.png");
+	</script>
+
+	<div>
+		 <button onclick="canvas.getContext('2d').putImageData(fillFromPoint(el, new Point(50,50), 100,100,100, 1), 0,0)"></button>
+	</div>
+	<!--<div><input type="text" name="" onmouseover="brush1"></div>
+	-->
+</body>
+</html>
