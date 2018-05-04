@@ -1,5 +1,21 @@
 Tomo Editor
 ================================
+
+github: https://github.com/DmitryPustovit/Intelligent-Design
+
+deployed at (cut and paste): aowolfie.com:5000
+
+You will need to open the tools, color select, layers and brushes (Multicolored tiles).
+
+Make sure you select a brush from the brush menu and the brush from the tools menu.
+
+You may need to refresh the page once or twice in order for all resources to load correctly.
+
+
+Build
+=========================================
+
+
 Current Build - Build 2.2.0
 
 Branch Statuses:  
