@@ -10,5 +10,5 @@
   "action" : true,
   "action_function" : "sync = !sync;",
   "disable" : false,
-  "section" : 1
+  "section" : 0
 }
