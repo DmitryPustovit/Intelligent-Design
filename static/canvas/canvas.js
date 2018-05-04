@@ -50,13 +50,9 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
+	console.log(tool);
 
-  if (tool == "pencil"){
-		brush = Pixel;
-	} else if (tool == "fill"){
-    var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
-    fillFromPoint(ctx, new Point(mouse.x,mouse.xy), pixel[0], pixel[1], pixel[2]);
-	} else if ("Pencil" == b){
+	if ("Pencil" == b){
 		brush = Pencil;
 	} else if ("Pen" == b){
 		brush = Pen;
@@ -81,6 +77,11 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	if (tool == "er") {
 		erase = true; //Simply used as a flag, erase with all the brushes!
 		//brush = eraser; //Uncomment me for no funsies.
+	} else if (tool == "pencil"){
+		brush = Pixel;
+	} else if (tool == "fill"){
+		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
+		fillFromPoint(ctx, new Point(mouse.x,mouse.xy), pixel[0], pixel[1], pixel[2]);
 	}
 
 	/* Prime the brush with color */
@@ -104,17 +105,19 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
 /* 'Paints' on the canvas */
 var onPaint = function() {
 
-	  if (localStorage.getItem("tool") == "eyedropper") {
-		  var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
-    	document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
-    }
-    else if(localStorage.getItem("tool") == "brush")
-    {
-      brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
+	if (localStorage.getItem("tool") == "eyedropper") {
+		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+		document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
+		mouse.oX = mouse.x;
+		mouse.oY = mouse.y;
+		return;
     }
 
-	  mouse.oX = mouse.x;
-    mouse.oY = mouse.y;
+    //MUST BE EXPOSED, DO NOT ADD THIS TO AN IF STATEMENT!
+    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
+
+	mouse.oX = mouse.x;
+	mouse.oY = mouse.y;
 };
 
 /* Updates the current brush's color */
