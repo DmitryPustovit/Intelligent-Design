@@ -80,8 +80,8 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	} else if (tool == "pencil"){
 		brush = Pixel;
 	} else if (tool == "fill"){
-		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
-		fillFromPoint(ctx, new Point(mouse.x,mouse.xy), pixel[0], pixel[1], pixel[2]);
+    var storedNames = JSON.parse(localStorage.getItem("color1"));
+		fillFromPoint(ctx, new Point(mouse.x,mouse.xy), storedNames[0], storedNames[1], storedNames[2]);
 	}
 
 	/* Prime the brush with color */

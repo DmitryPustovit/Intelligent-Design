@@ -22,15 +22,15 @@ var neigh = [[-1,0],[1,0],[0,-1],[0,1]];
 /* A fill function that fills from a point */
 function fillFromPoint(canvas, p1, rI, gI, bI, aI){
   var frontier = [];
-  var context = ctx;
-  var width = canvas.clientWidth;
-  var height = canvas.clientHeight;
-  var data = ctx.getImageData(0, 0, image.width, image.height);
+  var width = image.width;
+  var height = image.height;
+  var data = ctx.getImageData(0, 0, width, height);
   var pos = (p1.y * width + p1.x) * 4;
   frontier.push(p1);
   var r = data[pos];
   var g = data[pos + 1];
   var b = data[pos + 2];
+  console.log(r); //This is the issue
 
   while (frontier.length){
     var point, left, right;
@@ -58,5 +58,5 @@ function fillFromPoint(canvas, p1, rI, gI, bI, aI){
     }
   }
   //return data;
-  ctx.putImageData(data,0,0);
+  ctx.putImageData(data,20,20);
 }
