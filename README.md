@@ -35,6 +35,8 @@ Install
 2) Install Flask - Windows Users  
 	Run this command in command prompt C:/Python27/Scripts/pip.exe install Flask  
 
+There are further install instructions in the install folder.
+
 
 To Do
 =========
