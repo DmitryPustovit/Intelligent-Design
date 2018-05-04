@@ -45,12 +45,11 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 	mouse.oX = mouse.x;
 	mouse.oY = mouse.y;
 
-  	var b = localStorage.getItem("brush").replace(/"/g,"");;
+  	var b = localStorage.getItem("brush").replace(/"/g,"");
 
 	erase = false;
 	/* Detect the brush and set it to draw */
 	var tool = localStorage.getItem("tool");
-	console.log(tool);
 
 	if ("Pencil" == b){
 		brush = Pencil;
@@ -100,6 +99,9 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
    image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
    document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
      image.layers[image.selected], image.width, image.height);
+     //console.log(canvas.toDataURL());
+     if(sync)
+      socket.emit('my event', {layer: image.selected, data : canvas.toDataURL()});
 });
 
 /* 'Paints' on the canvas */

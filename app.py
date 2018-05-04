@@ -1,7 +1,7 @@
 import os
 import json
 from flask import Flask, render_template, url_for
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -30,9 +30,10 @@ for moduleSection in moduleSections:
 
 moduleSections = sorted(moduleSections,key=lambda l:l["order"], reverse=False)
 
-@socketio.on('message')
-def handle_message(message):
-    print('received message: ' + message)
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    #print('received json: ' + str(json))
+    emit('update IMG', json, broadcast=True)
 
 @app.errorhandler(500)
 def page_not_found(e):
