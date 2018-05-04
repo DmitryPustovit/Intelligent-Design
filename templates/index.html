@@ -75,15 +75,15 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         //var socket = io.connect('http://' + socket.request.connection.remoteAddress  + ':' + socket.request.connection.remotePort);
-        //var socket = io.connect('https://' + document.domain + ':' + location.port);
+        var socket = io.connect('https://' + document.domain + ':' + location.port);
         //var socket = io();
-        //socket.on('connect', function() {
+        socket.on('connect', function() {
             //ocket.emit('con', {data: 'I\'m connected!'});
-        //});
+        });
 
         var sync = false;
 
-        /*socket.on('update IMG', function(msg) {
+        socket.on('update IMG', function(msg) {
                 if(sync)
                 {
 
@@ -94,7 +94,7 @@
                   };
                 }
 
-            }); */
+            });
     </script>
 
 </html>
