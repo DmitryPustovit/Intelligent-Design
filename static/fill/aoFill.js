@@ -20,7 +20,8 @@ function Point(x, y){ this.x = x; this.y = y; return this; }
 var neigh = [[-1,0],[1,0],[0,-1],[0,1]];
 
 /* A fill function that fills from a point */
-function fillFromPoint(p1, rI, gI, bI){
+function fillFromPoint(canvas, p1, rI, gI, bI){
+  console.log(canvas);
   var frontier = [];
   var width = canvas.width;
   var height = canvas.height;

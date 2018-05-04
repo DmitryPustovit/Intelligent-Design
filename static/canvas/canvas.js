@@ -81,7 +81,7 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 		brush = Pixel;
 	} else if (tool == "fill"){
     var storedNames = JSON.parse(localStorage.getItem("color1"));
-		fillFromPoint(new Point(mouse.x,mouse.xy), storedNames[0], storedNames[1], storedNames[2]);
+		fillFromPoint(canvas, new Point(mouse.x,mouse.y), storedNames[0], storedNames[1], storedNames[2]);
 	}
 
 	/* Prime the brush with color */
