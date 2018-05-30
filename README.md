@@ -77,3 +77,10 @@ Build 2.1.0
 
 Build 1.0.0
 - First release
+
+
+Install (Windows)  
+=======================
+Run these commands in command prompt  
+- C:/Python27/Scripts/pip.exe install Flask  
+- C:/Python27/Scripts/pip.exe install flask-socketio  
