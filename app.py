@@ -1,10 +1,10 @@
 import os
 import json
 from flask import Flask, render_template, url_for
-from flask_socketio import SocketIO, emit
+#from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+#socketio = SocketIO(app)
 
 print ("Generating Amazingness. Please Hold.")
 
@@ -20,20 +20,20 @@ if os.path.isfile('config.json'):
 for module in modulesLocation:
     if os.path.isfile(modulesRoot + '/' + module +'/config.json'):
         data = json.load(open(modulesRoot + "/" + module +'/config.json'))
-        data["icon_src"] = modulesRoot + "/" + module + "/" + data["icon_src"]
-        data["page_src"] = modulesRoot + "/" + module + "/" + data["page_src"]
-        moduleSections[data["section"]]["modules"].append(data)
-
+        if not data["disable"]:
+            data["icon_src"] = modulesRoot + "/" + module + "/" + data["icon_src"]
+            data["page_src"] = modulesRoot + "/" + module + "/" + data["page_src"]
+            moduleSections[data["section"]]["modules"].append(data) 
 
 for moduleSection in moduleSections:
     moduleSection["modules"] = sorted(moduleSection["modules"],key=lambda l:l["order"], reverse=False)
 
 moduleSections = sorted(moduleSections,key=lambda l:l["order"], reverse=False)
 
-@socketio.on('my event')
-def handle_my_custom_event(json):
+#@socketio.on('my event')
+#def handle_my_custom_event(json):
     #print('received json: ' + str(json))
-    emit('update IMG', json, broadcast=True)
+#    emit('update IMG', json, broadcast=True)
 
 @app.errorhandler(500)
 def page_not_found(e):
@@ -44,5 +44,5 @@ def main():
     return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == "__main__":
-    socketio.run(app)
-    #app.run(host='0.0.0.0', port=8080)#
+    #socketio.run(app)
+    app.run(host='0.0.0.0', port=8080)

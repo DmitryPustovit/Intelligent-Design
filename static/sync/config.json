@@ -9,6 +9,6 @@
   "defaultY" : "top: 40px;",
   "action" : false,
   "action_function" : "sync = !sync;",
-  "disable" : false,
+  "disable" : true,
   "section" : 1
 }
