@@ -1,10 +1,10 @@
-#  _______                    _   
-# |__   __|                  | |  
-#    | | ___  _ __ ___   ___ | |  
-#    | |/ _ \| '_ ` _ \ / _ \| |  
-#    | | (_) | | | | | | (_) |_|  
-#    |_|\___/|_| |_| |_|\___/(_)  
-#    
+  _______                    _   
+ |__   __|                  | |  
+    | | ___  _ __ ___   ___ | |  
+    | |/ _ \| '_ ` _ \ / _ \| |  
+    | | (_) | | | | | | (_) |_|  
+    |_|\___/|_| |_| |_|\___/(_)  
+    
 
 Tomo Editor
 ================================
@@ -46,19 +46,20 @@ Current Build - Build 2.2.1
 
 Useful Branch Statuses:  
 :warning: Master - Hostile (Always Hostile), up to date  
-:x: Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!    
 :white_check_mark: Production - Safe, Version 2.2.1  
+  
+:x: Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!    
 
 
 Patch Notes
 ==================
-:question: Build x   
+:question: *Build x*   
 - Save work protection  
 - Draw Sync  
 - Pressure Sensitivity  
 - Touch Screen Support    
 
-:floppy_disk: Build 2.3.0  
+:floppy_disk: *Build 2.3.0*  
 - UI rework  
 - Seperation of Canvas and other key componets
 - Global cookie module
@@ -69,22 +70,22 @@ Patch Notes
 - Major Tweeks and Fixed, revist core functions
 - Minor Tweeks and Fixes
 
-:heavy_check_mark: Build 2.2.1
+:heavy_check_mark: *Build 2.2.1*
 - aobrush 1.2 (Random Version Number)
 - Stability Increase
 - Documentaion
 - Minor Tweeks and Fixes
 
-:heavy_check_mark: Build 2.2.0
+:heavy_check_mark: *Build 2.2.0*
 - Layer Manger, revap of layer system
 - UI rework
 - More dependable canvas
 - Color Wheel 2.0
 - Bug Fixes  
 
-:heavy_check_mark: Build 2.1.0
+:heavy_check_mark: *Build 2.1.0*
 - Merged in advanced save functions and save UI
 - Bug Fixes
 
-:heavy_check_mark: Build 1.0.0
+:heavy_check_mark: *Build 1.0.0*
 - First release
