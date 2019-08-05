@@ -14,8 +14,8 @@ https://github.com/DmitryPustovit/Intelligent-Design
 Live Build:  
 https://polar-falls-71423.herokuapp.com/  
 
-Development To Do List aka Hit List:
-http://dmitrypustovit.com/Intelligent-Design/  
+Development To Do List aka Hit List:  
+http://dmitrypustovit.com/Tomo/  
 
 
 Branching Policy
