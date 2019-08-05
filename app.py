@@ -16,6 +16,7 @@ print ("Generating Amazingness. Please Hold.")
 # Global Configs
 # Honestly, all of the bools should be false in a production enviorment
 debug = False
+port = int(os.environ.get('PORT', 5000))
 
 # Tomo generates based on what modules are avalible making development simple
 moduleSections = []
@@ -52,4 +53,8 @@ def main():
     return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=debug)
+    # Lazy fix
+    # TBH, idk why the below doesn't play well with heroku
+    app.run()
+    #port = int(os.environ.get('PORT', 5000))
+    #app.run(port=port, debug=debug)
