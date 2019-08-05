@@ -53,8 +53,5 @@ def main():
     return render_template('index.html', moduleSections = moduleSections)
 
 if __name__ == '__main__':
-    # Lazy fix
-    # TBH, idk why the below doesn't play well with heroku
-    app.run()
-    #port = int(os.environ.get('PORT', 5000))
-    #app.run(port=port, debug=debug)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
