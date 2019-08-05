@@ -1,19 +1,36 @@
+```
+  _______                    _   
+ |__   __|                  | |  
+    | | ___  _ __ ___   ___ | |  
+    | |/ _ \| '_ ` _ \ / _ \| |  
+    | | (_) | | | | | | (_) |_|  
+    |_|\___/|_| |_| |_|\___/(_)  
+```
+  
+
 Tomo Editor
 ================================
-Tomo Editor is a project originally created for the final group project of a software engineering class  
-The idea behind Tomo was to be an open, simple, powerful, community image editor  
-One of the core ideas was to be able to sync what is being drawn from mutliple people  
-Tomo means friends, and Tomo Editor is a place where you can Draw, Edit, and Create with friends!   
-
+The idea behind Tomo was to be an open, simple, powerful, community image editor.    
+One of the core ideas was to be able to sync what is being drawn from multiple people.  
+Tomo means friends, and Tomo Editor is a place where you can Draw, Edit, and Create with friends!  
+  
+    
+	  
+Tomo Editor is a project originally created for the final group project of a software engineering class.  
+It was a bit more ambitious then we realized at the time.  
+  
+  
 
 Application Links
 ==================
-Github:  
-https://github.com/DmitryPustovit/Intelligent-Design
-
 Live Build:  
 https://polar-falls-71423.herokuapp.com/  
-
+  
+  
+Github:  
+https://github.com/DmitryPustovit/Intelligent-Design
+  
+  
 Development To Do List aka Hit List:  
 http://dmitrypustovit.com/Tomo/  
 
@@ -30,80 +47,51 @@ Build
 Current Build - Build 2.2.1
 
 Useful Branch Statuses:  
-Master - Hostile (Always Hostile), up to date  
-Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!    
-Production - Safe, Version 2.2.1  
+:warning: Master - Hostile (Always Hostile), up to date  
+  
+:white_check_mark: Production - Safe, Version 2.2.1  
+  
+  
+  
+  
+:x: Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!    
 
 
 Patch Notes
 ==================
-Build 2.3.0  
+:question: **Build x**   
 - Save work protection  
-- UI rework  
 - Draw Sync  
 - Pressure Sensitivity  
-- Touch Screen Support  
-- More to come  
+- Touch Screen Support    
 
-Build 2.2.1
-- aobrush 2.0  
+:floppy_disk: **Build 2.3.0**
+- UI rework  
+- Seperation of Canvas and other key componets
+- Global cookie module
+- Code Clean up and Optimizations  
+- Update ReadMe, Docs, Project page status  
+- Add Documentation and Doc Generator  
+- Removed Unneeded Files
+- Major Tweeks and Fixed, revist core functions
+- Minor Tweeks and Fixes
+
+:heavy_check_mark: **Build 2.2.1**
+- aobrush 1.2 (Random Version Number)
 - Stability Increase
 - Documentaion
 - Minor Tweeks and Fixes
 
-Build 2.2.0
+:heavy_check_mark: **Build 2.2.0**
 - Layer Manger, revap of layer system
 - UI rework
 - More dependable canvas
 - Color Wheel 2.0
 - Bug Fixes  
 
-Build 2.1.0
+:heavy_check_mark: **Build 2.1.0**
 - Merged in advanced save functions and save UI
 - Bug Fixes
 
-Build 1.0.0
+:heavy_check_mark: **Build 1.0.0**
 - First release
-
-
-To Do
-=========
-- Add Documentation  
-- Remove External Examples folders   
-- Remove installs folder  
-- Update ReadMe, Docs, Project page status
-- 	Current Plans:
-- UI revamp
-- Code Optimizations
-- Code Clean up
-- Basic editor functions
-- AoeUpdate
-- 2.3.0
-
-
-Legacy Stuff, Edit or Delete at some point
-=======================
-Run these commands in command prompt  
-- C:/Python27/Scripts/pip.exe install Flask  
-- C:/Python27/Scripts/pip.exe install flask-socketio  
-
-
-deployed at (cut and paste): aowolfie.com:5000
-
-You will need to open the tools, color select, layers and brushes (Multicolored tiles).
-
-Make sure you select a brush from the brush menu and the brush from the tools menu.
-
-You may need to refresh the page once or twice in order for all resources to load correctly.
-
-TODO: 
-Install scripts! 
-Also Python 3.7 used now
-
-
-1) Install Python found in Install Folder  
-	Run the python-2.7.14.amd64.msi  
-2) Install Flask - Windows Users  
-	Run this command in command prompt C:/Python27/Scripts/pip.exe install Flask  
-
-There are further install instructions in the install folder.
