@@ -20,9 +20,9 @@ http://dmitrypustovit.com/Intelligent-Design/
 
 Branching Policy
 ================================
-Proper branching system is to make a branch with the name convention:
-user-release_version-IssueNumber-descriptor
-EX: DmitryPustovit-PV_1-1-doc-updates
+Proper branching system is to make a branch with the name convention:  
+user-release_version-IssueNumber-descriptor  
+EX: DmitryPustovit-PV_1-1-doc-updates  
 
 
 Build
@@ -30,9 +30,9 @@ Build
 Current Build - Build 2.2.1
 
 Useful Branch Statuses:  
-Master - Hostile (Always Hostile), up to date
-Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!  
-Production - Safe, Version 2.2.1
+Master - Hostile (Always Hostile), up to date  
+Release - [2019 - I wouldn't touch this TBH] Hostile, OUTDATE, AVOID!    
+Production - Safe, Version 2.2.1  
 
 
 Patch Notes
@@ -72,7 +72,7 @@ To Do
 - Remove External Examples folders   
 - Remove installs folder  
 - Update ReadMe, Docs, Project page status
-- Current Plans:
+- 	Current Plans:
 - UI revamp
 - Code Optimizations
 - Code Clean up
