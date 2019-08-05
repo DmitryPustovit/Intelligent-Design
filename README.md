@@ -1,14 +1,14 @@
 Tomo Editor
 ================================
-Tomo Editor is a project originally created for the final group project of a software engineering class 
-The idea behind Tomo was to be an open, simple, powerful, community image editor
-One of the core ideas was to be able to sync what is being drawn from mutliple people
-Tomo means friends, and Tomo Editor is a place where you can Draw, Edit, and Create with friends! 
+Tomo Editor is a project originally created for the final group project of a software engineering class  
+The idea behind Tomo was to be an open, simple, powerful, community image editor  
+One of the core ideas was to be able to sync what is being drawn from mutliple people  
+Tomo means friends, and Tomo Editor is a place where you can Draw, Edit, and Create with friends!   
 
 
 Application Links
 ==================
-Github: 
+Github:  
 https://github.com/DmitryPustovit/Intelligent-Design
 
 Live Build:  
@@ -68,11 +68,11 @@ Build 1.0.0
 
 To Do
 =========
-Add Documentation  
-Remove External Examples folders   
-Remove installs folder  
-Update ReadMe, Docs, Project page status
-Current Plans:
+- Add Documentation  
+- Remove External Examples folders   
+- Remove installs folder  
+- Update ReadMe, Docs, Project page status
+- Current Plans:
 - UI revamp
 - Code Optimizations
 - Code Clean up
