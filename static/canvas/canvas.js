@@ -85,6 +85,7 @@ document.getElementById('canvasHolder').addEventListener("pointerdown",function(
 
 	/* Prime the brush with color */
     updateColor();
+    updateColor();
 
     onPaint();
 	document.addEventListener('pointermove', onPaint, false);
@@ -128,5 +129,5 @@ var onPaint = function() {
 /* Updates the current brush's color */
 function updateColor(){
 	var storedNames = JSON.parse(localStorage.getItem("color1"));
-  brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
+	brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
 }

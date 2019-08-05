@@ -32,7 +32,11 @@
       </div>
     </div>
 
-    <!-- Canvas -->
+    <!-- 
+      Canvas 
+      The drawing magic happens here
+      ToDo: Standardize Canvas Docs
+    -->
     <div id="canvasHolder">
       <div id="sketchScroll">
         <div id="sketch"></div>
@@ -41,20 +45,24 @@
 
     <!-- Windows -->
     {% for module in moduleSections[1]["modules"] %}
-         <div id="{{ module["id"] }}" class="window" style="{{ module["defaultX"] }} {{ module["defaultY"] }}">
-           <div class="window_inside">
-             <iframe id="{{ module["id"] }}_iframe" src="{{ module["page_src"] }}"></iframe>
+      {% if module["popout"] == true %}
+           <div id="{{ module["id"] }}" class="window" style="{{ module["defaultX"] }} {{ module["defaultY"] }}">
+             <div class="window_inside">
+               <iframe id="{{ module["id"] }}_iframe" src="{{ module["page_src"] }}"></iframe>
+             </div>
            </div>
-         </div>
+      {% endif %}
     {% endfor %}
 
     <div id="outerside"></div>
 
+    <!-- ToDo: Auto Generate Build Note-->
     <div id="dev-build"> Developer Build - 2.2.0 </div>
 
     <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
     <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>-->
 
+    <!-- To Do: Automate Generated Addition -->
     <script src="static/jquery-1.12.4.js"></script>
     <script src="static/jquery-ui.js"></script>
     <script src="static/main.js"></script>
@@ -70,28 +78,6 @@
     <script src="static/canvas/canvas.js"></script>
     <script src="static/zoom/zoom.js"></script>
     <script src="static/fill/aoFill.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        //var socket = io.connect('http://' + document.domain + ':' + location.port);
-        var socket = io.connect();
-        socket.on('connect', function() {
-            //ocket.emit('con', {data: 'I\'m connected!'});
-        });
-
-        var sync = false;
-
-        socket.on('update IMG', function(msg) {
-                if(sync)
-                {
-
-                var send = new Image();
-                send.src = msg["data"];
-                  send.onload = function() {
-                    ctx.drawImage(send, 0, 0);
-                  };
-                }
-
-            });
-    </script>
+    </body>
 
 </html>
