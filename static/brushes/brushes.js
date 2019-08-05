@@ -198,7 +198,7 @@ pixel = {
 pacMan = {
 	"name": "Pac-Man",
 	"textures": [
-		"http://www.download82.com/images/produse/iconuri/pacman-remake.png"
+		""
 	],
 	"mtRand": false,
 	"minRotation": 45,
