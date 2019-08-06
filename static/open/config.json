@@ -3,6 +3,7 @@
   "id": "open",
   "icon_src" : "ic_folder_open_black_48dp_2x.png",
   "page_src" : "open.html",
+  "script_src" : ["open.js"],
   "order" : 2,
   "popout" : false,
   "defaultX" : null,

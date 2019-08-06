@@ -3,6 +3,7 @@
   "id": "brush",
   "icon_src" : "ic_apps_black_48dp_2x.png",
   "page_src" : "brushes.html",
+  "script_src" : ["aoBrush.js", "brushes.js"],
   "order" : 4,
   "popout" : true,
   "defaultX" : "left: 40px;",
