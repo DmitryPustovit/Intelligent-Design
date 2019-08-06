@@ -3,6 +3,7 @@
   "id": "save",
   "icon_src" : "ic_save_black_48dp_2x.png",
   "page_src" : "save.html",
+  "script_src" : ["save.js"],
   "order" : 2,
   "popout" : false,
   "defaultX" : null,

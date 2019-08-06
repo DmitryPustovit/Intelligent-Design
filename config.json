@@ -19,5 +19,10 @@
       "modules" : []
     }
   ],
-  "Load_Message" : ["Loading Amazingness. Please Hold", "What could possibly go wrong?", "Beep Boop. Welcome to the terminal zone."]
+  "Load_Message" : ["Loading Amazingness. Please Hold", "What could possibly go wrong?", "Beep Boop. Welcome to the terminal zone."],
+  "Settings" : 
+  {
+    "release" : "Developer Build 2.2.1",
+    "title" : "Tomo Editor"
+  }
 }
