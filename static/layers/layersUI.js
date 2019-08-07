@@ -87,6 +87,8 @@ function drawLayers(){
 
 //Update Layer Preview
 function updateLayerPreview(layer, width, height){
+  if (!document.getElementById(layer.id))
+    return;
   var canvas = document.getElementById(layer.id).getElementsByTagName('canvas')[0];
   var ctx = canvas.getContext('2d');
   canvas.width = width;

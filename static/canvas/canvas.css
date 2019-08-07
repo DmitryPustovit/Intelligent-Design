@@ -11,13 +11,10 @@
     width: 140%;
     height: 140%;
     position: relative;
-    margin: auto;
 }
 
 #sketch{
   background: url("transparent.png");
-  width: 700px;
-  height: 400px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   cursor: crosshair;
   position: absolute;
@@ -31,4 +28,10 @@ canvas{
   height: 100%;
   background: none;
   position: absolute;
+  image-rendering: optimizeSpeed;             /* Older versions of FF          */
+  image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+  image-rendering: -webkit-optimize-contrast; /* Safari                        */
+  image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+  image-rendering: pixelated;                 /* Awesome future-browsers       */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
 }

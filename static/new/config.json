@@ -7,8 +7,8 @@
   "popout" : false,
   "defaultX" : null,
   "defaultY" : null,
-  "action" : false,
-  "action_function" : "",
+  "action" : true,
+  "action_function" : "displayUI('static/new/new.html', newButton);",
   "disable" : false,
   "section" : 0
 }

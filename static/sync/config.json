@@ -1,0 +1,14 @@
+{
+  "name": "Sync",
+  "id": "sync",
+  "icon_src" : "ic_sync_white_48dp_2x.png",
+  "page_src" : "sync.html",
+  "order" : 6,
+  "popout" : false,
+  "defaultX" : "left: 40px;",
+  "defaultY" : "top: 40px;",
+  "action" : false,
+  "action_function" : "sync = !sync;",
+  "disable" : true,
+  "section" : 1
+}
