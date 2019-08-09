@@ -3,6 +3,7 @@
   "id": "open",
   "icon_src" : "ic_insert_drive_file_black_48dp_2x.png",
   "page_src" : "open.html",
+  "script_src" : ["new.js"],
   "order" : 1,
   "popout" : false,
   "defaultX" : null,

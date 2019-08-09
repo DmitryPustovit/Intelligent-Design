@@ -41,6 +41,7 @@ port = int(os.environ.get('PORT', 5000))
 # This needs to be documented a bit better once it's not as subject to change
 # Not Sure if a lot of these should go into the configs section or if they should be in a config json file
 #
+settings = {}
 moduleSections = []
 modulesRoot ='static'
 modulesLocation = os.listdir(modulesRoot)
@@ -48,12 +49,19 @@ modulesLocation = os.listdir(modulesRoot)
 # Geneating core from global json
 if os.path.isfile('config.json'):
     data = json.load(open('config.json'))
+
     #Debug
     if debug: 
         seed(time.time())
         print ('Global json file found!')
         print (data["Load_Message"][randint(0, len(data["Load_Message"])-1)])
     #Debug End
+
+    # Settings
+    # Nice and simple
+    settings = data["Settings"]
+
+    # Main Menu buttons
     for moduleSection in data["groups"]:
         moduleSections.append(moduleSection)
 
@@ -61,14 +69,27 @@ if os.path.isfile('config.json'):
 for module in modulesLocation:
     if os.path.isfile(modulesRoot + '/' + module +'/config.json'):
         data = json.load(open(modulesRoot + "/" + module +'/config.json'))
+        # Disabled check
         if not data["disable"]:
+
             #Debug
             if debug: print ("Loading module: " + module)
             #Debug End
-            data["icon_src"] = modulesRoot + "/" + module + "/" + data["icon_src"]
-            data["page_src"] = modulesRoot + "/" + module + "/" + data["page_src"]
+
+            # All of the locations are optional
+            # This might not be desired, will revist later
+            if "icon_src" in data: data["icon_src"] = modulesRoot + "/" + module + "/" + data["icon_src"]
+            if "page_src" in data: data["page_src"] = modulesRoot + "/" + module + "/" + data["page_src"]
+            if "script_src" in data: 
+                scripts = []
+                for script in data["script_src"]: 
+                    scripts.append(modulesRoot + "/" + module + "/" + script)
+                data["script_src"] = scripts
+                
+            # Actually adding the data to something flask will read
             moduleSections[data["section"]]["modules"].append(data) 
 
+# Ordering Modules
 for moduleSection in moduleSections:
     moduleSection["modules"] = sorted(moduleSection["modules"],key=lambda l:l["order"], reverse=False)
 
@@ -85,7 +106,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    return render_template('index.html', moduleSections = moduleSections)
+    return render_template('index.html', moduleSections = moduleSections, settings = settings)
 
 if __name__ == '__main__':
     app.run(host=host, port=port, debug=debug)
