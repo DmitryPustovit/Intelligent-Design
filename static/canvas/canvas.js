@@ -1,16 +1,21 @@
-//Onload Code
-var brush = new Brush(solidPen);
-var Pencil = new Brush(pencil);
-var Pen = new Brush(pen);
-var Solid_Pen = new Brush(solidPen);
-var H_Bar = new Brush(horizontalBar);
-var V_Bar = new Brush(verticalBar);
-var Bubbles = new Brush(bubbles);
-var Clouds = new Brush(clouds);
-var bTwirl = new Brush(twirl);
-var Spaz = new Brush(spaz);
-var Pac_Man = new Brush(pacMan);
-var Pixel = new Brush(pixel);
+
+// Taping and sticking this together, this is next on my refactor list
+var brush, Pencil, Pen, Solid_Pen, H_Bar, V_Bar, Bubbles, Clouds, bTwirl, Spaz, Pac_Man, Pixel;
+
+$(window).load(function() {
+	brush = new Brush(solidPen);
+	Pencil = new Brush(pencil);
+	Pen = new Brush(pen);
+	Solid_Pen = new Brush(solidPen);
+	H_Bar = new Brush(horizontalBar);
+	V_Bar = new Brush(verticalBar);
+	Bubbles = new Brush(bubbles);
+	Clouds = new Brush(clouds);
+	bTwirl = new Brush(twirl);
+	Spaz = new Brush(spaz);
+	Pac_Man = new Brush(pacMan);
+	Pixel = new Brush(pixel);
+  });
 
 var canvas, ctx;
 var erase;
@@ -118,8 +123,6 @@ document.getElementById('canvasHolder').addEventListener("pointerup",function(e)
    document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
      image.layers[image.selected], image.width, image.height);
      //console.log(canvas.toDataURL());
-     if(sync)
-      socket.emit('my event', {layer: image.selected, data : canvas.toDataURL()});
 });
 
 /* 'Paints' on the canvas */
