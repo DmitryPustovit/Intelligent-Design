@@ -110,4 +110,4 @@ def main():
     return render_template('index.html', moduleSections = moduleSections, settings = settings)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=host, port=port, debug=debug)
