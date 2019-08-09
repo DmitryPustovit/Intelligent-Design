@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import os
 import json
 from flask import Flask, render_template, url_for
-
 # These are only used in debug, not sure how bad this is
 import time
 from random import seed
@@ -108,5 +109,5 @@ app = Flask(__name__)
 def main():
     return render_template('index.html', moduleSections = moduleSections, settings = settings)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host=host, port=port, debug=debug)

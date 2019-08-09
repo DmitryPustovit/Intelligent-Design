@@ -9,8 +9,7 @@ function createLayer() {
   ctx.mozImageSmoothingEnabled = false;
   ctx.webkitImageSmoothingEnabled = false;
   ctx.msImageSmoothingEnabled = false;
-  ctx.imageSmoothingEnabled = false;
-  ctx.imageSmoothingQuality = "low";
+  ctx.imageSmoothingEnabled = false;;
 
   image.layers.push({
     id : newCanvas.id,

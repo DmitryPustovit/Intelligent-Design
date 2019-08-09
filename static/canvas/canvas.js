@@ -35,6 +35,23 @@ if (localStorage.getItem("tool") === null) {
 //Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
 
+//$('#sketch').mousemove(function(e) {
+//  mouse.x = (e.pageX - $('#sketch').offset().left)/currentscale;
+//	mouse.y = (e.pageY - $('#sketch').offset().top)/currentscale;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+//});
+//$('#canvasHolder').pointermove(function(e) {
+//  mouse.x = e.pageX - $('#sketch').offset().left;
+//	mouse.y = e.pageY - $('#sketch').offset().top;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+//});
+
+document.getElementById('sketch').addEventListener("pointermove", function(e) {
+  mouse.x = (e.pageX - $('#sketch').offset().left); /// currentscale;
+	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
+  console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+}, false);
+
 document.getElementById('sketch').addEventListener("pointermove", function(e) {
 var ratio = window.devicePixelRatio;
 	var sScroll = document.getElementById('sketchScroll');
