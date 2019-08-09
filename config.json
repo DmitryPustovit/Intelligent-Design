@@ -23,6 +23,7 @@
   "Settings" : 
   {
     "release" : "Developer Build 2.2.1",
-    "title" : "Tomo Editor"
+    "title" : "Tomo Editor",
+    "fav_icon" : "static/favicon.ico"
   }
 }
