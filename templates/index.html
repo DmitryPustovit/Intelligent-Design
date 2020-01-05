@@ -2,125 +2,90 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="static/main.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="Pragma" content="no-cache">
 
-    <title>Tomo Editor</title>
+    <link rel="icon" href="{{settings["fav_icon"]}}">
+
+    <link href="static/main.css" rel="stylesheet">
+    <link href="static/UI/PerfectUI.css" rel="stylesheet">
+    <link href="static/canvas/canvas.css" rel="stylesheet">
+
+    <title>{{settings["title"]}}</title>
   </head>
   <body>
+    <!-- Preloading -->
+    <div class="preloaderHolder">
+       <div class="preloader"> </div>
+     </div>
+
+    <!-- Main Menu Buttons -->
     <div id="sidemenu">
-      <!--
-      <img src="logo3.png" class="menuButton" id="logo" style="margin-bottom: 20px; margin-top: 10px; border: none; padding: 0; height: 60px; width: 60px;"/>
-
-      <hr>
-      <img src="canvas.png" class="menuButton" />
-      <hr>
-      <img src="drive.png" class="menuButton" />
-      <hr>
-      <img src="open.png" class="menuButton" />
-      <hr>
-      <img src="discord.png" class="menuButton" />
-      <hr>
-      <img src="question.png" class="menuButton" />
-      <hr>
-      <img src="settings.png" class="menuButton" />
-      <hr> -->
-      <!-- <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div>
-      <div class="menuButton"> </div> -->
-    </div>
-    <div id="outerside"></div>
-      <div style="position: fixed; width: calc(100% - 40px); height: 100%; left: 40px;">
-
-        <!-- Canvas -->
-        <div class="window" style="margin-left: 20px; left: 300px; top: 80px;">
-          <div class="window_inside">
-            <iframe style="padding: 0;" src="{{ url_for('static', filename='canvas/canvas.html') }}" id="theCanvasIframeId" height="600" width="800"></iframe>
+      <div style="position: absolute; top: 50%; transform: translateY(-50%);">
+        {% for moduleSection in moduleSections %}
+          <div class="menuSection">
+            {% for module in moduleSection["modules"] %}
+              <div class="menuButton {% if module["action"] == false %} noneAction {% endif %}" data-id="{{ module["id"] }}" {% if module["action"] %} onclick="{{ module["action_function"] }}" {% endif %}>
+                <img src="{{ module["icon_src"] }}"/>
+              </div>
+            {% endfor %}
           </div>
-        </div>
-
-        <!-- Tools -->
-        <div class="window" style="top:90px;">
-          <div class="window_inside">
-            <iframe src="{{ url_for('static', filename='tools/tools.html') }}" width="80" height="400"></iframe>
-          </div>
-        </div>
-
-        <!-- Color Wheel -->
-        <div class="window" style="left: calc(100% - 325px);">
-          <div class="window_inside">
-            <iframe src="{{ url_for('static', filename='colorwheel/colorwheel.html') }}" id="theColorIframeId" height="300" style="width: 300px;"></iframe>
-          </div>
-        </div>
-
-        <!-- Layers -->
-        <div class="window" style="left: calc(100% - 280px); top:440px; ">
-          <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='layers/layers.html') }}" id="theLayerIframeId" height="330" style="width: 260px;"></iframe>
-          </div>
-        </div>
-
-        <!--
-        <div class="window"> <div class="window_inside">
-          <iframe src="{{ url_for('static', filename='chat.html') }}" width="400" height="300" style="padding: 0;"></iframe>
-        </div> </div> -->
-
-
+        {% endfor %}
       </div>
+    </div>
 
-    <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
-    <div id="quote"><img src="{{ url_for('static', filename='logo3.png') }}" style="width: 100px;"/></span></div>-->
+    <!-- 
+      Canvas 
+      The drawing magic happens here
+    -->
+    <div id="canvasHolder">
+      <div id="sketchScroll">
+        <div id="sketch"></div>
+      </div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Windows -->
+    {% for module in moduleSections[1]["modules"] %}
+      {% if module["popout"] == true %}
+           <div id="{{ module["id"] }}" class="window" style="{{ module["defaultX"] }} {{ module["defaultY"] }}">
+             <div class="window_inside">
+               <iframe id="{{ module["id"] }}_iframe" src="{{ module["page_src"] }}"></iframe>
+             </div>
+           </div>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Borders for Window Snapping -->
+    <div id="outerside"></div>
+
+    <!-- Release Version ^_^ -->
+    <div id="dev-build"> {{settings["release"]}} </div>
+
+    <!-- To Do: Automate Generated Addition -->
+    <script src="static/jquery-1.12.4.js"></script>
+    <script src="static/jquery-ui.js"></script>
     <script src="static/main.js"></script>
-    <script src="static/crossWindow.js"></script>
-    <script>
-    //FEATURES
+    <script src="static/UI/PerfectUI.js"></script>
+    <script src="static/image/image.js"></script>
+    <script src="static/resize/resize.js"></script>
+    <script src="static/layers/layers.js"></script>
+    <script src="static/canvas/canvas.js"></script>
+    <script src="static/cloud/cloud.js"></script>
+    <script src="static/zoom/zoom.js"></script>
+    <script src="static/fill/aoFill.js"></script>
 
-    //var iframe = document.getElementById("#theCanvasIframeId");
-    //var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-    //var canvas = iframe_canvas.getElementById("paint");
+    <!-- Script Auto Load -->
+    {% for moduleSection in moduleSections %}
+      {% for module in moduleSection["modules"] %}
+        {% for script in module["script_src"] %}
+          <script src="{{script}}"></script>  
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
 
-    function localSave(){
-      flattenLayers();
-      setTimeout(save, 2000);
-    }
-
-    function save(){
-      var iframe = document.getElementById("theCanvasIframeId");
-      var iframe_canvas = iframe.contentDocument || iframe.contentWindow.document;
-      var canvas = iframe_canvas.getElementsByTagName("canvas")[0]; //Possibly a better, cleaner way of fixing things
-
-      //temp download link
-      var downloadLink = document.createElement("a");
-
-      var dt = canvas.toDataURL('image/png');
-      dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-      dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
-      downloadLink.href = dt;
-      downloadLink.download = "canvas.png";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-
-    function flattenLayers()
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("flattenLayers", '*');
-      document.getElementById('theLayerIframeId').contentWindow.postMessage("flattenLayers", '*');
-    }
-
-    function eyedropper(data)
-    {
-      document.getElementById('theColorIframeId').contentWindow.postMessage("eyedropper," + data[0] + "," + data[1] + "," + data[2] + "," + data[3], '*');
-    }
-
-    function assignBrush(data)
-    {
-      document.getElementById('theCanvasIframeId').contentWindow.postMessage("assign," + data, '*');
-    }
-
-    </script>
+    </body>
 </html>
+
+
+   <!-- <div id="quote">"Headphones are like wine."<br><span style="float:right; font-size:20px;">-Wise Man</span></div>
+    <div id="quote"><img src="{{ url_for('static', filename='images/logo3.png') }}" style="width: 100px;"/></span></div>-->

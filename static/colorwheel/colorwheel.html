@@ -10,11 +10,64 @@
   </head>
   <body>
     <canvas id="picker"></canvas>
-    <div id="color"> </div>
-    <div class="color">Red: <input type="number" value="255" id="red"/> </div>
-    <div class="color">Green: <input type="number" value="255" id="green"/> </div>
-    <div class="color">Blue: <input type="number" value="255" id="blue"/> </div>
+    <div id="stats">
+      <div class="colorHeader">RGB</div>
+      <div class="color">
+        <div class="letters">R:</div>
+        <input type="range" min="0" max="255" class="slider" id="redSlider">
+        <input type="number" value="255" class="textbox" id="red"/>
+      </div>
+      <div class="color">
+        <div class="letters">G:</div>
+        <input type="range" min="0" max="255" class="slider" id="greenSlider">
+        <input type="number" value="255" class="textbox"  id="green"/>
+      </div>
+      <div class="color">
+        <div class="letters">B:</div>
+        <input type="range" min="0" max="255" class="slider" id="blueSlider">
+        <input type="number" value="255" class="textbox"  id="blue"/>
+      </div>
 
+      <br/><br/>
+
+      <div class="colorHeader">HSV</div>
+      <div class="color">
+        <div class="letters">H:</div>
+        <input type="range" min="0" max="360" class="slider" id="hueSlider" style="background: linear-gradient(to right,red, yellow, lime, aqua, blue, magenta, red);">
+        <input type="number" class="textbox" id="hue"/>
+      </div>
+      <div class="color">
+        <div class="letters">S:</div>
+        <input type="range" min="0" max="100" class="slider" id="satSlider">
+        <input type="number"  class="textbox"  id="sat"/>
+      </div>
+      <div class="color">
+        <div class="letters">V:</div>
+        <input type="range" min="0" max="100" class="slider" id="valueSlider">
+        <input type="number"  class="textbox"  id="val"/>
+      </div>
+
+      <br/><br/>
+
+      <div class="colorHeader">Alpha (Opacity) </div>
+      <div class="color">
+        <div class="letters">H:</div>
+        <input type="range" min="0" max="255" class="slider" id="alphaSlider">
+        <input type="number" value="255" class="textbox" id="alpha"/>
+        <div id="alphaSliderBackground"> </div>
+      </div>
+    </div>
+
+    <img id="swap" src="ic_swap_horiz_black_24dp_2x.png"/>
+    <div id="resetColorBoxes"><div class="restBox" id="colorReset1"></div><div class="restBox" id="colorReset2"></div></div>
+    <div id="colorBoxes">
+      <div class="colorBox top" id="color1"></div>
+      <div class="colorBoxBack topback" id="color1Back"></div>
+      <div class="colorBox" id="color2"></div>
+      <div class="colorBoxBack" id="color2Back"></div>
+    </div>
+
+    <script src="../jquery-1.12.4.js" crossorigin="anonymous"></script>
     <script src="colorwheel.js"></script>
   </body>
 </html>

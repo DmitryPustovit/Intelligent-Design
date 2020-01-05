@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="aoBrush.css">
+	<script src="aoBrush.js"></script>
+	<script src="brushes0.js"></script>
+	<title></title>
+</head>
+<body>
+	<canvas id = "canvas"> </canvas>
+	<script>
+		el = document.getElementById("canvas");
+		el.width = document.body.clientWidth;
+		el.height = document.body.clientHeight * .8;
+		brush = new Brush(pacMan);
+
+
+
+		//brush1 = new Brush(el, "brush1.png");
+	</script>
+
+	<div>
+		 <button onclick='brush.drawLine(el.getContext("2d"),new Point(1,1), new Point(500,500)); document.body.appendChild(brush.getIcon());'><img src = "BrushTextures/bubble.png"></button>
+	</div>
+	<!--<div><input type="text" name="" onmouseover="brush1"></div>
+	-->
+</body>
+</html>

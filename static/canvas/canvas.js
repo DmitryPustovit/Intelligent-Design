@@ -1,221 +1,153 @@
 
-//Onload Code
-var canvas, ctx, width = document.documentElement.clientWidth, height = document.documentElement.clientHeight;
-createLayer(1);
-selectLayer(1);
+// Taping and sticking this together, this is next on my refactor list
+var brush, Pencil, Pen, Solid_Pen, H_Bar, V_Bar, Bubbles, Clouds, bTwirl, Spaz, Pac_Man, Pixel;
 
-//Fills first layer with white
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+$(window).load(function() {
+	brush = new Brush(solidPen);
+	Pencil = new Brush(pencil);
+	Pen = new Brush(pen);
+	Solid_Pen = new Brush(solidPen);
+	H_Bar = new Brush(horizontalBar);
+	V_Bar = new Brush(verticalBar);
+	Bubbles = new Brush(bubbles);
+	Clouds = new Brush(clouds);
+	bTwirl = new Brush(twirl);
+	Spaz = new Brush(spaz);
+	Pac_Man = new Brush(pacMan);
+	Pixel = new Brush(pixel);
+  });
 
-bPencil = new Brush(pencil);
-bPen = new Brush(pen);
-bHorizontalBar = new Brush(horizontalBar);
-bVerticalBar = new Brush(verticalBar);
-bBubbles = new Brush(bubbles);
-bClouds = new Brush(clouds);
-blank = new Brush(blank);
-bTwirl = new Brush(twirl);
-spaz = new Brush(spaz);
+var canvas, ctx;
+var erase;
 
-if (localStorage.getItem("color") === null) {
-  localStorage.setItem("color", JSON.stringify([255,255,255,1]));
+if (localStorage.getItem("color1") == null ) {
+  localStorage.setItem("color1", JSON.stringify([0,0,0,255]));
 }
 
-updateColor();
+if (localStorage.getItem("color2") == null ) {
+  localStorage.setItem("color2", JSON.stringify([255,255,255,255]));
+}
 
 if (localStorage.getItem("tool") === null) {
 	ctx.strokeStyle = 'pencil';
 }
 
-
-//Univeral Mouse Movement Tracker
+//Univeral Mouse Movement Tracker //TODO
 var mouse = {x: 0, y: 0, oX: 0, oY: 0};
-$(document).mousemove(function(e) {
-  mouse.x = e.pageX;
-	mouse.y = e.pageY;
+
+//$('#sketch').mousemove(function(e) {
+//  mouse.x = (e.pageX - $('#sketch').offset().left)/currentscale;
+//	mouse.y = (e.pageY - $('#sketch').offset().top)/currentscale;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+//});
+//$('#canvasHolder').pointermove(function(e) {
+//  mouse.x = e.pageX - $('#sketch').offset().left;
+//	mouse.y = e.pageY - $('#sketch').offset().top;
+  //console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+//});
+
+document.getElementById('sketch').addEventListener("pointermove", function(e) {
+  mouse.x = (e.pageX - $('#sketch').offset().left); /// currentscale;
+	mouse.y = (e.pageY - $('#sketch').offset().top); /// currentscale;
+  console.log("X: " + mouse.x + " Y: " + mouse.y); //DEBUG
+}, false);
+
+document.getElementById('sketch').addEventListener("pointermove", function(e) {
+var ratio = window.devicePixelRatio;
+	var sScroll = document.getElementById('sketchScroll');
+	var sSketch = document.getElementById('sketch');
+	mouse.x = (e.pageX - $('#sketch').offset().left) * ratio; /// currentscale;
+	mouse.y = (e.pageY - $('#sketch').offset().top) * ratio; /// currentscale;
+	//mouse.x = sScroll.clientX;
+	//mouse.y = sScroll.clientY;
+}, false);
+
+/* When the pointer comes in contact with the canvas */
+document.getElementById('canvasHolder').addEventListener("pointerdown",function(e) {
+	mouse.oX = mouse.x;
+	mouse.oY = mouse.y;
+
+  	var b = localStorage.getItem("brush").replace(/"/g,"");
+
+	erase = false;
+	/* Detect the brush and set it to draw */
+	var tool = localStorage.getItem("tool");
+
+	if ("Pencil" == b){
+		brush = Pencil;
+	} else if ("Pen" == b){
+		brush = Pen;
+	} else if (b == "Solid Pen"){
+		brush = Solid_Pen;
+	} else if ("H-Bar" == b){
+		brush = H_Bar;
+	} else if ("V-Bar" == b){
+		brush = V_Bar;
+	} else if ("Bubbles" == b){
+		brush = Bubbles;
+	} else if ("Clouds" == b){
+		brush = Clouds;
+	} else if ("Twirl" == b){
+		brush = bTwirl;
+	} else if ("Spaz" == b){
+		brush = Spaz;
+	} else if ("Pac-Man" == b){
+		brush = Pac_Man;
+	}
+
+	if (tool == "er") {
+		erase = true; //Simply used as a flag, erase with all the brushes!
+		//brush = eraser; //Uncomment me for no funsies.
+	} else if (tool == "pencil"){
+		brush = Pixel;
+	} else if (tool == "fill"){
+    var storedNames = JSON.parse(localStorage.getItem("color1"));
+		fillFromPoint(canvas, new Point(mouse.x,mouse.y), storedNames[0], storedNames[1], storedNames[2]);
+	}
+
+	/* Prime the brush with color */
+    updateColor();
+    updateColor();
+
+    onPaint();
+	document.addEventListener('pointermove', onPaint, false);
 });
 
-var brush;
+document.getElementById('canvasHolder').addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, false);
 
-$(document).mousedown(function(e) {
-		if (localStorage.getItem("tool") != "none")
-				blank.assign();
+document.getElementById('canvasHolder').addEventListener("pointerup",function(e) {
+	 document.removeEventListener('pointermove', onPaint, false);
+   image.layers[image.selected].data = ctx.getImageData(0,0,image.width, image.height);
+   document.getElementById('layers_iframe').contentWindow.updateLayerPreview(
+     image.layers[image.selected], image.width, image.height);
+     //console.log(canvas.toDataURL());
+});
 
-    bPencil.setCanvas(canvas);
-    bPen.setCanvas(canvas);
-    bHorizontalBar.setCanvas(canvas);
-    bVerticalBar.setCanvas(canvas);
-    bBubbles.setCanvas(canvas);
-    bClouds.setCanvas(canvas);
-    blank.setCanvas(canvas);
-    bTwirl.setCanvas(canvas);
-    spaz.setCanvas(canvas);
+/* 'Paints' on the canvas */
+var onPaint = function() {
 
-    ctx.beginPath();
-    ctx.moveTo(mouse.x, mouse.y);
-		updateColor();
+	var tool = localStorage.getItem("tool");
+	if (tool == "eyedropper") {
+		var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
+		document.getElementById('colorwheel_iframe').contentWindow.setColor(pixel.data);
 		mouse.oX = mouse.x;
-		mouse.oY = mouse.y;``
-		document.addEventListener('mousemove', onPaint, false);
-});
+		mouse.oY = mouse.y;
+		return;
+    } else if (tool == "fill"){
+		return;
+	}
 
-$(document).mouseup(function(e) {
-	 document.removeEventListener('mousemove', onPaint, false);
-});
+    //MUST BE EXPOSED, DO NOT ADD THIS TO AN IF STATEMENT!
+    brush.drawLine(ctx,  new Point(mouse.oX,mouse.oY), new Point(mouse.x, mouse.y), erase);
 
-//Paint feature
-		var onPaint = function() {
-			ctx.lineWidth = 1;
-			ctx.lineJoin = 'round';
-			ctx.lineCap = 'round';
-			ctx.imageSmoothingEnabled = true;
-			ctx.beginPath();
-			if(localStorage.getItem("tool") == "pencil"){
-				ctx.globalCompositeOperation = "source-over";
-				ctx.moveTo(mouse.oX,mouse.oY);
-				ctx.lineTo(mouse.x,mouse.y);
-				ctx.stroke();
-			}
-			if (localStorage.getItem("tool") == "er")
-			{
-	      ctx.globalCompositeOperation = "destination-out";
-	      ctx.arc(mouse.oX,mouse.oY,8,0,Math.PI*2,false);
-	      ctx.fill();
-	    }
-			if (localStorage.getItem("tool") == "eyedropper")
-			{
-				var pixel = ctx.getImageData(mouse.x, mouse.y, 1, 1);
-	      var data = pixel.data;
-				parent.eyedropper(data);
-				console.log("eyedropper drag");
-			}
-			mouse.oX = mouse.x;
-			mouse.oY = mouse.y;
+	mouse.oX = mouse.x;
+	mouse.oY = mouse.y;
+};
 
-		    //ctx.lineTo(mouse.x, mouse.y);
-		    //ctx.stroke();
-		};
-
-//Change Color Feature
-		function updateColor(){
-			var storedNames = JSON.parse(localStorage.getItem("color"));
-			ctx.strokeStyle = 'rgba(' +storedNames[0] + ',' + storedNames[1] + ',' + storedNames[2] + ',1)';
-
-			/*
-      bPencil.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bPen.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bHorizontalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bVerticalBar.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bBubbles.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bClouds.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      blank.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      bTwirl.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);
-      spaz.setRGBA(storedNames[0],storedNames[1],storedNames[2], 1);  */
-		}
-
-//Paste img feature
-		window.addEventListener('paste', pasteHere);
-
-		function pasteHere(e) {
-			if(e.clipboardData == false) {
-				return false; //there is nothing to paste
-			}
-		    	var paste = e.clipboardData.items;
-		    	if(paste == undefined) {
-				return false //there is nothing to paste
-			}
-		    	for (var i = 0; i < paste.length; i++) {
-		        if (paste[i].type.indexOf("image") == -1) {
-				continue; //means there is no image
-			}
-		        var blob = paste[i].getAsFile();
-		        var URLObj = window.URL || window.webkitURL;
-		        var source = URLObj.createObjectURL(blob);
-		        pasteTheImage(source);
-		        }
-		}
-			//draw pasted object
-		function pasteTheImage(source) {
-			var pastedImage = new Image();
-			pastedImage.onload = function() {
-		        	ctx.drawImage(pastedImage, mouse.x, mouse.y);
-			}
-			pastedImage.src = source;
-		}
-
-		var brushWorking = false;
-	function assignBrush(brush)
- 	 {
-		 brushWorking = true;
-
-		 if(brush == "pencil")
- 		     bPencil.assign();
-		 if(brush == "pen")
-			   bPen.assign();
-		 if(brush == "h")
-	 		   bHorizontalBar.assign();
-		 if(brush == "v")
-		 		 bVerticalBar.assign();
-	 	 if(brush == "b")
-			 	 bBubbles.assign();
-		 if(brush == "c")
-				 bClouds.assign();
-    if(brush == "t")
-     		 bTwirl.assign();
-    if(brush == "s")
-         spaz.assign();
- 	 }
-
-
-//Universal Listerer
-window.addEventListener('message', receiver, false);
-
-function receiver(e) {
-   if (e.origin == '*') {
-     return;
-   } else {
-		 var data = e.data.split(',');
-		 if(data[0] == 'createLayer')
-		 		createLayer(data[1]);
-
-		if(data[0] == 'selectLayer')
-	 		 selectLayer(data[1]);
-
-		if(data[0] == 'mergeLayer')
-			mergeLayers(data[1], data[2]);
-
-		if(data[0] == 'flattenLayers')
-			flattenLayers();
-
-		if(data[0] == 'removeLayer')
-				removeLayer(data[1]);
-
-		if(data[0] == 'hideLayer')
-				hideLayer(data[1], data[1]);
-
-		if(data[0] == 'assign')
-			assignBrush(data[1]);
-
-		 console.log(data);
-   }
+/* Updates the current brush's color */
+function updateColor(){
+	var storedNames = JSON.parse(localStorage.getItem("color1"));
+	brush.setRGBA(storedNames[0], storedNames[1], storedNames[2], storedNames[3]/ 255);
 }
-
-
-
-
-
-
-///JUNK
-//var img = new Image();
-
- //drawing of the test image - img1
- //img.onload = function () {
-	 //draw background image
-		 //ctx.drawImage(img, 0, canvas.height - 500);
-		 //draw a box over the top
-		 //ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
-		 //ctx.fillRect(0, 0, 500, 500);
- //};
-
- //img.src = 'intro.jpg';

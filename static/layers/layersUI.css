@@ -1,12 +1,28 @@
 body{
   width: 260px;
+  height: 330px;
   margin: 0;
   padding: 0;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+#content{
+  position: absolute;
+  top:0;
+  left: 0;
+}
+
+#layers{
+  width: 260px;
 }
 
 .layer{
   position: relative;
-  padding: 28px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  width: 243px;
 }
 
 .layer:hover{
@@ -19,9 +35,14 @@ body{
   display: inline-block;
   position: absolute;
   top: 11px;
-  left: 4px;
+  left: 14px;
   border: 1px solid black;
-  display: none;
+  background: url("transparent.png");
+}
+
+canvas{
+  width: 70px;
+  height: 50px;
 }
 
 .selected{
@@ -29,16 +50,36 @@ body{
 }
 
 span{
-  margin-left: 70px;
+  margin-left: 110px;
 }
 
 input{
   float: right;
+  margin-right: 20px;
 }
 
 .content{
   height: 300px;
   overflow-y: scroll;
+}
+
+.material-icons{
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+#add{
+  color: #2ed573;
+}
+
+#remove{
+  color: #ff4757;
 }
 
 .rotate180 {

@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name" : "File Options",
+      "order" : "1",
+      "id" : "file",
+      "modules" : []
+    },
+    {
+      "name" : "Windows",
+      "order" : "2",
+      "id" : "windows",
+      "modules" : []
+    },
+    {
+      "name" : "Modify Image",
+      "order" : "3",
+      "id" : "modify",
+      "modules" : []
+    }
+  ],
+  "Load_Message" : ["Loading Amazingness. Please Hold", "What could possibly go wrong?", "Beep Boop. Welcome to the terminal zone."],
+  "Settings" : 
+  {
+    "release" : "Developer Build 2.2.1",
+    "title" : "Tomo Editor",
+    "fav_icon" : "static/favicon.ico"
+  }
+}

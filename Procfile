@@ -1,1 +1,2 @@
-web: gunicorn -b :$PORT app:app
+web: python app.py
+
